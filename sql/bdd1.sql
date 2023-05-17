@@ -41,15 +41,20 @@ CREATE TABLE Administrateur(
     FOREIGN KEY (idLogin) REFERENCES Login (idLogin)
 );
 
-CREATE TABLE DataChallenge(
-    idDataChallenge INTEGER PRIMARY KEY AUTO_INCREMENT,
+
+CREATE TABLE DataDefi(
+    idDataDefi INTEGER PRIMARY KEY AUTO_INCREMENT,
     idGestionnaire INTEGER,
-    descriptionD TEXT,
+    typeD VARCHAR(50),
+    nombreSujet INTEGER,
+    nombreQuestionnaire INTEGER,
     nom TEXT,
+    descriptionD TEXT,
     dateDebut DATE DEFAULT (CURRENT_DATE),
-    dateFin DATE,
+    dateFIN DATE,
     FOREIGN KEY (idGestionnaire) REFERENCES Gestionnaire (idLogin)
 );
+
 
 CREATE TABLE Groupe(
     idGroupe INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -65,7 +70,7 @@ CREATE TABLE Groupe(
     idEtudiant8 INTEGER,
     nom VARCHAR(100),
     FOREIGN KEY (idCapitaine) REFERENCES Etudiant (idLogin),
-    FOREIGN KEY (idDataChallenge) REFERENCES DataChallenge (idDataChallenge),
+    FOREIGN KEY (idDataChallenge) REFERENCES DataDefi (idDataDefi),
     FOREIGN KEY (idEtudiant1) REFERENCES Etudiant (idLogin),
     FOREIGN KEY (idEtudiant2) REFERENCES Etudiant (idLogin),
     FOREIGN KEY (idEtudiant3) REFERENCES Etudiant (idLogin),
@@ -83,19 +88,12 @@ CREATE TABLE ProjetData(
     idGroupe INTEGER,
     descriptionP TEXT,
     imageP TEXT,
-    FOREIGN KEY (idDataChallenge) REFERENCES DataChallenge (idDataChallenge),
+    FOREIGN KEY (idDataChallenge) REFERENCES DataDefi (idDataDefi),
     FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe)
 );
 
-CREATE TABLE DataBattle(
-    idDataBattle INTEGER PRIMARY KEY AUTO_INCREMENT,
-    idGestionnaire INTEGER,
-    nom VARCHAR(50),
-    descriptionP TEXT,
-    dateDebut DATE,
-    dateFIN DATE,
-    FOREIGN KEY (idGestionnaire) REFERENCES Gestionnaire (idLogin)
-);
+
+
 
 
 CREATE TABLE Podium(
@@ -106,7 +104,7 @@ CREATE TABLE Podium(
     FOREIGN KEY (idEtudiant1) REFERENCES Etudiant (idLogin),
     FOREIGN KEY (idEtudiant2) REFERENCES Etudiant (idLogin),
     FOREIGN KEY (idEtudiant3) REFERENCES Etudiant (idLogin),
-    FOREIGN KEY (idDataBattle) REFERENCES DataBattle (idDataBattle)
+    FOREIGN KEY (idDataBattle) REFERENCES DataDefi (idDataDefi)
 );
 
 
