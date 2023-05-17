@@ -13,7 +13,7 @@ CREATE TABLE Login(
 CREATE TABLE Etudiant(
     idLogin INTEGER PRIMARY KEY,
     nom VARCHAR(50),
-    prenom VARCHAR(50),
+    prenom VARCHAR(50),s
     niveauEtude VARCHAR(10),
     telephone VARCHAR(10),
     mail VARCHAR(255),
@@ -113,6 +113,7 @@ CREATE TABLE Message(
     idExpediteur INTEGER,
     idDestinataire INTEGER,
     dateHeure DATE DEFAULT (CURRENT_DATE),
+    contenu TEXT,
     lu BOOLEAN,
     FOREIGN KEY (idExpediteur) REFERENCES Login (idLogin),
     FOREIGN KEY (idDestinataire) REFERENCES Login (idLogin)
