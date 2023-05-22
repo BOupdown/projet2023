@@ -13,6 +13,7 @@ function disconnect($connexion)
 {
     mysqli_close($connexion);
 }
+// Créer un étudiant à partir de ses informations
 function creerEtudiant($connexion, $nomUtilisateur, $mdp, $nom, $prenom, $niveauEtude, $telephone, $mail)
 {
     try {
@@ -49,7 +50,7 @@ function creerEtudiant($connexion, $nomUtilisateur, $mdp, $nom, $prenom, $niveau
         echo "Erreur : " . $e->getMessage();
     }
 }
-
+// Créer un gestionnaire à partir de ses informations
 function creerGestionnaire($connexion, $nomUtilisateur, $mdp, $nom, $prenom, $entreprise, $telephone, $mail, $dateDebut, $dateFin)
 {
     try {
@@ -86,6 +87,7 @@ function creerGestionnaire($connexion, $nomUtilisateur, $mdp, $nom, $prenom, $en
         echo "Erreur : " . $e->getMessage();
     }
 }
+// Créer un groupe à partir de ses informations
 function creerGroupe($connexion, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom)
 {
     try {
@@ -112,7 +114,7 @@ function creerGroupe($connexion, $idCapitaine, $idDataChallenge, $idEtudiant1, $
     }
 }
 
-
+// Créer un projetData à paartir de ses informations
 function creerProjetData($connexion, $idDataChallenge, $idGroupe, $description, $image)
 {
     try {
@@ -138,7 +140,7 @@ function creerProjetData($connexion, $idDataChallenge, $idGroupe, $description, 
         echo "Erreur : " . $e->getMessage();
     }
 }
-
+// Créer un data challenge à partir des informations 
 function creerDataChallenge($connexion, $idGestionnaire, $nombreSujet, $nom, $description, $dateDebut, $dateFin)
 {
     try {
@@ -166,7 +168,7 @@ function creerDataChallenge($connexion, $idGestionnaire, $nombreSujet, $nom, $de
     }
 }
 
-
+// Créer une data battle à partir des informations
 function creerDataBattle($connexion, $idGestionnaire, $nombreQuestionnaire, $nom, $description, $dateDebut, $dateFin)
 {
     try {
@@ -196,7 +198,7 @@ function creerDataBattle($connexion, $idGestionnaire, $nombreQuestionnaire, $nom
 
 
 
-
+// Créer un podium à partir des informations
 function creerPodium($connexion, $idDataDefi, $idEtudiant1, $idEtudiant2, $idEtudiant3)
 {
     try {

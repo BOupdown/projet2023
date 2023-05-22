@@ -13,7 +13,7 @@ CREATE TABLE Login(
 CREATE TABLE Etudiant(
     idLogin INTEGER PRIMARY KEY,
     nom VARCHAR(50),
-    prenom VARCHAR(50),s
+    prenom VARCHAR(50),
     niveauEtude VARCHAR(10),
     telephone VARCHAR(10),
     mail VARCHAR(255),
@@ -91,9 +91,6 @@ CREATE TABLE ProjetData(
     FOREIGN KEY (idDataChallenge) REFERENCES DataDefi (idDataDefi),
     FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe)
 );
-
-
-
 
 
 CREATE TABLE Podium(
