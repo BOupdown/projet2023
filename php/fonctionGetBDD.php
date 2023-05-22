@@ -194,6 +194,7 @@ function getUtilisateurParId($connexion, $idUtilisateur)
         return null;
     }
 }
+// Retourne les informations d'un utilisateur à partir de son login et de son mot de passe
 function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp) {
     $query = "SELECT idLogin, nomUtilisateur, mdp, type
               FROM Login
@@ -430,6 +431,7 @@ function getPodiumParId($connexion, $idDataBattle)
         return null;
     }
 }
+// Retourne les différents groupes d'un étudiants et leurs informations
 function getGroupesParIdEtudiant($connexion, $idEtudiant)
 {
     $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom
