@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page avec image d arrière-plan</title>
+  <title>index IA Pau</title>
   <link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
 <body>
-    <div id="DataDefiTitle" class="center-text">Data Défi</div>
+ 
+
+  <div id="DataDefiTitle" class="center-text">Data Défi</div>
+
+  <div class="buttonsAccueil">
+    <a href="nimp" class="button">S'inscrire</a>
+    <a href="php/datainfo.php" class="button">Data infos</a>
+    <br>
+    <a href="nimp" class="button">Les gagnants des concours</a>
+  </div>
+  
 </body>
 </html>
