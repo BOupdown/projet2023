@@ -7,7 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = 0;
     $errs = "";
     $login = htmlspecialchars($_POST['login']);
-    $mdp = sha1($_POST['mdp']);
 
 
 
@@ -17,9 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errs .= "login;";
     }
 
-    if (empty($mdp)) {
+    if (empty($_POST['mdp'])) {
         $errors += 1;
         $errs .= "mdp;";
+
+    }else{
+        $mdp = sha1($_POST['mdp']);
 
     }
 
