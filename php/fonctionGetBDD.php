@@ -490,7 +490,7 @@ function getEmailsEtudiantsParIdGroupe($connexion, $idGroupe)
 {
     $query = "SELECT E.mail
               FROM Groupe G
-              LEFT JOIN Etudiant E ON G.idCapitaine = E.idLogin OR G.idEtudiant1 = E.idLogin OR G.idEtudiant2 = E.idLogin OR G.idEtudiant3 = E.idLogin OR G.idEtudiant4 = E.idLogin OR G.idEtudiant5 = E.idLogin OR G.idEtudiant6 = E.idLogin OR G.idEtudiant7 = E.idLogin OR G.idEtudiant8 = E.idLogin
+              LEFT JOIN Etudiant E ON G.idEtudiant1 = E.idLogin OR G.idEtudiant2 = E.idLogin OR G.idEtudiant3 = E.idLogin OR G.idEtudiant4 = E.idLogin OR G.idEtudiant5 = E.idLogin OR G.idEtudiant6 = E.idLogin OR G.idEtudiant7 = E.idLogin OR G.idEtudiant8 = E.idLogin
               WHERE G.idGroupe = ?";
 
     $stmt = $connexion->prepare($query);
