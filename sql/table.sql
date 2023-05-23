@@ -49,10 +49,17 @@ CREATE TABLE DataDefi(
     nombreSujet INTEGER,
     nombreQuestionnaire INTEGER,
     nom TEXT,
-    descriptionD TEXT,
     dateDebut DATE DEFAULT (CURRENT_DATE),
     dateFIN DATE,
     FOREIGN KEY (idGestionnaire) REFERENCES Gestionnaire (idLogin)
+);
+
+CREATE TABLE Sujet(
+    idSujet INTEGER PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(50),
+    descriptionS TEXT,
+    idDataDefi INTEGER,
+    FOREIGN KEY (idDataDefi) REFERENCES DataDefi (idDataDefi)
 );
 
 
