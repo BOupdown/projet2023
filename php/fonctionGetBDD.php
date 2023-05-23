@@ -198,7 +198,7 @@ function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp) {
               FROM Login
               WHERE nomUtilisateur = ? AND mdp = ?";
 
-    $idLogin = $nomUtilisateur = $mdp = $type = null;
+    $idLogin = $nomUtilisateurR = $mdpR = $type = null;
 
     try {
         // Préparation de la requête
@@ -211,7 +211,7 @@ function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp) {
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idLogin, $nomUtilisateur, $mdp, $type);
+        $stmt->bind_result($idLogin, $nomUtilisateurR, $mdpR, $type);
 
         // Récupération des données
         $stmt->fetch();
@@ -219,8 +219,8 @@ function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp) {
         // Création d'un tableau associatif avec les résultats
         $utilisateur = array(
             "idLogin" => $idLogin,
-            "nomUtilisateur" => $nomUtilisateur,
-            "mdp" => $mdp,
+            "nomUtilisateur" => $nomUtilisateurR,
+            "mdp" => $mdpR,
             "type" => $type
         );
 
@@ -486,6 +486,37 @@ function getGroupesParIdEtudiant($connexion, $idEtudiant)
         return null;
     }
 }
+function getEmailsEtudiantsParIdGroupe($connexion, $idGroupe)
+{
+    $query = "SELECT E.mail
+              FROM Groupe G
+              LEFT JOIN Etudiant E ON G.idEtudiant1 = E.idLogin OR G.idEtudiant2 = E.idLogin OR G.idEtudiant3 = E.idLogin OR G.idEtudiant4 = E.idLogin OR G.idEtudiant5 = E.idLogin OR G.idEtudiant6 = E.idLogin OR G.idEtudiant7 = E.idLogin OR G.idEtudiant8 = E.idLogin
+              WHERE G.idGroupe = ?";
+
+    $stmt = $connexion->prepare($query);
+
+    try {
+        $stmt->bind_param("i", $idGroupe);
+        $stmt->execute();
+        $email = null;
+
+        $stmt->bind_result($email);
+
+        $emails = array();
+
+        while ($stmt->fetch()) {
+            $emails[] = $email;
+        }
+
+        $stmt->close();
+
+        return $emails;
+    } catch (Exception $e) {
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
 
 
 ?>
