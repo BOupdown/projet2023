@@ -1,6 +1,4 @@
 <?php
-require 'bdd.php';
-require 'fonctionCreateBDD.php';
 
 // Retourne un tableau php contenant les informations de l'étudiant ayant pour id $idEtudiant
 function getEtudiantParId($connexion, $idEtudiant)
