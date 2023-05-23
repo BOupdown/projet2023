@@ -126,9 +126,9 @@ CREATE TABLE Message(
     idMessage INTEGER PRIMARY KEY AUTO_INCREMENT,
     idExpediteur INTEGER,
     idDestinataire INTEGER,
-    dateHeure DATE DEFAULT (CURRENT_DATE),
+    dateHeure DATETIME DEFAULT NOW(),
     contenu TEXT,
-    lu BOOLEAN,
+    lu BOOLEAN DEFAULT 0,
     FOREIGN KEY (idExpediteur) REFERENCES Login (idLogin),
     FOREIGN KEY (idDestinataire) REFERENCES Login (idLogin)
 );
