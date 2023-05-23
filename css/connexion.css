@@ -109,17 +109,7 @@ form .content {
     justify-content: space-around;
 }
 
-form .content .checkbox {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-form .content input {
-    width: 15px;
-    height: 15px;
-    background: red;
-}
 
 form .content label {
     color: #262626;
@@ -164,7 +154,10 @@ form .signup-link a:hover {
     text-decoration: underline;
 }
 
-.error {
+.erreur {
     border: 2px solid red !important;
-
+    color: red;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 5px;
 }

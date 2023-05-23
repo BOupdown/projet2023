@@ -1,5 +1,4 @@
 const formulaire = document.getElementById('form');
-const messageErreurRadio = document.querySelector('.messageErreurRadio');
 
 
 formulaire.addEventListener('submit', (event) => {
@@ -13,6 +12,18 @@ formulaire.addEventListener('submit', (event) => {
             // Empêcher l'envoi du formulaire
             event.preventDefault();
         }
+
+        const radios = formulaire.querySelectorAll('input[type="radio"][name="niveau"]');
+        const radioSelected = [...radios].some((radio) => radio.checked);
+        if (!radioSelected) {
+            // Ajouter la classe CSS "erreur" à la div parent du groupe de radio
+            formulaire.querySelector('.category').classList.add('erreurRadio');
+
+
+            // Empêcher l'envoi du formulaire
+            event.preventDefault();
+        }
+
     });
 });
 
@@ -21,4 +32,5 @@ formulaire.addEventListener('click', (event) => {
     if (event.target) {
         event.target.classList.remove('erreur');
     }
+    
 });

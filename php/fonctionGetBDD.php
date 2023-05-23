@@ -518,5 +518,53 @@ function getEmailsEtudiantsParIdGroupe($connexion, $idGroupe)
 }
 
 
+function getUtilisateurParLogin($connexion, $login) {
+    $query = "SELECT idLogin, nomUtilisateur, mdp, type
+              FROM Login
+              WHERE nomUtilisateur = ?";
+
+    $utilisateurs = array();
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre avec la variable $login
+        $stmt->bind_param("s", $login);
+
+        // Exécution de la requête
+        $stmt->execute();
+        $idLogin = $nomUtilisateur = $mdp = $type = null;
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idLogin, $nomUtilisateur, $mdp, $type);
+
+        // Parcours des résultats
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque utilisateur
+            $utilisateur = array(
+                "idLogin" => $idLogin,
+                "nomUtilisateur" => $nomUtilisateur,
+                "mdp" => $mdp,
+                "type" => $type
+            );
+
+            // Ajout de l'utilisateur au tableau
+            $utilisateurs[] = $utilisateur;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des utilisateurs
+        return $utilisateurs;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
 
 ?>

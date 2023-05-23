@@ -20,9 +20,9 @@
                         if (!isset($_SESSION['id'])){
 
                         echo '<li><a class="hover-underline-animation" href="/php/connexion.php">Se connecter</a></li>';
-                        echo '<li><a class="hover-underline-animation" href="/php/contact.php">Inscription</a></li>';
+                        echo '<li><a class="hover-underline-animation" href="/php/register.php">Inscription</a></li>';
                         }else{
-                            echo '<li><a class="hover-underline-animation" href="/php/contact.php">Déconnexion</a></li>';
+                            echo '<li><a class="hover-underline-animation" href="/php/deconnexion.php">Déconnexion</a></li>';
                         }
                         ?>
                     </ul>

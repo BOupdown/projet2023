@@ -13,11 +13,13 @@
 .menu a {
     min-width: 120px;
     margin: 0.5rem;
-    padding: 0.4rem 0;
+    padding: 1rem 0;
     text-align: center;
     text-decoration: none;
-    font-weight: bold; /* Mettre en gras */
-    font-size: 20px; /* Taille de la police */
+    font-weight: bold;
+    /* Mettre en gras */
+    font-size: 20px;
+    /* Taille de la police */
 }
 
 .hover-underline-animation {
@@ -29,13 +31,13 @@
 .hover-underline-animation::after {
     content: '';
     position: absolute;
-    width: 100%;    
+    width: 100%;
     transform: scaleX(0);
     height: 2px;
     bottom: 0;
     left: 0;
     background-color: bisque;
-    transform-origin: bottom right;
+    transform-origin: bottom right; 
     transition: transform 0.25s ease-out;
 }
 
@@ -48,7 +50,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .droite {
@@ -60,6 +61,7 @@
 .logo {
     width: 100px;
     height: auto;
+    margin-left: 100px;
 }
 
 #navbar {
@@ -68,24 +70,32 @@
     top: 0;
     z-index: 10000;
     width: 100%;
+    background-color: #172A3A;
+    width: 100%;
+
 }
 
-@media screen and (max-width: 878px) {
+@media screen and (max-width: 980px) {
     #navbar {
-        height: 250px;
+        height: 150px;
         /* Hauteur souhaitée pour les appareils plus petits */
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 679px) {
     #navbar {
         height: 350px;
         /* Hauteur souhaitée pour les appareils plus petits */
     }
-    
+
 }
 
-body{
-    margin-top: 14vh; /* Ajustez la valeur selon la hauteur de votre navbar */
+body {
+    margin-top: 14vh;
+    /* Ajustez la valeur selon la hauteur de votre navbar */
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}

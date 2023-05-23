@@ -5,6 +5,7 @@ USE projetIng;
 
 INSERT INTO Login (nomUtilisateur, mdp, type)
 VALUES ('Omar', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 'Etudiant');
+-- mdp = a
 
 INSERT INTO Login (nomUtilisateur, mdp, type)
 VALUES ('Rémi', 'e9d71f5ee7c92d6dc9e92ffdad17b8bd49418f98', 'Etudiant');
