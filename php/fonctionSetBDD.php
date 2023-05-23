@@ -1,5 +1,7 @@
 <?php
 
+
+
 // Change le mot de passe d'un utilisateur via son id
 function setMotDePasse($connexion, $idLogin, $nouveauMotDePasse)
 {
@@ -17,5 +19,8 @@ function setMotDePasse($connexion, $idLogin, $nouveauMotDePasse)
         echo "Erreur : " . $e->getMessage();
     }
 }
+
+
+
 
 ?>
