@@ -97,7 +97,22 @@ VALUES (1, 3, 4, 5);
 
 -- --------------- TABLE MESSAGE ----------------------------------------------
 
-INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu, lu)
-VALUES (1, 2, '2023-05-23', 'Bonjour, chacal!', 0);
+INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu)
+VALUES (1, 2, '2023-05-17 8:05:20', 'bonjour bonjour bonjour b!!!!! jour');
+
+INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu)
+VALUES (2, 1, '2023-05-17 10:54:32', 'salutt salut :) b!!!!! jour');
+
+INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu)
+VALUES (1, 3, '2023-05-18 17:04:11', 'oui c pour ca que je parle avec user3');
+
+INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu)
+VALUES (3, 1, '2023-05-18 19:04:11', 'ok merci user1');
+
+INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu)
+VALUES (1, 4, '2023-05-19 15:47:21', 'sssssssssssssssssssssss');
+
+INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu)
+VALUES (1, 2, '2023-05-23 14:08:08', 'Bonjour, chacal!');
 
 -- 
