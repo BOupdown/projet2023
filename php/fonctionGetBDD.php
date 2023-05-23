@@ -486,6 +486,37 @@ function getGroupesParIdEtudiant($connexion, $idEtudiant)
         return null;
     }
 }
+function getEmailsEtudiantsParIdGroupe($connexion, $idGroupe)
+{
+    $query = "SELECT E.mail
+              FROM Groupe G
+              LEFT JOIN Etudiant E ON G.idCapitaine = E.idLogin OR G.idEtudiant1 = E.idLogin OR G.idEtudiant2 = E.idLogin OR G.idEtudiant3 = E.idLogin OR G.idEtudiant4 = E.idLogin OR G.idEtudiant5 = E.idLogin OR G.idEtudiant6 = E.idLogin OR G.idEtudiant7 = E.idLogin OR G.idEtudiant8 = E.idLogin
+              WHERE G.idGroupe = ?";
+
+    $stmt = $connexion->prepare($query);
+
+    try {
+        $stmt->bind_param("i", $idGroupe);
+        $stmt->execute();
+        $email = null;
+
+        $stmt->bind_result($email);
+
+        $emails = array();
+
+        while ($stmt->fetch()) {
+            $emails[] = $email;
+        }
+
+        $stmt->close();
+
+        return $emails;
+    } catch (Exception $e) {
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
 
 
 ?>
