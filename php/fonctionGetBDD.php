@@ -1,6 +1,5 @@
 <?php
-require 'bdd.php';
-require 'fonctionCreateBDD.php';
+
 
 // Retourne un tableau php contenant les informations de l'étudiant ayant pour id $idEtudiant
 function getEtudiantParId($connexion, $idEtudiant)
@@ -200,7 +199,7 @@ function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp) {
               FROM Login
               WHERE nomUtilisateur = ? AND mdp = ?";
 
-    $idLogin = $nomUtilisateur = $mdp = $type = null;
+    $idLogin = $nomUtilisateurR = $mdpR = $type = null;
 
     try {
         // Préparation de la requête
@@ -213,7 +212,7 @@ function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp) {
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idLogin, $nomUtilisateur, $mdp, $type);
+        $stmt->bind_result($idLogin, $nomUtilisateurR, $mdpR, $type);
 
         // Récupération des données
         $stmt->fetch();
@@ -221,8 +220,8 @@ function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp) {
         // Création d'un tableau associatif avec les résultats
         $utilisateur = array(
             "idLogin" => $idLogin,
-            "nomUtilisateur" => $nomUtilisateur,
-            "mdp" => $mdp,
+            "nomUtilisateur" => $nomUtilisateurR,
+            "mdp" => $mdpR,
             "type" => $type
         );
 
