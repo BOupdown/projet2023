@@ -15,9 +15,9 @@
                         <li><a class="hover-underline-animation" href="/index.php">Accueil</a></li>
                         <li><a class="hover-underline-animation" href="/php/datainfo.php">Les défis</a>
                         </li>
-                        <li><a class="hover-underline-animation" href="/php/produit.php?cat=noix">Les gagnants</a></li>
+                        <li><a class="hover-underline-animation" href="/php/gagnants.php">Les gagnants</a></li>
                         <?php
-                        if (!isset($_SESSION['id'])){
+                        if (empty($_SESSION['type'])){
 
                         echo '<li><a class="hover-underline-animation" href="/php/connexion.php">Se connecter</a></li>';
                         echo '<li><a class="hover-underline-animation" href="/php/register.php">Inscription</a></li>';

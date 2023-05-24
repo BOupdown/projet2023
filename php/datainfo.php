@@ -8,6 +8,8 @@
 
 <body>
     <?php
+    session_start();
+
     require 'navbar.php';
     require_once 'fonctionCreateBDD.php';
     require_once 'fonctionGetBDD.php';
