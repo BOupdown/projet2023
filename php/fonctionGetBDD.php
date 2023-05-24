@@ -239,16 +239,16 @@ function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp) {
 // Retourne un tableau php contenant les informations d'un dataChallenge ayant pour id $idDatachallenge
 function getDataDefiParId($connexion, $idDataDefi)
 {
-    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, descriptionD, dateDebut, dateFin
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin
               FROM DataDefi
               WHERE idDataDefi = ?";
 
-    $idDataDefi = $idGestionnaire = $typeD = $nombreSujet = $nombreQuestionnaire = $nom = $descriptionD = $dateDebut = $dateFin = null;
+    $idGestionnaire = $typeD = $nombreSujet = $nombreQuestionnaire = $nom = $dateDebut = $dateFin = null;
 
     try {
         // Préparation de la requête
         $stmt = $connexion->prepare($query);
-
+        
         // Liaison du paramètre avec la variable $idDataDefi
         $stmt->bind_param("i", $idDataDefi);
 
@@ -256,7 +256,7 @@ function getDataDefiParId($connexion, $idDataDefi)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $descriptionD, $dateDebut, $dateFin);
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
 
         // Récupération des données
         $stmt->fetch();
@@ -269,7 +269,6 @@ function getDataDefiParId($connexion, $idDataDefi)
             "nombreSujet" => $nombreSujet,
             "nombreQuestionnaire" => $nombreQuestionnaire,
             "nom" => $nom,
-            "descriptionD" => $descriptionD,
             "dateDebut" => $dateDebut,
             "dateFin" => $dateFin
         );
