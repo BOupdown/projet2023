@@ -28,7 +28,7 @@
             // Afficher le tableau HTML
             echo '<div class="table-wrapper">';
             echo '<table class="tableinfo">';
-            echo '<tr><th>Nom</th><th>Nom du Gestionnaire</th><th>Type</th><th>Nombre Sujet</th><th>Nombre Questionnaire</th><th>Date Début</th><th>Date Fin</th></tr>';
+            echo '<tr><th>Nom</th><th>Nom du gestionnaire</th><th>Type</th><th>Nombre de sujet</th><th>Nombre de questionnaire</th><th>Date de début</th><th>Date de fin</th></tr>';
 
             foreach ($dataDefiArray as $dataDefi) {
                 echo '<tr>';
