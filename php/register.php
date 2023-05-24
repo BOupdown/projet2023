@@ -23,7 +23,6 @@
         if (in_array('cmpd', $errors)) {
             echo "<script>alert(\"Les mots de passes ne sont pas identiques\")</script>";
         }
-        
     } else {
         $errors = [];
     }
@@ -90,12 +89,12 @@
 
                     </div>
                     <div class="niveau-details">
-                        <input value="L1" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-1" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L1") {echo 'checked';} ?>>
-                        <input value="L2" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-2" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L2") {echo 'checked';} ?>>
-                        <input value="L3"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-3" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L3") {echo 'checked';} ?>>
-                        <input value="M1" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-4" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "M1") {echo 'checked';} ?>>
-                        <input value="M2"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-5" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "M2") {echo 'checked';} ?>>
-                        <input value="D"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-6" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "D") {echo 'checked';} ?>>
+                        <input name = "rd"value="L1" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-1" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L1") {echo 'checked';} ?>>
+                        <input name = "rd"value="L2" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-2" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L2") {echo 'checked';} ?>>
+                        <input name = "rd" value="L3"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-3" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L3") {echo 'checked';} ?>>
+                        <input name = "rd"value="M1" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-4" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "M1") {echo 'checked';} ?>>
+                        <input name = "rd"value="M2"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-5" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "M2") {echo 'checked';} ?>>
+                        <input name = "rd"value="D"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-6" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "D") {echo 'checked';} ?>>
 
 
                         <span class="niveau-title">Année d'étude</span>
