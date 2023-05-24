@@ -701,7 +701,45 @@ function getAllQuestionnaire($connexion)
 }
 
 
+// Retourne un tableau php contenant tous les id des datas battle
+function getAllIdDataBattle($connexion)
+{
+    $query = "SELECT idDataBattle FROM Podium";
 
+    $idDataBattle = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre avec la variable $idDapodiumtaBattle
+        $stmt->bind_param("i", $idDataBattle);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataBattle);
+
+        $ids = array();
+        // Récupération des données
+        while ($stmt->fetch())
+        {
+            $ids[] = $idDataBattle;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations du podium
+        return $ids;
+
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
 
 
 
