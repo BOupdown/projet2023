@@ -22,6 +22,10 @@
                         echo '<li><a class="hover-underline-animation" href="/php/connexion.php">Se connecter</a></li>';
                         echo '<li><a class="hover-underline-animation" href="/php/register.php">Inscription</a></li>';
                         }else{
+                            if ($_SESSION['type'] == "admin" ) {
+                                echo '<li><a class="hover-underline-animation" href="/php/gererCompte.php">Gérer compte</a></li>';
+ 
+                            }
                             echo '<li><a class="hover-underline-animation" href="/php/deconnexion.php">Déconnexion</a></li>';
                         }
                         ?>
