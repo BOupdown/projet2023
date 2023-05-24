@@ -239,16 +239,16 @@ function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp) {
 // Retourne un tableau php contenant les informations d'un dataChallenge ayant pour id $idDatachallenge
 function getDataDefiParId($connexion, $idDataDefi)
 {
-    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, descriptionD, dateDebut, dateFin
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin
               FROM DataDefi
               WHERE idDataDefi = ?";
 
-    $idDataDefi = $idGestionnaire = $typeD = $nombreSujet = $nombreQuestionnaire = $nom = $descriptionD = $dateDebut = $dateFin = null;
+    $idGestionnaire = $typeD = $nombreSujet = $nombreQuestionnaire = $nom = $dateDebut = $dateFin = null;
 
     try {
         // Préparation de la requête
         $stmt = $connexion->prepare($query);
-
+        
         // Liaison du paramètre avec la variable $idDataDefi
         $stmt->bind_param("i", $idDataDefi);
 
@@ -256,7 +256,7 @@ function getDataDefiParId($connexion, $idDataDefi)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $descriptionD, $dateDebut, $dateFin);
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
 
         // Récupération des données
         $stmt->fetch();
@@ -269,7 +269,6 @@ function getDataDefiParId($connexion, $idDataDefi)
             "nombreSujet" => $nombreSujet,
             "nombreQuestionnaire" => $nombreQuestionnaire,
             "nom" => $nom,
-            "descriptionD" => $descriptionD,
             "dateDebut" => $dateDebut,
             "dateFin" => $dateFin
         );
@@ -701,7 +700,45 @@ function getAllQuestionnaire($connexion)
 }
 
 
+// Retourne un tableau php contenant tous les id des datas battle
+function getAllIdDataBattle($connexion)
+{
+    $query = "SELECT idDataBattle FROM Podium";
 
+    $idDataBattle = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre avec la variable $idDapodiumtaBattle
+        $stmt->bind_param("i", $idDataBattle);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataBattle);
+
+        $ids = array();
+        // Récupération des données
+        while ($stmt->fetch())
+        {
+            $ids[] = $idDataBattle;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations du podium
+        return $ids;
+
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
 
 
 
