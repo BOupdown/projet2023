@@ -48,7 +48,7 @@ require("navbar.php");
                <input type="submit" value="Login">
             </div>
             <div class="signup-link">
-              Pas encore de compte ? <a href="#">S'inscrire</a>
+              Pas encore de compte ? <a href="register.php">S'inscrire</a>
             </div>
          </form>
       </div>

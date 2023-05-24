@@ -13,7 +13,7 @@
                 <nav class="navbar">
                     <ul class="menu">
                         <li><a class="hover-underline-animation" href="/index.php">Accueil</a></li>
-                        <li><a class="hover-underline-animation" href="/php/produit.php?cat=noisettes">Les défis</a>
+                        <li><a class="hover-underline-animation" href="/php/datainfo.php">Les défis</a>
                         </li>
                         <li><a class="hover-underline-animation" href="/php/produit.php?cat=noix">Les gagnants</a></li>
                         <?php

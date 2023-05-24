@@ -32,7 +32,7 @@
         foreach ($dataDefiArray as $dataDefi) {
             echo '<tr>';
             echo '<td>' . $dataDefi['idDataDefi'] . '</td>';
-            echo '<td>' . getGestionnaireParId($connexion, $dataDefi['idGestionnaire'])[nom] . '</td>';
+            echo '<td>' . getGestionnaireParId($connexion, $dataDefi['idGestionnaire'])['nom'] . '</td>';
             echo '<td>' . $dataDefi['typeD'] . '</td>';
             echo '<td>' . $dataDefi['nombreSujet'] . '</td>';
             echo '<td>' . $dataDefi['nombreQuestionnaire'] . '</td>';
