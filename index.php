@@ -14,7 +14,7 @@ require 'php/navbar.php';
   <div id="DataDefiTitle" class="center-text">Data Défi</div>
 
   <div class="buttonsAccueil">
-    <a href="nimp" class="button">S'inscrire</a>
+    <a href="php/register.php" class="button">S'inscrire</a>
     <a href="php/datainfo.php" class="button">Data infos</a>
     <br>
     <a href="nimp" class="button">Les gagnants des concours</a>
