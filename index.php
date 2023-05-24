@@ -17,7 +17,7 @@ require 'php/navbar.php';
     <a href="nimp" class="button">S'inscrire</a>
     <a href="php/datainfo.php" class="button">Data infos</a>
     <br>
-    <a href="nimp" class="button">Les gagnants des concours</a>
+    <a href="php/gagnants.php" class="button">Les gagnants des concours</a>
 
   </div>
   
