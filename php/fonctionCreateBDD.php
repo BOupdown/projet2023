@@ -14,7 +14,7 @@ function disconnect($connexion)
     mysqli_close($connexion);
 }
 // Créer un étudiant à partir de ses informations
-function creerEtudiant($connexion, $nomUtilisateur, $mdp, $nom, $prenom, $niveauEtude, $telephone, $mail)
+function creerEtudiant($connexion, $nomUtilisateur, $mdp, $nom, $prenom, $niveauEtude, $telephone, $mail,$ecole)
 {
     try {
         // Début de la transaction
@@ -32,9 +32,9 @@ function creerEtudiant($connexion, $nomUtilisateur, $mdp, $nom, $prenom, $niveau
 
 
         // Préparer la requête pour l'insertion dans la table Etudiant
-        $stmt = $connexion->prepare("INSERT INTO Etudiant (idLogin, nom, prenom, niveauEtude, telephone, mail)
-                                VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("isssss", $idLogin, $nom, $prenom, $niveauEtude, $telephone, $mail);
+        $stmt = $connexion->prepare("INSERT INTO Etudiant (idLogin, nom, prenom, niveauEtude, telephone, mail,ecole)
+                                VALUES (?, ?, ?, ?, ?, ?,?)");
+        $stmt->bind_param("issssss", $idLogin, $nom, $prenom, $niveauEtude, $telephone, $mail,$ecole);
         if ($stmt->execute() === false) {
             throw new Exception("Erreur lors de l'insertion dans la table Etudiant : " . $connexion->error);
         }

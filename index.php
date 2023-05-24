@@ -4,6 +4,10 @@
   <title>index IA Pau</title>
   <link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
+<?php
+session_start();
+require 'php/navbar.php';
+?>
 <body>
  
 
@@ -14,6 +18,7 @@
     <a href="php/datainfo.php" class="button">Data infos</a>
     <br>
     <a href="nimp" class="button">Les gagnants des concours</a>
+
   </div>
   
 </body>

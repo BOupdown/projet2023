@@ -1,5 +1,5 @@
 <?php
-$usernamedb = "Oasis";
-$passworddb = "aequo3AVoo4y";
+$usernamedb = "Julien";
+$passworddb = "Alejandro";
 $dbname = "projetIng";
 ?>
