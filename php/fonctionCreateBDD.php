@@ -1,14 +1,14 @@
 <?php
 require 'bdd.php';
-function connect($username, $password, $dbname)
+function connect($usernamedb, $passworddb, $dbnamedb)
 {
-    $connexion = new mysqli("localhost", $username, $password, $dbname);
+    $connexion = new mysqli("localhost", $usernamedb, $passworddb, $dbnamedb);
     if ($connexion->connect_error) {
         die("Connection Failed!" . $connexion->connect_error);
     }
     return $connexion;
-
 }
+
 function disconnect($connexion)
 {
     mysqli_close($connexion);
@@ -222,6 +222,57 @@ function creerPodium($connexion, $idDataDefi, $idEtudiant1, $idEtudiant2, $idEtu
 }
 
 
+// Créer une data battle à partir des informations
+function creerSujet($connexion, $idSujet, $nom, $descriptionS, $idDataDefi)
+{
+    try {
+        // Début de la transaction
+        $connexion->begin_transaction();
+
+        $stmt = $connexion->prepare("INSERT INTO Sujet (idSujet, nom, descriptionS, idDataDefi)
+                                VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("issi", $idSujet, $nom, $descriptionS, $idDataDefi);
+        if ($stmt->execute() === false) {
+            throw new Exception("Erreur lors de l'insertion dans la table DataDefi : " . $connexion->error);
+        }
+
+        // Terminer la transaction
+        $connexion->commit();
+
+        echo "Opérations effectuées avec succès !";
+
+    } catch (Exception $e) {
+        // En cas d'erreur, annuler la transaction
+        $connexion->rollback();
+        echo "Erreur : " . $e->getMessage();
+    }
+}
+
+// Créer un questionnaire à partir des informations
+function creerQuestionnaire($connexion, $nom, $descriptionQ, $idDataDefi)
+{
+    try {
+        // Début de la transaction
+        $connexion->begin_transaction();
+
+        $stmt = $connexion->prepare("INSERT INTO Questionnaire (nom, descriptionQ, idDataDefi)
+                                VALUES (?, ?, ?)");
+        $stmt->bind_param("ssi", $nom, $descriptionQ, $idDataDefi);
+        if ($stmt->execute() === false) {
+            throw new Exception("Erreur lors de l'insertion dans la table Questionnaire : " . $connexion->error);
+        }
+
+        // Terminer la transaction
+        $connexion->commit();
+
+        echo "Questionnaire créé avec succès !";
+
+    } catch (Exception $e) {
+        // En cas d'erreur, annuler la transaction
+        $connexion->rollback();
+        echo "Erreur : " . $e->getMessage();
+    }
+}
 
 
 

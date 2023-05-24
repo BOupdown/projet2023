@@ -565,6 +565,144 @@ function getUtilisateurParLogin($connexion, $login) {
     }
 }
 
+function getAllDataDefi($connexion)
+{
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin FROM DataDefi";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
+
+        // Tableau pour stocker les données des défis
+        $tableDataDefi = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $dataDefi = array(
+                "idDataDefi" => $idDataDefi,
+                "idGestionnaire" => $idGestionnaire,
+                "typeD" => $typeD,
+                "nombreSujet" => $nombreSujet,
+                "nombreQuestionnaire" => $nombreQuestionnaire,
+                "nom" => $nom,
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin
+            );
+
+            // Ajouter le tableau associatif au tableau des défis
+            $tableDataDefi[] = $dataDefi;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des défis
+        return $tableDataDefi;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
+function getAllSujet($connexion)
+{
+    $query = "SELECT idSujet, nom, descriptionS, idDataDefi FROM Sujet";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idSujet, $nom, $descriptionS, $idDataDefi);
+
+        // Tableau pour stocker les données des défis
+        $tableDataDefi = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $sujet = array(
+                "idSujet" => $idSujet,
+                "nom" => $nom,
+                "descriptionS" => $descriptionS,
+                "idDataDefi" => $idDataDefi,
+            );
+
+            // Ajouter le tableau associatif au tableau des défis
+            $tableDataDefi[] = $sujet;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des défis
+        return $tableDataDefi;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
+function getAllQuestionnaire($connexion)
+{
+    $query = "SELECT idSujet, nom, descriptionQ, idDataDefi FROM Questionnaire";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idSujet, $nom, $descriptionQ, $idDataDefi);
+
+        // Tableau pour stocker les données des questionnaires
+        $tableauQuestionnaire = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $questionnaire = array(
+                "idSujet" => $idSujet,
+                "nom" => $nom,
+                "descriptionQ" => $descriptionQ,
+                "idDataDefi" => $idDataDefi,
+            );
+
+            // Ajouter le tableau associatif au tableau des questionnaires
+            $tableauQuestionnaire[] = $questionnaire;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des questionnaires
+        return $tableauQuestionnaire;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
+
+
 
 
 ?>

@@ -9,25 +9,31 @@ VALUES ('Omar', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 'Etudiant');
 
 INSERT INTO Login (nomUtilisateur, mdp, type)
 VALUES ('Rémi', 'e9d71f5ee7c92d6dc9e92ffdad17b8bd49418f98', 'Etudiant');
+-- mdp = b
 
 INSERT INTO Login (nomUtilisateur, mdp, type)
 VALUES ('Patrick', '84a516841ba77a5b4648de2cd0dfcb30ea46dbb4', 'Etudiant');
+-- mdp = c
 
 INSERT INTO Login (nomUtilisateur, mdp, type)
 VALUES ('Julien', '3c363836cf4e16666669a25da280a1865c2d2874', 'Etudiant');
+-- mdp = d
 
 INSERT INTO Login (nomUtilisateur, mdp, type)
 VALUES ('Nezar', '58e6b3a414a1e090dfc6029add0f3555ccba127f', 'Etudiant');
+-- mdp = e
 
 -- --------------- LOGIN GESTIONNAIRE ----------------------------------------------
 
 INSERT INTO Login (nomUtilisateur, mdp, type)
 VALUES ('Gestionnaire1', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Gestionnaire');
+-- mdp = password123
 
 -- --------------- LOGIN ADMINISTRATEUR ----------------------------------------------
 
 INSERT INTO Login (nomUtilisateur, mdp, type)
 VALUES ('Admin1', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Administrateur');
+-- mdp = password123
 
 -- --------------- TABLE ETUDIANT ----------------------------------------------
 
