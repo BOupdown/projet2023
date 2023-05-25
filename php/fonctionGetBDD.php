@@ -5,7 +5,7 @@ function getEtudiantParId($connexion, $idEtudiant)
 {
     $query = "SELECT idLogin, nom, prenom, niveauEtude, telephone, mail FROM Etudiant WHERE idLogin = ?";
 
-    $idLogin = $nom = $prenom = $niveauEtude = $telephone = $mail = null;
+    $nom = $prenom = $niveauEtude = $telephone = $mail = null;
 
     try {
         // Préparation de la requête
@@ -391,7 +391,7 @@ function getPodiumParId($connexion, $idDataBattle)
               FROM Podium
               WHERE idDataBattle = ?";
 
-    $idDataBattle = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = null;
+    $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = null;
 
     try {
         // Préparation de la requête
@@ -710,9 +710,6 @@ function getAllIdDataBattle($connexion)
     try {
         // Préparation de la requête
         $stmt = $connexion->prepare($query);
-
-        // Liaison du paramètre avec la variable $idDapodiumtaBattle
-        $stmt->bind_param("i", $idDataBattle);
 
         // Exécution de la requête
         $stmt->execute();

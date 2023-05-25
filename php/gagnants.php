@@ -18,7 +18,6 @@ require 'fonctionCreateBDD.php';
 
             $connexion = connect($usernamedb, $passworddb, $dbname);
             $listeIdDataBattle = getAllIdDataBattle($connexion);
-            //var_dump($listeIdDataBattle);
 
             //pour chaque id de data battle on get le podium
             foreach($listeIdDataBattle as $id)
@@ -26,7 +25,6 @@ require 'fonctionCreateBDD.php';
 
                 $temp = getPodiumParId($connexion, $id);
                 echo "<br>";
-                //var_dump($temp);
                 $etudiant1 = getEtudiantParId($connexion, $temp["idEtudiant1"]);
                 $etudiant2 = getEtudiantParId($connexion, $temp["idEtudiant2"]);
                 $etudiant3 = getEtudiantParId($connexion, $temp["idEtudiant3"]);
