@@ -109,7 +109,7 @@ INSERT INTO Podium (idDataBattle, idEtudiant1, idEtudiant2, idEtudiant3)
 VALUES (1, 3, 4, 5);
 
 INSERT INTO Podium (idDataBattle, idEtudiant1, idEtudiant2, idEtudiant3)
-VALUES (3, 5, 3, 4);
+VALUES (2, 5, 3, 4);
 
 -- --------------- TABLE MESSAGE ----------------------------------------------
 
