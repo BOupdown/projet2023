@@ -1,45 +1,41 @@
 .fond {
     margin: 0;
     padding: 0;
-
-    margin-top: 25%;
+    display:grid;
+    margin-top: 1em ;
     margin-left: auto;
     margin-right: auto; 
     width: 50%;
-    height: 90vh;
-    display: flex;
+    height: 100%;
     justify-content: center;
-    /*align-items: center;*/
-    background-color: grey;
+    align-items: center;
+    background-color: #172A3A   ;
     box-sizing: border-box;
+    text-align: center;
+    margin-bottom:2em ;
+    border-radius: 20px;
+    color: bisque;
 
 }
 
 #DataDefiTitle {
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: bisque;
-    font-size: 5vw;
-    font-weight: bold;
+    margin-top: 1.6em;
     text-align: center;
-}
+    font-size: 100px;
+    color: bisque;
+}   
 
 body {
     background-image: url(../images/image.jpg);
     background-repeat: repeat;
     background-size: cover;
-    font-family: sans-serif;
 }
 
 .container {
-    padding: 10;
     display: flex;
     align-items: flex-end;
-    height: 400px;
-    width: 50%;
     box-sizing: border-box;
+    margin-bottom: 2em;
 }
 
 .podium__item {
@@ -56,7 +52,7 @@ color: bisque;
 
 .podium__city {
 text-align: center;
-padding: 0 .5rem;
+padding: 0 5rem;
 }
 
 .podium__number {
@@ -66,16 +62,26 @@ height: 75px;
 
 .podium .first {
 min-height: 300px;
-background: #020024;
+background: #824C71;
+color: #172A3A;
+
 
 }
 
 .podium .second {
 min-height: 200px;
-background: #172A3A;
+background: #E5D0E3;
+color: #172A3A;
 }
 
 .podium .third {
 min-height: 100px;
 background: #4d5358;
+color: #172A3A;
+
+}
+
+.defi-title{
+    font-size: 2em;
+    text-decoration: underline;
 }
