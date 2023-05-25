@@ -134,8 +134,10 @@ CREATE TABLE Message(
 );
 
 CREATE TABLE MessageGroupe(
-    idMessage PRIMARY KEY,
+    idMessage INTEGER PRIMARY KEY,
+    idExpediteur INTEGER,
     idDestinataire INTEGER,
     FOREIGN KEY (idMessage) REFERENCES Message (idMessage);
+    FOREIGN KEY (idExpediteur) REFERENCES Message (idExpediteur);
     FOREIGN KEY (idDestinataire) REFERENCES Groupe (idGroupe);
 )

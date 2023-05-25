@@ -574,6 +574,8 @@ function getAllDataDefi($connexion)
 
         // Exécution de la requête
         $stmt->execute();
+        $idDataDefi = $idGestionnaire = $typeD = $nombreSujet = $nombreQuestionnaire = $nom = $dateDebut = $dateFin = null;
+ 
 
         // Liaison des colonnes du résultat avec des variables
         $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
@@ -624,6 +626,8 @@ function getAllSujet($connexion)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
+        $idSujet = $nom = $descriptionS = $idDataDefi = null;
+
         $stmt->bind_result($idSujet, $nom, $descriptionS, $idDataDefi);
 
         // Tableau pour stocker les données des défis
@@ -666,6 +670,7 @@ function getAllQuestionnaire($connexion)
 
         // Exécution de la requête
         $stmt->execute();
+        $idSujet = $nom = $descriptionQ = $idDataDefi = null;
 
         // Liaison des colonnes du résultat avec des variables
         $stmt->bind_result($idSujet, $nom, $descriptionQ, $idDataDefi);
@@ -717,19 +722,46 @@ function getAllIdDataBattle($connexion)
         // Liaison des colonnes du résultat avec des variables
         $stmt->bind_result($idDataBattle);
 
-        $ids = array();
-        // Récupération des données
-        while ($stmt->fetch())
-        {
-            $ids[] = $idDataBattle;
+function getAllEtudiant($connexion)
+{
+    $query = "SELECT idLogin, nom, prenom, niveauEtude, telephone, mail, ecole FROM Etudiant";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+        
+        $idLogin = $nom = $prenom = $niveauEtude = $telephone = $mail = $ecole = null;
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idLogin, $nom, $prenom, $niveauEtude, $telephone, $mail, $ecole);
+
+        // Tableau pour stocker les données des étudiants
+        $tableEtudiants = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $etudiant = array(
+                "idLogin" => $idLogin,
+                "nom" => $nom,
+                "prenom" => $prenom,
+                "niveauEtude" => $niveauEtude,
+                "telephone" => $telephone,
+                "mail" => $mail,
+                "ecole" => $ecole,
+            );
+
+            // Ajouter le tableau associatif au tableau des étudiants
+            $tableEtudiants[] = $etudiant;
         }
 
         // Fermeture du statement
         $stmt->close();
 
-        // Retourne les informations du podium
-        return $ids;
-
+        // Retourne le tableau des étudiants
+        return $tableEtudiants;
     } catch (Exception $e) {
         // Gestion de l'exception
         echo "Une erreur est survenue : " . $e->getMessage();
