@@ -27,6 +27,7 @@ require("navbar.php");
     }
     ?>
 
+
     <div class="fond">
     <div class="wrapper">
          <div class="title">

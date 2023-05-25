@@ -12,6 +12,8 @@ formulaire.addEventListener('submit', (event) => {
             // Empêcher l'envoi du formulaire
             event.preventDefault();
         }
+
+
     });
 });
 

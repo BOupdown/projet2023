@@ -57,7 +57,11 @@ VALUES (5, 'El Medkour', 'Nezar', 'L3', '0715849526', 'elmedkourn@cy-tech.fr', '
 INSERT INTO Gestionnaire (idLogin, nom, prenom, entreprise, telephone, mail, dateDebut, dateFin)
 VALUES (6, 'Gestionnaire1', 'Gestionnaire1', 'ABC Company', '0695847128', 'gestionnaire@example.com', '2022-01-01', '2022-12-31');
 
--- --------------- TABLE ADMINISTRATEUR ----------------------------------------------
+
+INSERT INTO Gestionnaire (idLogin, nom, prenom, entreprise, telephone, mail, dateDebut, dateFin)
+VALUES (7, 'Gestionnaire2', 'Gestionnaire2', 'ZZZ Company', '0695847128', 'gestionnaire@example.com', '2022-01-01', '2022-12-31');
+
+-- ---------------ABLE ADMINISTRATEUR ----------------------------------------------
 
 INSERT INTO Administrateur (idLogin, nom, prenom, telephone, mail)
 VALUES (3, 'Admin1', 'Admin1', '0626594871', 'admin@example.com');
@@ -66,6 +70,9 @@ VALUES (3, 'Admin1', 'Admin1', '0626594871', 'admin@example.com');
 
 INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFIN)
 VALUES (6, 'DataBattle', 2, 3, 'Octogone 2pac vs Eminem', '2022-05-01', '2022-06-30');
+
+INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFIN)
+VALUES (7, 'DataBattle', 3, 2, 'Octogone Omar vs Julien', '2022-07-01', '2022-08-30');
 
 -- --------------- TABLE SUJET ----------------------------------------------
 
@@ -100,6 +107,9 @@ VALUES (1, 1, 'le bard sort victorieux', 'images/image.png');
 
 INSERT INTO Podium (idDataBattle, idEtudiant1, idEtudiant2, idEtudiant3)
 VALUES (1, 3, 4, 5);
+
+INSERT INTO Podium (idDataBattle, idEtudiant1, idEtudiant2, idEtudiant3)
+VALUES (2, 5, 3, 4);
 
 -- --------------- TABLE MESSAGE ----------------------------------------------
 

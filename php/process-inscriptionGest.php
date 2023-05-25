@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = htmlspecialchars($_POST['email']);
     $login = htmlspecialchars($_POST['login']);
     $telephone = htmlspecialchars($_POST['telephone']);
-    $ecole = htmlspecialchars($_POST['ecole']);
-    $niveau = htmlspecialchars($_POST['niveau']);
-
+    $entreprise = htmlspecialchars($_POST['entreprise']);
+    $debut = htmlspecialchars($_POST['debut']);
+    $fin = htmlspecialchars($_POST['fin']);
 
 
 
@@ -64,14 +64,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors += 1;
         $errs .= "telephone;";
     }
-
-    if (empty($niveau)) {
+    if (empty($entreprise)) {
         $errors += 1;
-        $errs .= "niveau;";
+        $errs .= "entreprise;";
     }
-    if(empty($ecole)){
+    if (empty($debut) || $debut > $fin || $debut < date("Y-m-d")) {
         $errors += 1;
-        $errs .= "ecole;";
+        $errs .= "debut;";
+    }
+    if (empty($fin) || $debut > $fin || $fin < date("Y-m-d")) {
+        $errors += 1;
+        $errs .= "fin;";
     }
 
 
@@ -82,15 +85,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         disconnect($connexion);
         if (count($resultat) > 0) {
 
-            header('Location: register.php?errors=used');
+            header('Location: inscrptionGestionnaire.php?errors=used');
             exit;
         } 
 
         
         $connexion = connect($usernamedb, $passworddb, $dbname);
-        creerEtudiant($connexion, $login, $mdp, $nom, $prenom, $niveau, $telephone, $email, $ecole);
+        creerGestionnaire($connexion, $login, $mdp, $nom, $prenom, $entreprise, $telephone, $email, $debut, $fin);
         disconnect($connexion);
-        header('Location: register.php?errors=no');
+        header('Location: inscriptionGestionnaire.php?errors=no');
         exit;
 
     } else {
@@ -101,9 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['telephone'] = $telephone;
         $_SESSION['email'] = $email;
         $_SESSION['niveau'] = $niveau;
-        $_SESSION['ecole'] = $ecole;
+        $_SESSION['entreprise'] = $entreprise;
+        $_SESSION['debut'] = $debut;
+        $_SESSION['fin'] = $fin;
 
-        header('Location: register.php?errors=' . $errs);
+        header('Location: inscriptionGestionnaire.php?errors=' . $errs);
         exit;
 
     }

@@ -12,6 +12,7 @@
     <?php
     session_start();
     require 'navbar.php';
+    if (isset($_SESSION['type']) && $_SESSION['type'] == 'Administrateur') {
 
     if (isset($_GET['errors'])) {
         $errors = explode(';', $_GET['errors']);
@@ -36,14 +37,13 @@
             <a href="register.php" class="buttonB">Inscription étudiant</a>
             <a href="inscriptionGestionnaire.php" class="buttonB">Inscription gestionnaire</a>
             </div>';
-            
     }
     ?>
     <div class="body">
         <div class="container">
             <div class="title">Inscription</div>
             <div class="content">
-                <form id="form" action="process-register.php" method="post" target="_self">
+                <form id="form" action="process-inscriptionGest.php" method="post" target="_self">
                     <div class="user-details">
                         <div class="input-box">
                             <span class="details">Nom</span>
@@ -76,11 +76,25 @@
                         ?>
 
                         <div class="input-box">
-                            <span class="details">Ecole</span>
-                            <input <?php if (in_array('ecole', $errors) ) { echo 'class="erreur"'; } ?> name="ecole" type="text" placeholder="Entrez votre école" value=<?php if (isset($_SESSION['ecole'])) { echo $_SESSION['ecole'];} ?> >
+                            <span class="details">Entreprise</span>
+                            <input <?php if (in_array('entreprise', $errors) ) { echo 'class="erreur"'; } ?> name="entreprise" type="text" placeholder="Entrez votre entreprise" value=<?php if (isset($_SESSION['entreprise'])) { echo $_SESSION['entreprise'];} ?> >
                         </div>
                         <?php
-                        unset($_SESSION['ecole']);
+                        unset($_SESSION['entreprise']);
+                        ?>
+                        <div class="input-box">
+                            <span class="details">Date de début d'activation</span>
+                            <input <?php if (in_array('debut', $errors) ) { echo 'class="erreur"'; } ?> name="debut" type="date" placeholder="Entrez le début d'activation" value=<?php if (isset($_SESSION['debut'])) { echo $_SESSION['debut'];} ?> >
+                        </div>
+                        <?php
+                        unset($_SESSION['debut']);
+                        ?>
+                        <div class="input-box">
+                            <span class="details">Date de fin d'activation</span>
+                            <input <?php if (in_array('fin', $errors) ) { echo 'class="erreur"'; } ?> name="fin" type="date" placeholder="Entrez la fin d'activation" value=<?php if (isset($_SESSION['fin'])) { echo $_SESSION['fin'];} ?> >
+                        </div>
+                        <?php
+                        unset($_SESSION['fin']);
                         ?>
                         <div class="input-box">
                             <span class="details">Login</span>
@@ -100,43 +114,7 @@
                         </div>
 
                     </div>
-                    <div class="niveau-details">
-                        <input name = "rd"value="L1" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-1" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L1") {echo 'checked';} ?>>
-                        <input name = "rd"value="L2" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-2" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L2") {echo 'checked';} ?>>
-                        <input name = "rd" value="L3"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-3" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L3") {echo 'checked';} ?>>
-                        <input name = "rd"value="M1" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-4" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "M1") {echo 'checked';} ?>>
-                        <input name = "rd"value="M2"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-5" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "M2") {echo 'checked';} ?>>
-                        <input name = "rd"value="D"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-6" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "D") {echo 'checked';} ?>>
-
-
-                        <span class="niveau-title">Année d'étude</span>
-                        <div class="category">
-                            <label for="dot-1">
-                                <span class="dot one"></span>
-                                <span class="niveau">L1</span>
-                            </label>
-                            <label for="dot-2">
-                                <span class="dot two"></span>
-                                <span class="niveau">L2</span>
-                            </label>
-                            <label for="dot-3">
-                                <span class="dot three"></span>
-                                <span class="niveau">L3</span>
-                            </label>
-                            <label for="dot-4">
-                                <span class="dot four"></span>
-                                <span class="niveau">M1</span>
-                            </label>
-                            <label for="dot-5">
-                                <span class="dot five"></span>
-                                <span class="niveau">M2</span>
-                            </label>
-                            <label for="dot-6">
-                                <span class="dot six"></span>
-                                <span class="niveau">D</span>
-                            </label>
-                        </div>
-                    </div>
+                   
                     <?php
                     unset($_SESSION['niveau']);
                     ?>
@@ -147,8 +125,13 @@
             </div>
         </div>
     </div>
+    <?php
+    } else {
+        header('Location: /index.php');
+    }
+    ?>
 </body>
-<script src="/js/verif-register.js"></script>
+<script src="/js/verif-inscriptionGest.js"></script>
 
 
 </html>
