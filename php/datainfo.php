@@ -28,11 +28,12 @@
         // Vérifier si le tableau n'est pas vide
         if (!empty($dataDefiArray)) {
             // Afficher le tableau HTML
-            echo '<div class="table-wrapper">';
-            echo '<table class="tableinfo">';
-            echo '<tr><th>Nom</th><th>Nom du gestionnaire</th><th>Type</th><th>Nombre de sujet</th><th>Nombre de questionnaire</th><th>Date de début</th><th>Date de fin</th></tr>';
+    
 
             foreach ($dataDefiArray as $dataDefi) {
+                echo '<div class="table-wrapper">';
+                echo '<table class="tableinfo">';   
+                echo '<tr><th>Nom</th><th>Nom du gestionnaire</th><th>Type</th><th>Nombre de sujet</th><th>Nombre de questionnaire</th><th>Date de début</th><th>Date de fin</th></tr>';
                 echo '<tr>';
                 echo '<td>' . $dataDefi['nom'] . '</td>';
                 $connexion = connect($usernamedb, $passworddb, $dbname);
@@ -62,10 +63,10 @@
                     echo '<td>' . $squestion['descriptionQ'] . '</td>';
                     echo '</tr>';
                 }
-                echo '</tr>';
+                echo '</table>';
+
             }
 
-            echo '</table>';
         } else {
             echo 'Aucune donnée de défi trouvée.';
         }
