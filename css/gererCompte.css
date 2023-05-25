@@ -4,32 +4,42 @@ body {
     background-size: cover;
 }
 
-.divEleve {
-    margin-top: 400px;
-  }
+.titre {
+    margin-top: 1.6em;
+    text-align: center;
+    font-size: 100px;
+    color: bisque;
 
-  .tableEleve {
-    margin-top: 0px;
-    border-collapse: collapse;
-    width: 100%;
-    font-size: 13px;
-    background-color: black;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.tableEleve th, .tableEleve td {
-    border: 1px solid #ddd;
+
+.table {
+    margin-top: 1em;
+    width: 100%;
+    font-size: 14px;
+    background-color: #172A3A;
+    border-collapse: separate;
+    border-radius: 20px;
+    overflow: hidden;
+    border-spacing: 0;
+    text-align: center;    
+    border: 5px solid #172A3A;
+
+}
+
+.table th,
+.table td {
+    border: 1px solid #172A3A;
     padding: 10px;
     color: wheat;
 }
 
-.tableEleve td {
-    background-color:grey;
+.table td {
+    background-color: #824C71;
 }
 
-.tableEleve tr:nth-child(even) {
-    background-color:grey;
+.table tr:nth-child(even) {
+    background-color: #824C71;
 }
 
 .buttonTd {
@@ -39,9 +49,26 @@ body {
 .buttonSupp {
     border-radius: 20px;
     padding: 10px 20px;
-    background-color: #f70404;
+    background-color: #9b1e1e;
     color: #fff;
     border: none;
     cursor: pointer;
-  }
-  
+}
+
+.dateFin {
+    background-color: #9b1e1e !important;
+}
+
+.titre2{
+    margin-top: 1.6em;
+    color: bisque;
+    font-size: 2em;
+    background-color: #172A3A;
+    display: inline;
+    border-radius: 20px;
+    border: 5px solid #172A3A;
+}
+
+.divElement{
+    margin-top: 1em;
+}

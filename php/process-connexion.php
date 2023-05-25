@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id = $reponse['idLogin'];
             $_SESSION['id'] = $id;
             $_SESSION['type'] = $reponse['type'];
-            header('Location: connexion.php?errors=no');
+            header('Location: ../index.php');
             exit;
 
         } else {

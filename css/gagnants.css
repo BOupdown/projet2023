@@ -64,24 +64,29 @@ height: 75px;
 min-height: 300px;
 background: #824C71;
 color: #172A3A;
-
+border-radius: 10px 10px 0 0;
 
 }
 
 .podium .second {
 min-height: 200px;
-background: #E5D0E3;
+background: #a16c90;
 color: #172A3A;
+border-radius: 10px 0 0 0;
+
 }
 
 .podium .third {
 min-height: 100px;
-background: #4d5358;
+background: #E5D0E3;
 color: #172A3A;
-
+border-radius: 0 10px 0 0;
 }
+
+
 
 .defi-title{
     font-size: 2em;
     text-decoration: underline;
 }
+
