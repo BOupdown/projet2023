@@ -722,7 +722,6 @@ function getAllIdDataBattle($connexion)
         // Liaison des colonnes du résultat avec des variables
         $stmt->bind_result($idDataBattle);
 
-<<<<<<< HEAD
 function getAllEtudiant($connexion)
 {
     $query = "SELECT idLogin, nom, prenom, niveauEtude, telephone, mail, ecole FROM Etudiant";
@@ -756,26 +755,13 @@ function getAllEtudiant($connexion)
 
             // Ajouter le tableau associatif au tableau des étudiants
             $tableEtudiants[] = $etudiant;
-=======
-        $ids = array();
-        // Récupération des données
-        while ($stmt->fetch())
-        {
-            $ids[] = $idDataBattle;
->>>>>>> a64ebf97c100af2b45169db6e31e39229351b1a8
         }
 
         // Fermeture du statement
         $stmt->close();
 
-<<<<<<< HEAD
         // Retourne le tableau des étudiants
         return $tableEtudiants;
-=======
-        // Retourne les informations du podium
-        return $ids;
-
->>>>>>> a64ebf97c100af2b45169db6e31e39229351b1a8
     } catch (Exception $e) {
         // Gestion de l'exception
         echo "Une erreur est survenue : " . $e->getMessage();
