@@ -1,0 +1,77 @@
+body {
+    background-image: url(../images/image.jpg);
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+.tableinfo {
+    margin-top: 1em;
+    width: 100%;
+    font-size: 14px;
+    background-color: #172A3A;
+    border-collapse: separate;
+    border-radius: 20px;
+    overflow: hidden;
+    border-spacing: 0;
+    text-align: center;    
+    border: 5px solid #172A3A;
+
+}
+
+
+
+.tableinfo th, .tableinfo td {
+    border: 1px solid #172A3A;
+    padding: 10px;
+    color: wheat;
+    
+}
+
+.tableinfo tr:nth-child(even) {
+    background-color: #824C71;
+}
+
+.tableinfo2 td {
+    background-color: #824C71;
+}
+
+.titredatainfo {
+    margin-top: 1.6em;
+    text-align: center;
+    font-size: 100px;
+    color: bisque;
+
+}
+
+.tableinfo2 {
+    margin-top: 10px;
+    border-collapse: collapse;
+    width: 30%;
+    font-size: 13px;
+    background-color: black;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: separate;
+    border-radius: 20px;
+    overflow: hidden;
+    border-spacing: 0;
+    text-align: center;
+    border: 5px solid #172A3A;
+
+}
+
+.tableinfo2 th, .tableinfo2 td {
+    border: 1px solid #172A3A;
+    padding: 10px;
+    color: #172A3A;
+}
+
+.tableinfo2 td {
+    background-color:#E5D0E3;
+}
+
+.tableinfo2 tr:nth-child(even) {
+    background-color:#E5D0E3;
+}
+
+
