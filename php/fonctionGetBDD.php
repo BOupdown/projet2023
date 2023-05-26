@@ -829,15 +829,12 @@ function getAllGestionnaire($connexion){
         return null;
     }
 }
-
-//recuperer tous les users
-
-function getAllUser($connexion)
-{
+function getAllLoginsEtudiants($connexion) {
     $query = "SELECT idLogin, nomUtilisateur, mdp, type
-              FROM Login";
+              FROM Login
+              WHERE type = 'etudiant'";
 
-    $idLogin = $nomUtilisateur = $mdp = $type = null;
+    $logins = array();
 
     try {
         // Préparation de la requête
@@ -845,37 +842,35 @@ function getAllUser($connexion)
 
         // Exécution de la requête
         $stmt->execute();
+        $idLogin = $nomUtilisateur = $mdp = $type = null;
 
         // Liaison des colonnes du résultat avec des variables
         $stmt->bind_result($idLogin, $nomUtilisateur, $mdp, $type);
 
-        // Récupération des données
-        $stmt->fetch();
-
-        $utilisateurs = array();
-        // Création d'un tableau associatif avec les résultats
-        while ($stmt->fetch())
-        {
-            $utilisateur = array(
+        // Parcours des résultats
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les informations du login
+            $login = array(
                 "idLogin" => $idLogin,
-                "nomUtilisateur" => $nomUtilisateur,
-                "mdp" => $mdp,
-                "type" => $type
+                "nomUtilisateur" => $nomUtilisateur
             );
-            $utilisateurs[] = $utilisateur;
+
+            // Ajout du tableau du login au tableau des logins
+            $logins[] = $login;
         }
-        
 
         // Fermeture du statement
         $stmt->close();
 
-        // Retourne les informations de l'utilisateur
-        return $utilisateurs;
+        // Retourne le tableau des logins des étudiants
+        return $logins;
     } catch (Exception $e) {
         // Gestion de l'exception
         echo "Une erreur est survenue : " . $e->getMessage();
         return null;
     }
 }
+
+
 
 ?>

@@ -89,25 +89,7 @@ form .category label {
     cursor: pointer;
 }
 
-form .category label .dot {
-    height: 18px;
-    width: 18px;
-    border-radius: 50%;
-    margin-right: 10px;
-    background: #d9d9d9;
-    border: 5px solid transparent;
-    transition: all 0.3s ease;
-}
 
-#dot-1:checked~.category label .one,
-#dot-2:checked~.category label .two,
-#dot-3:checked~.category label .three,
-#dot-4:checked~.category label .four,
-#dot-5:checked~.category label .five,
-#dot-6:checked~.category label .six {
-    background: #29BABB;
-    border-color: #d9d9d9;
-}
 
 form input[type="radio"] {
     display: none;
@@ -179,4 +161,9 @@ form .button input:hover {
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 5px;
+}
+
+.list-group{
+    max-height: 300px;
+    overflow-y: scroll;
 }
