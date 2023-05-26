@@ -19,7 +19,7 @@
     if (isset($_SESSION['id'])) {
       echo '<a href="php/monProfil.php" class="button">Mon profil</a>';
     } else {
-      echo '    <a href="php/register.php" class="button">S\'inscrire</a>';
+      echo '<a href="php/register.php" class="button">S\'inscrire</a>';
     }
     ?>
     <a href="php/datainfo.php" class="button">Data infos</a>

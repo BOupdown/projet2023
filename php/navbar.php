@@ -30,6 +30,9 @@
                                 echo '<li><a class="hover-underline-animation" href="/php/gererCompte.php">Gérer comptes</a></li>';
  
                             }
+                            if ($_SESSION['type'] == "Etudiant") {
+                                echo '<li><a class="hover-underline-animation" href="/php/creerGroupe.php">Créer groupe</a></li>';
+                            }
                             $connexion = connect($usernamedb, $passworddb, $dbname);
                             $user = getUtilisateurParId($connexion, $_SESSION['id']);
                             disconnect($connexion);
