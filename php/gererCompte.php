@@ -9,19 +9,28 @@
 <body>
     <?php
     session_start();
-
     require 'navbar.php';
     require_once 'fonctionGetBDD.php';
     require_once 'fonctionCreateBDD.php';
-    
+
+    ?>
+    <h1 class="titre">Gérer les comptes</h1>
+
+    <div class="type">
+        <a href="register.php" class="button">Inscription étudiant</a>
+        <a href="inscriptionGestionnaire.php" class="button">Inscription gestionnaire</a>
+    </div>
+
+    <?php
+
+
 
     if (isset($_SESSION['type']) && $_SESSION['type'] == 'Administrateur') {
         $connexion = connect($usernamedb, $passworddb, $dbname);
         $gestionnaires = getAllGestionnaire($connexion);
         disconnect($connexion);
-        echo '<h1 class= "titre">Gérer les comptes</h1>';
         echo "<div class='divElement'> ";
-        echo '<div class="divTitre">';   
+        echo '<div class="divTitre">';
         echo '<h2 class= "titre2">Gestionnaires</h2>';
         echo '</div>';
 
@@ -35,11 +44,11 @@
                 echo "<td>" . $gestionnaire['mail'] . "</td>";
                 echo "<td>" . $gestionnaire['entreprise'] . "</td>";
                 echo "<td>" . $gestionnaire['telephone'] . "</td>";
-                echo "<td>".$gestionnaire['dateDebut']."</td>";
+                echo "<td>" . $gestionnaire['dateDebut'] . "</td>";
                 if ($gestionnaire['dateFin'] < date("Y-m-d")) {
-                    echo "<td class = 'dateFin'>".$gestionnaire['dateFin']."</td>";
-                }else{
-                    echo "<td>".$gestionnaire['dateFin']."</td>";
+                    echo "<td class = 'dateFin'>" . $gestionnaire['dateFin'] . "</td>";
+                } else {
+                    echo "<td>" . $gestionnaire['dateFin'] . "</td>";
                 }
 
                 echo "<td class='buttonTd'><button class='buttonSupp' onclick='supprimer(" . $gestionnaire["idLogin"] . ")'>X</button></td>";
