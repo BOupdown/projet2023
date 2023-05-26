@@ -133,6 +133,7 @@ CREATE TABLE Message(
     FOREIGN KEY (idDestinataire) REFERENCES Login (idLogin)
 );
 
+
 CREATE TABLE MessageGroupe(
     idMessage INTEGER PRIMARY KEY,
     idDestinataire INTEGER,
