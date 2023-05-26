@@ -29,6 +29,10 @@ INSERT INTO Login (nomUtilisateur, mdp, type)
 VALUES ('Gestionnaire1', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Gestionnaire');
 -- mdp = password123
 
+INSERT INTO Login (nomUtilisateur, mdp, type)
+VALUES ('Gestionnaire2', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Gestionnaire');
+-- mdp = password123
+
 -- --------------- LOGIN ADMINISTRATEUR ----------------------------------------------
 
 INSERT INTO Login (nomUtilisateur, mdp, type)
@@ -113,22 +117,27 @@ VALUES (2, 5, 3, 4);
 
 -- --------------- TABLE MESSAGE ----------------------------------------------
 
-INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu)
-VALUES (1, 2, '2023-05-17 8:05:20', 'bonjour bonjour bonjour b!!!!! jour');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (6, 2, 'vrai objet', 'bonjour bonjour bonjour b!!!!! jour');
 
-INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu)
-VALUES (2, 1, '2023-05-17 10:54:32', 'salutt salut :) b!!!!! jour');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (6, 2, 'objet kreklzrnf', 'bonjour bonjour bonjour b!!!!! jour');
 
-INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu)
-VALUES (1, 3, '2023-05-18 17:04:11', 'oui c pour ca que je parle avec user3');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (7, 1, 'OBJETTT', 'salutt salut :) b!!!!! jour');
 
-INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu)
-VALUES (3, 1, '2023-05-18 19:04:11', 'ok merci user1');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (6, 3, 'objet de oui', 'oui c pour ca que je parle avec user3');
 
-INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu)
-VALUES (1, 4, '2023-05-19 15:47:21', 'sssssssssssssssssssssss');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (3, 1, 'objet de ok', 'ok merci user1');
 
-INSERT INTO Message (idExpediteur, idDestinataire, dateHeure, contenu)
-VALUES (1, 2, '2023-05-23 14:08:08', 'Bonjour, chacal!');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (6, 4, 'sssss', 'sssssssssssssssssssssss');
 
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (7, 2, 'Bjr', 'Bonjour, chacal!');
+
+INSERT INTO MessageGroupe (idMessage, idDestinataire)
+VALUES (7, 1);
 -- 
