@@ -1,0 +1,109 @@
+body {
+    background-image: url(../images/image.jpg);
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+.titre {
+    margin-top: 1.6em;
+    text-align: center;
+    font-size: 100px;
+    color: bisque;
+
+}
+
+
+.table {
+    margin-top: 1em;
+    width: 100%;
+    font-size: 14px;
+    background-color: #172A3A;
+    border-collapse: separate;
+    border-radius: 20px;
+    overflow: hidden;
+    border-spacing: 0;
+    text-align: center;    
+    border: 5px solid #172A3A;
+    margin-bottom: 2em;
+
+}
+
+.table th,
+.table td {
+    border: 1px solid #172A3A;
+    padding: 10px;
+    color: wheat;
+}
+
+.table td {
+    background-color: #824C71;
+}
+
+.table tr:nth-child(even) {
+    background-color: #824C71;
+}
+
+.buttonTd {
+    text-align: center;
+}
+
+.buttonSupp {
+    border-radius: 20px;
+    padding: 10px 20px;
+    background-color: #9b1e1e;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.dateFin {
+    background-color: #9b1e1e !important;
+}
+
+.titre2{
+    margin-top: 1.6em;
+    color: bisque;
+    font-size: 2em;
+    background-color: #172A3A;
+    display: inline;
+    border-radius: 20px;
+    border: 5px solid #172A3A;
+}
+
+.divElement{
+    margin-top: 1em;
+}
+
+.type{
+    text-align: center;
+    margin-bottom: 3em;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 42px;
+    background-color: #172A3A;
+    color: bisque;
+    text-align: center;
+    text-decoration: none;
+    font-size: 19px;
+    border: none;
+    cursor: pointer;
+    margin: 20px;
+    border-radius: 10px;
+}
+.vide{
+    margin-top: 1em;
+    text-align: center;
+    font-size: 2em;
+    color: #9b1e1e;
+    font-weight: bold;
+    display: inline;
+    background-color: bisque;
+    border-radius: 20px;
+    border: 5px solid bisque;
+}  
+.divErreur{
+    display: flex;
+    justify-content: center;
+}

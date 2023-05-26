@@ -4,6 +4,11 @@
 
 </head>
 <header>
+    <?php
+    session_start();
+    require_once 'fonctionGetBDD.php';
+    require_once 'fonctionCreateBDD.php';
+    ?>
     <div id="navbar">
         <div class="top">
             <div class="divLogo">
@@ -22,10 +27,14 @@
                         echo '<li><a class="hover-underline-animation" href="/php/connexion.php">Se connecter</a></li>';
                         echo '<li><a class="hover-underline-animation" href="/php/register.php">Inscription</a></li>';
                         }else{
-                            if ($_SESSION['type'] == "admin" ) {
-                                echo '<li><a class="hover-underline-animation" href="/php/gererCompte.php">Gérer compte</a></li>';
+                            if ($_SESSION['type'] == "Administrateur" ) {
+                                echo '<li><a class="hover-underline-animation" href="/php/gererCompte.php">Gérer comptes</a></li>';
  
                             }
+                            $connexion = connect($usernamedb, $passworddb, $dbname);
+                            $user = getUtilisateurParId($connexion, $_SESSION['id']);
+                            disconnect($connexion);
+                            echo '<li><a class="hover-underline-animation" href="/php/monProfil.php">'.$user['nomUtilisateur'].'</a></li>';
                             echo '<li><a class="hover-underline-animation" href="/php/deconnexion.php">Déconnexion</a></li>';
                         }
                         ?>

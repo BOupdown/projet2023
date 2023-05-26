@@ -737,6 +737,98 @@ function getAllIdDataBattle($connexion)
     }
 }
 
+// retourne un tableau contenant tous les étudiants de la base de données
+function getAllEtudiant($connexion){
+    $query = "SELECT idLogin, nom, prenom,niveauEtude,telephone,mail, ecole FROM Etudiant";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idUtilisateur, $nom, $prenom,$niveauEtude,$telephone,$mail,$ecole);
+
+        // Tableau pour stocker les données des utilisateurs
+        $utilisateurs = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $utilisateur = array(
+                "idLogin" => $idUtilisateur,
+                "nom" => $nom,
+                "prenom" => $prenom,
+                "niveauEtude" => $niveauEtude,
+                "telephone" => $telephone,
+                "mail" => $mail,
+                "ecole" => $ecole,
+            );
+
+            // Ajouter le tableau associatif au tableau des utilisateurs
+            $utilisateurs[] = $utilisateur;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des utilisateurs
+        return $utilisateurs;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+// Retourne tous les gestionnaires de la base de données    
+function getAllGestionnaire($connexion){
+    $query = "SELECT idLogin, nom, prenom,entreprise,telephone,mail,dateDebut,dateFin FROM Gestionnaire";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idUtilisateur, $nom, $prenom,$entreprise,$telephone,$mail,$dateDebut,$dateFin);
+
+        // Tableau pour stocker les données des utilisateurs
+        $utilisateurs = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $utilisateur = array(
+                "idLogin" => $idUtilisateur,
+                "nom" => $nom,
+                "prenom" => $prenom,
+                "entreprise" => $entreprise,
+                "telephone" => $telephone,
+                "mail" => $mail,
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin,
+            );
+
+            // Ajouter le tableau associatif au tableau des utilisateurs
+            $utilisateurs[] = $utilisateur;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des utilisateurs
+        return $utilisateurs;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
 
 
 ?>
