@@ -5,7 +5,6 @@
 </head>
 <header>
     <?php
-    session_start();
     require_once 'fonctionGetBDD.php';
     require_once 'fonctionCreateBDD.php';
     ?>

@@ -18,7 +18,8 @@ require_once 'fonctionCreateBDD.php';
 
             $connexion = connect($usernamedb, $passworddb, $dbname);
             $listeIdDataBattle = getAllIdDataBattle($connexion);
-
+            disconnect($connexion);
+            $connexion = connect($usernamedb, $passworddb, $dbname);
             //pour chaque id de data battle on get le podium
             foreach($listeIdDataBattle as $id)
             {
@@ -29,6 +30,18 @@ require_once 'fonctionCreateBDD.php';
                 $etudiant2 = getEtudiantParId($connexion, $temp["idEtudiant2"]);
                 $etudiant3 = getEtudiantParId($connexion, $temp["idEtudiant3"]);
                 $defi = getDataDefiParId($connexion,$id);
+                if ($etudiant1["idLogin"] == NULL) {
+                    $etudiant1['nom'] = "Utilisateur supprimé";
+                    $etudiant1['prenom'] = "";
+                }
+                if ($etudiant2["idLogin"] == NULL) {
+                    $etudiant2['nom'] = "Utilisateur supprimé";
+                    $etudiant2['prenom'] = "";
+                }
+                if ($etudiant3["idLogin"] == NULL) {
+                    $etudiant3['prenom'] = "Utilisateur supprimé";
+                    $etudiant3['nom'] = "";
+                }
                 echo "<div class = 'podium'>";
                 echo "<h2 class ='defi-title'>".$defi["nom"]."</h2>
                 <div class=\"container podium\">
@@ -54,6 +67,7 @@ require_once 'fonctionCreateBDD.php';
                 </div>"; 
                 echo "</div>";
             }
+            disconnect($connexion);
         ?>
     </div>
   

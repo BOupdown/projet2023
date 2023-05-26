@@ -37,7 +37,11 @@
                 echo '<tr>';
                 echo '<td>' . $dataDefi['nom'] . '</td>';
                 $connexion = connect($usernamedb, $passworddb, $dbname);
-                echo '<td>' . getGestionnaireParId($connexion, $dataDefi['idGestionnaire'])['nom'] . '</td>';
+                $gestionnaire = getGestionnaireParId($connexion, $dataDefi['idGestionnaire']);
+                if ($gestionnaire['idLogin'] == null) {
+                    $gestionnaire['nom'] = "Utilisateur supprimé";
+                }
+                echo '<td>' . $gestionnaire['nom']. '</td>';
                 disconnect($connexion);
                 echo '<td>' . $dataDefi['typeD'] . '</td>';
                 echo '<td>' . $dataDefi['nombreSujet'] . '</td>';
