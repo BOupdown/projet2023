@@ -292,7 +292,7 @@ function getGroupeParId($connexion, $idGroupe)
               FROM Groupe
               WHERE idGroupe = ?";
 
-    $idGroupe = $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom = null;
+    $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom = null;
 
     try {
         // Préparation de la requête
@@ -345,7 +345,7 @@ function getProjetDataParId($connexion, $idProjetData)
               FROM ProjetData
               WHERE idProjetData = ?";
 
-    $idProjetData = $idDataChallenge = $idGroupe = $descriptionP = $imageP = null;
+    $idDataChallenge = $idGroupe = $descriptionP = $imageP = null;
 
     try {
         // Préparation de la requêtepodium
