@@ -830,5 +830,52 @@ function getAllGestionnaire($connexion){
     }
 }
 
+//recuperer tous les users
+
+function getAllUser($connexion)
+{
+    $query = "SELECT idLogin, nomUtilisateur, mdp, type
+              FROM Login";
+
+    $idLogin = $nomUtilisateur = $mdp = $type = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idLogin, $nomUtilisateur, $mdp, $type);
+
+        // Récupération des données
+        $stmt->fetch();
+
+        $utilisateurs = array();
+        // Création d'un tableau associatif avec les résultats
+        while ($stmt->fetch())
+        {
+            $utilisateur = array(
+                "idLogin" => $idLogin,
+                "nomUtilisateur" => $nomUtilisateur,
+                "mdp" => $mdp,
+                "type" => $type
+            );
+            $utilisateurs[] = $utilisateur;
+        }
+        
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations de l'utilisateur
+        return $utilisateurs;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
 
 ?>
