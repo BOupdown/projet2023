@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'fonctionCreateBDD.php';
-require 'fonctionGetBDD.php';
+require_once 'fonctionGetBDD.php';
+require_once 'fonctionCreateBDD.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = 0;

@@ -7,8 +7,8 @@
 <?php
 session_start();
 require 'navbar.php';
-require 'fonctionGetBDD.php';
-require 'fonctionCreateBDD.php';
+require_once 'fonctionGetBDD.php';
+require_once 'fonctionCreateBDD.php';
 ?>
 <body>
 
