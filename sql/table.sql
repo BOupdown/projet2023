@@ -128,6 +128,7 @@ CREATE TABLE Message(
     idDestinataire INTEGER,
     dateHeure DATETIME DEFAULT NOW(),
     contenu TEXT,
+    objet VARCHAR(128),
     lu BOOLEAN DEFAULT 0,
     FOREIGN KEY (idExpediteur) REFERENCES Login (idLogin),
     FOREIGN KEY (idDestinataire) REFERENCES Login (idLogin)
