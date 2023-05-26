@@ -91,5 +91,19 @@ body {
     cursor: pointer;
     margin: 20px;
     border-radius: 10px;
-  }
-  
+}
+.vide{
+    margin-top: 1em;
+    text-align: center;
+    font-size: 2em;
+    color: #9b1e1e;
+    font-weight: bold;
+    display: inline;
+    background-color: bisque;
+    border-radius: 20px;
+    border: 5px solid bisque;
+}  
+.divErreur{
+    display: flex;
+    justify-content: center;
+}

@@ -38,7 +38,7 @@
             echo '<table class="table">';
             echo "<tr><th>Nom</th><th>Prénom</th><th>Mail</th><th>Entreprise</th><th>Téléphone</th><th>Date début</th><th>Date fin</th><th>Supprimer</th></tr>";
             foreach ($gestionnaires as $gestionnaire) {
-                echo "<tr id='gestionnaire_" . $gestionnaire['idLogin'] . "'>";
+                echo "<tr id='login_" . $gestionnaire['idLogin'] . "'>";
                 echo "<td>" . $gestionnaire['nom'] . "</td>";
                 echo "<td>" . $gestionnaire['prenom'] . "</td>";
                 echo "<td>" . $gestionnaire['mail'] . "</td>";
@@ -57,7 +57,9 @@
 
             echo "</table>";
         } else {
-            echo "erreur";
+            echo "<div class='divErreur'>";
+            echo "<p class='vide'>Aucun gestionnaire</p>";
+            echo "</div>";
         }
         echo "</div>";
 
@@ -72,7 +74,7 @@
             echo "<tr><th>Nom</th><th>Prénom</th><th>Niveau d'étude</th><th>Téléphone</th><th>Mail</th><th>École</th><th>Supprimer</th></tr>";
 
             foreach ($etudiants as $etudiant) {
-                echo "<tr id='etudiant_" . $etudiant['idLogin'] . "'>";
+                echo "<tr id='login_" . $etudiant['idLogin'] . "'>";
                 echo "<td>" . $etudiant['nom'] . "</td>";
                 echo "<td>" . $etudiant['prenom'] . "</td>";
                 echo "<td>" . $etudiant['niveauEtude'] . "</td>";
@@ -85,7 +87,9 @@
 
             echo "</table>";
         } else {
-            echo "erreur";
+            echo "<div class='divErreur'>";
+            echo "<p class='vide'>Aucun etudiant</p>";
+            echo "</div>";
         }
         echo "</div>";
     }
@@ -93,15 +97,15 @@
 
 
     <script>
-        function supprimer(idEtudiant) {
+        function supprimer(idLogin) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.status == 200 && xhr.readyState == 4) {
-                    var etudiant = document.getElementById('etudiant_' + idEtudiant);
-                    etudiant.parentNode.removeChild(etudiant);
+                    var login = document.getElementById('login_' + idLogin);
+                    login.parentNode.removeChild(login);
                 }
             }
-            xhr.open('GET', 'supprimer.php?id=' + idEtudiant, true);
+            xhr.open('GET', 'supprimer.php?id=' + idLogin, true);
             xhr.send();
         }
     </script>

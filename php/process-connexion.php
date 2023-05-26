@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id = $reponse['idLogin'];
             $_SESSION['id'] = $id;
             $_SESSION['type'] = $reponse['type'];
+            $_SESSION['login'] = $login;
             header('Location: ../index.php');
             exit;
 
