@@ -3,11 +3,11 @@
     require '../php/fonctionCreateBDD.php';
 
     // Vérifier si l'utilisateur est connecté
-    if (!isset($_SESSION['connecte'])) {
-        die('Erreur : utilisateur non connecté.');
+    if (!isset($_SESSION['type']) || $_SESSION['type'] != 'Gestionnaire') {
+        die('Erreur : utilisateur non autorisé.');
     }
 
-    $id_expediteur = $_SESSION['connecte'];
+    $id_expediteur = $_SESSION['id'];
     $id_destinataire = $_POST['id_destinataire'];
 
     /* Requête de la conversation entre l'utilisateur connecté et le destinataire cliqué
@@ -47,7 +47,7 @@
     }
     $html .= '</table><div id="conteneur-zone-saisie-btn-envoyer">';
     $html .= '<form><input type="text" id="zone-saisie-objet">';
-    $html .= '<textarea id="zone-saisie-mail" rows=4></textarea></form>';
+    $html .= '<textarea id="zone-saisie-mail" rows=6></textarea></form>';
     $html .= '<button onclick="envoyerMessage(' . $destinataire . ')">Envoyer</button></div>';
     
     disconnect($connexion);
