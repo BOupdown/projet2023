@@ -117,26 +117,26 @@ VALUES (2, 5, 3, 4);
 
 -- --------------- TABLE MESSAGE ----------------------------------------------
 
-INSERT INTO Message (idExpediteur, idDestinataire, contenu)
-VALUES (6, 2, 'bonjour bonjour bonjour b!!!!! jour');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (6, 2, 'vrai objet', 'bonjour bonjour bonjour b!!!!! jour');
 
-INSERT INTO Message (idExpediteur, idDestinataire, contenu)
-VALUES (6, 2, 'bonjour bonjour bonjour b!!!!! jour');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (6, 2, 'objet kreklzrnf', 'bonjour bonjour bonjour b!!!!! jour');
 
-INSERT INTO Message (idExpediteur, idDestinataire, contenu)
-VALUES (7, 1, 'salutt salut :) b!!!!! jour');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (7, 1, 'OBJETTT', 'salutt salut :) b!!!!! jour');
 
-INSERT INTO Message (idExpediteur, idDestinataire, contenu)
-VALUES (6, 3, 'oui c pour ca que je parle avec user3');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (6, 3, 'objet de oui', 'oui c pour ca que je parle avec user3');
 
-INSERT INTO Message (idExpediteur, idDestinataire, contenu)
-VALUES (3, 1, 'ok merci user1');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (3, 1, 'objet de ok', 'ok merci user1');
 
-INSERT INTO Message (idExpediteur, idDestinataire, contenu)
-VALUES (6, 4, 'sssssssssssssssssssssss');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (6, 4, 'sssss', 'sssssssssssssssssssssss');
 
-INSERT INTO Message (idExpediteur, idDestinataire, contenu)
-VALUES (7, 2, 'Bonjour, chacal!');
+INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
+VALUES (7, 2, 'Bjr', 'Bonjour, chacal!');
 
 INSERT INTO MessageGroupe (idMessage, idDestinataire)
 VALUES (7, 1);
