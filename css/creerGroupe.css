@@ -66,8 +66,7 @@ form .input-box span.details {
     transition: all 0.3s ease;
 }
 
-.user-details .input-box input:focus,
-.user-details .input-box input:valid {
+.user-details .input-box input:focus {
     border-color: #172A3A;
 }
 
@@ -164,6 +163,14 @@ form .button input:hover {
 }
 
 .list-group{
-    max-height: 300px;
-    overflow-y: scroll;
+    position: absolute;
+    height: 50px; /* Définissez ici la taille fixe souhaitée */
+    overflow: scroll;
+    z-index: 9999; /* Pour s'assurer que la div se superpose aux autres contenus */
+    background-color: rgb(255, 255, 255);
+    opacity: 1; /* Définissez ici l'opacité souhaitée pour la div de suggestions */
+    width: 349px;
+    display: none;
+    border : 1px solid #172A3A;
+    border-radius: 5px;
 }

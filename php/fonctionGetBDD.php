@@ -872,5 +872,52 @@ function getAllLoginsEtudiants($connexion) {
 }
 
 
+function getDataDefiParNom($connexion, $nomDataDefi)
+{
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin
+              FROM DataDefi
+              WHERE nom = ?";
+
+    $idDataDefi = $idGestionnaire = $typeD = $nombreSujet = $nombreQuestionnaire = $dateDebut = $dateFin = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre avec la variable $nomDataDefi
+        $stmt->bind_param("s", $nomDataDefi);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
+
+        // Récupération des données
+        $stmt->fetch();
+
+        // Création d'un tableau associatif avec les résultats
+        $dataDefi = array(
+            "idDataDefi" => $idDataDefi,
+            "idGestionnaire" => $idGestionnaire,
+            "typeD" => $typeD,
+            "nombreSujet" => $nombreSujet,
+            "nombreQuestionnaire" => $nombreQuestionnaire,
+            "nom" => $nom,
+            "dateDebut" => $dateDebut,
+            "dateFin" => $dateFin
+        );
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations du DataDefi
+        return $dataDefi;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
 
 ?>

@@ -94,10 +94,10 @@ function creerGroupe($connexion, $idCapitaine, $idDataChallenge, $idEtudiant1, $
         // Début de la transaction
         $connexion->begin_transaction();
 
-        // Insertion des données dans la table Groupe
+        // Préparer la requête pour l'insertion dans la table Groupe
         $stmt = $connexion->prepare("INSERT INTO Groupe (idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom)
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("iiiiiiiiiss", $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom);
+        $stmt->bind_param("iiiiiiiiiis", $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom);
         if ($stmt->execute() === false) {
             throw new Exception("Erreur lors de l'insertion dans la table Groupe : " . $connexion->error);
         }
