@@ -13,6 +13,11 @@
     require_once 'fonctionGetBDD.php';
     require_once 'fonctionCreateBDD.php';
 
+    if (empty($_SESSION['type']) || $_SESSION['type'] != 'Administrateur') {
+        header('Location: ../index.php');
+        exit();
+    }
+
     ?>
     <h1 class="titre">Gérer les comptes</h1>
 
@@ -83,6 +88,7 @@
                 echo "<td>" . $etudiant['ecole'] . "</td>";
                 echo "<td class='buttonTd'><button class='buttonSupp' onclick='supprimer(" . $etudiant["idLogin"] . ")'>X</button></td>";
                 echo "</tr>";
+            
             }
 
             echo "</table>";

@@ -14,7 +14,7 @@ function disconnect($connexion)
     mysqli_close($connexion);
 }
 // Créer un étudiant à partir de ses informations
-function creerEtudiant($connexion, $nomUtilisateur, $mdp, $nom, $prenom, $niveauEtude, $telephone, $mail,$ecole)
+function creerEtudiant($connexion, $nomUtilisateur, $mdp, $nom, $prenom, $niveauEtude, $telephone, $mail, $ecole)
 {
     try {
         // Début de la transaction
@@ -34,7 +34,7 @@ function creerEtudiant($connexion, $nomUtilisateur, $mdp, $nom, $prenom, $niveau
         // Préparer la requête pour l'insertion dans la table Etudiant
         $stmt = $connexion->prepare("INSERT INTO Etudiant (idLogin, nom, prenom, niveauEtude, telephone, mail,ecole)
                                 VALUES (?, ?, ?, ?, ?, ?,?)");
-        $stmt->bind_param("issssss", $idLogin, $nom, $prenom, $niveauEtude, $telephone, $mail,$ecole);
+        $stmt->bind_param("issssss", $idLogin, $nom, $prenom, $niveauEtude, $telephone, $mail, $ecole);
         if ($stmt->execute() === false) {
             throw new Exception("Erreur lors de l'insertion dans la table Etudiant : " . $connexion->error);
         }
@@ -56,7 +56,7 @@ function creerGestionnaire($connexion, $nomUtilisateur, $mdp, $nom, $prenom, $en
     try {
         // Début de la transaction
         $connexion->begin_transaction();
-        
+
         // Création du login
         $type = "gestionnaire";
         $stmt = $connexion->prepare("INSERT INTO Login (nomUtilisateur, mdp, type) VALUES (?, ?, ?)");
@@ -64,7 +64,7 @@ function creerGestionnaire($connexion, $nomUtilisateur, $mdp, $nom, $prenom, $en
         if ($stmt->execute() === false) {
             throw new Exception("Erreur lors de l'insertion dans la table Login : " . $connexion->error);
         }
-        
+
         // Récupérer l'ID du dernier enregistrement inséré
         $idLogin = $stmt->insert_id;
 
@@ -141,19 +141,43 @@ function creerProjetData($connexion, $idDataChallenge, $idGroupe, $description, 
     }
 }
 // Créer un data challenge à partir des informations 
-function creerDataChallenge($connexion, $idGestionnaire, $nombreSujet, $nom, $description, $dateDebut, $dateFin)
+function creerDataChallenge($connexion, $idGestionnaire, $nombreSujet, $nom, $description, $dateDebut, $dateFin, $sujet1, $sujet2, $sujet3, $sujet4, $sujet5, $sujet6)
 {
     try {
         // Début de la transaction
         $connexion->begin_transaction();
-        $type ="dataChallenge";
+        $type = "dataChallenge";
         $nombreQuestionnaire = 0;
+
         // Insertion des données dans la table DataDefi
         $stmt = $connexion->prepare("INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, descriptionD, dateDebut, dateFin)
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ississss", $idGestionnaire, $type, $nombreSujet, $nombreQuestionnaire, $nom, $description, $dateDebut, $dateFin);
+        $stmt->bind_param("isiissss", $idGestionnaire, $type, $nombreSujet, $nombreQuestionnaire, $nom, $description, $dateDebut, $dateFin);
         if ($stmt->execute() === false) {
             throw new Exception("Erreur lors de l'insertion dans la table DataDefi : " . $connexion->error);
+        }
+
+        // Récupérer l'ID du défi nouvellement créé
+        $idDataDefi = $connexion->insert_id;
+
+        // Création des sujets si les variables de sujets ne sont pas nulles
+        if (!is_null($sujet1)) {
+            creerSujet($connexion, $sujet1, $description, $idDataDefi);
+        }
+        if (!is_null($sujet2)) {
+            creerSujet($connexion, $sujet2, $description, $idDataDefi);
+        }
+        if (!is_null($sujet3)) {
+            creerSujet($connexion, $sujet3, $description, $idDataDefi);
+        }
+        if (!is_null($sujet4)) {
+            creerSujet($connexion, $sujet4, $description, $idDataDefi);
+        }
+        if (!is_null($sujet5)) {
+            creerSujet($connexion, $sujet5, $description, $idDataDefi);
+        }
+        if (!is_null($sujet6)) {
+            creerSujet($connexion, $sujet6, $description, $idDataDefi);
         }
 
         // Terminer la transaction
@@ -168,13 +192,16 @@ function creerDataChallenge($connexion, $idGestionnaire, $nombreSujet, $nom, $de
     }
 }
 
+
+
+
 // Créer une data battle à partir des informations
-function creerDataBattle($connexion, $idGestionnaire, $nombreQuestionnaire, $nom, $description, $dateDebut, $dateFin)
+function creerDataBattle($connexion, $idGestionnaire, $nombreQuestionnaire, $nom, $description, $dateDebut, $dateFin, $sujet)
 {
     try {
         // Début de la transaction
         $connexion->begin_transaction();
-        $type ="dataBattle";
+        $type = "dataBattle";
         $nombreSujet = 1;
         // Insertion des données dans la table DataDefi
         $stmt = $connexion->prepare("INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, descriptionD, dateDebut, dateFin)
@@ -183,6 +210,11 @@ function creerDataBattle($connexion, $idGestionnaire, $nombreQuestionnaire, $nom
         if ($stmt->execute() === false) {
             throw new Exception("Erreur lors de l'insertion dans la table DataDefi : " . $connexion->error);
         }
+
+        // Récupérer l'ID du défi nouvellement créé
+        $idDataDefi = $connexion->insert_id;
+
+        creerSujet($connexion, $sujet, $description, $idDataDefi);
 
         // Terminer la transaction
         $connexion->commit();
@@ -209,10 +241,10 @@ function creerPodium($connexion, $idDataDefi, $idEtudiant1, $idEtudiant2, $idEtu
         if ($query->execute() === false) {
             throw new Exception("Erreur lors de l'insertion dans la table Login : " . $connexion->error);
         }
-    
-    
+
+
         echo "Opérations effectuées avec succès !";
-    
+
     } catch (Exception $e) {
         // En cas d'erreur, annuler la transaction
         $connexion->rollback();
@@ -223,15 +255,15 @@ function creerPodium($connexion, $idDataDefi, $idEtudiant1, $idEtudiant2, $idEtu
 
 
 // Créer une data battle à partir des informations
-function creerSujet($connexion, $idSujet, $nom, $descriptionS, $idDataDefi)
+function creerSujet($connexion, $nom, $descriptionS, $idDataDefi)
 {
     try {
         // Début de la transaction
         $connexion->begin_transaction();
 
-        $stmt = $connexion->prepare("INSERT INTO Sujet (idSujet, nom, descriptionS, idDataDefi)
-                                VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("issi", $idSujet, $nom, $descriptionS, $idDataDefi);
+        $stmt = $connexion->prepare("INSERT INTO Sujet ( nom, descriptionS, idDataDefi)
+                                VALUES ( ?, ?, ?)");
+        $stmt->bind_param("ssi", $nom, $descriptionS, $idDataDefi);
         if ($stmt->execute() === false) {
             throw new Exception("Erreur lors de l'insertion dans la table DataDefi : " . $connexion->error);
         }

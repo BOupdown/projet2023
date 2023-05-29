@@ -7,10 +7,12 @@
 </head>
 
 <body>
+  
 
   <?php
   session_start();
   require 'php/navbar.php';
+  
   ?>
   <div id="DataDefiTitle" class="center-text">Data Défi</div>
 
@@ -24,7 +26,7 @@
     ?>
     <a href="php/datainfo.php" class="button">Data infos</a>
     <br>
-    <a href="php/inscriptionAdmin.php" class="button">Les gagnants des concours</a>
+    <a href="php/gagnants.php" class="button">Les gagnants des concours</a>
 
   </div>
 

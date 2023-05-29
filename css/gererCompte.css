@@ -1,7 +1,7 @@
 body {
     background-image: url(../images/image.jpg);
     background-repeat: repeat;
-    background-size: cover;
+    background-size: contain;
 }
 
 .titre {
@@ -45,7 +45,7 @@ body {
 
 .buttonTd {
     text-align: center;
-}
+}   
 
 .buttonSupp {
     border-radius: 20px;

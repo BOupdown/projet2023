@@ -920,4 +920,139 @@ function getDataDefiParNom($connexion, $nomDataDefi)
     }
 }
 
+function getAllDataChallenge($connexion)
+{
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin FROM DataDefi WHERE typeD = 'dataChallenge'";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
+
+        // Tableau pour stocker les données des défis
+        $tableDataDefi = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $dataDefi = array(
+                "idDataDefi" => $idDataDefi,
+                "idGestionnaire" => $idGestionnaire,
+                "typeD" => $typeD,
+                "nombreSujet" => $nombreSujet,
+                "nombreQuestionnaire" => $nombreQuestionnaire,
+                "nom" => $nom,
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin
+            );
+
+            // Ajouter le tableau associatif au tableau des défis
+            $tableDataDefi[] = $dataDefi;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des défis de type "challenge"
+        return $tableDataDefi;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+   }
+}
+function getAllDataBattle($connexion)
+{
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin FROM DataDefi WHERE typeD = 'dataBattle'";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
+
+        // Tableau pour stocker les données des défis
+        $tableDataDefi = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $dataDefi = array(
+                "idDataDefi" => $idDataDefi,
+                "idGestionnaire" => $idGestionnaire,
+                "typeD" => $typeD,
+                "nombreSujet" => $nombreSujet,
+                "nombreQuestionnaire" => $nombreQuestionnaire,
+                "nom" => $nom,
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin
+            );
+
+            // Ajouter le tableau associatif au tableau des défis
+            $tableDataDefi[] = $dataDefi;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des défis de type "challenge"
+        return $tableDataDefi;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+   }
+}
+function getAllLoginsGestionnaire($connexion) {
+    $query = "SELECT idLogin, nomUtilisateur, mdp, type
+              FROM Login
+              WHERE type = 'Gestionnaire'";
+
+    $logins = array();
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+        $idLogin = $nomUtilisateur = $mdp = $type = null;
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idLogin, $nomUtilisateur, $mdp, $type);
+
+        // Parcours des résultats
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les informations du login
+            $login = array(
+                "idLogin" => $idLogin,
+                "nomUtilisateur" => $nomUtilisateur
+            );
+
+            // Ajout du tableau du login au tableau des logins
+            $logins[] = $login;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des logins des étudiants
+        return $logins;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
 ?>

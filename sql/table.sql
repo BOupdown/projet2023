@@ -52,6 +52,7 @@ CREATE TABLE DataDefi(
     nom TEXT,
     dateDebut DATE DEFAULT (CURRENT_DATE),
     dateFIN DATE,
+    descriptionD TEXT,
     FOREIGN KEY (idGestionnaire) REFERENCES Gestionnaire (idLogin) ON DELETE SET NULL
 );
 
@@ -124,20 +125,20 @@ CREATE TABLE Podium(
 
 CREATE TABLE Message(
     idMessage INTEGER PRIMARY KEY AUTO_INCREMENT,
-    idExpediteur INTEGER,
+    idExpediteur INTEGER ,
     idDestinataire INTEGER,
     dateHeure DATETIME DEFAULT NOW(),
     objet VARCHAR(128),
     contenu TEXT,
     lu BOOLEAN DEFAULT 0,
-    FOREIGN KEY (idExpediteur) REFERENCES Login (idLogin),
-    FOREIGN KEY (idDestinataire) REFERENCES Login (idLogin)
+    FOREIGN KEY (idExpediteur) REFERENCES Login (idLogin) ON DELETE SET NULL,
+    FOREIGN KEY (idDestinataire) REFERENCES Login (idLogin) ON DELETE SET NULL
 );
 
 
 CREATE TABLE MessageGroupe(
     idMessage INTEGER PRIMARY KEY,
     idDestinataire INTEGER,
-    FOREIGN KEY (idMessage) REFERENCES Message (idMessage),
-    FOREIGN KEY (idDestinataire) REFERENCES Groupe (idGroupe)
+    FOREIGN KEY (idMessage) REFERENCES Message (idMessage) ON DELETE CASCADE,
+    FOREIGN KEY (idDestinataire) REFERENCES Groupe (idGroupe) ON DELETE SET NULL
 );

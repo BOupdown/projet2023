@@ -17,10 +17,11 @@
 <body>
     <?php
     session_start();
-if (empty($_SESSION['type']) ||$_SESSION['type'] != 'etudiant') {
+if (empty($_SESSION['type']) || ( $_SESSION['type'] != 'Etudiant')) {
     header('Location: /index.php');
     exit();
 }
+
     require 'navbar.php';
     require_once 'fonctionGetBDD.php';
     require_once 'fonctionCreateBDD.php';
