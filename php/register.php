@@ -11,6 +11,10 @@
 <body>
     <?php
     session_start();
+    if (!empty($_SESSION['type']) && $_SESSION['type'] != 'Administrateur') {
+        header('Location: ../index.php');
+        exit();
+    }
     require 'navbar.php';
 
     if (isset($_GET['errors'])) {

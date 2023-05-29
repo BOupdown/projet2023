@@ -93,6 +93,10 @@
         }
         echo "</div>";
     }
+    else {
+        header("Location: ../index.php");
+        exit();
+    }
     ?>
 
 

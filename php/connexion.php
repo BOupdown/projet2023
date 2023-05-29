@@ -13,6 +13,10 @@ require("navbar.php");
 
 <body>
     <?php
+    if(!empty($_SESSION['type'])){
+        header('Location: ../index.php');
+        exit();
+    }
     if (isset($_GET['errors'])) {
         $errors = explode(';', $_GET['errors']);
         if (in_array('no',$errors)) {
