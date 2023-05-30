@@ -1239,4 +1239,53 @@ function getProjetDataParIdDataDefi($connexion, $idDataDefi)
     }
 }
 
+function getDataFichierParIdProjetData($connexion, $idProjetData)
+{
+    $query = "SELECT idDataFichier, idProjetData, nbLignes, nbFonctions, tailleMinFonction, tailleMaxFonction, tailleMoyenneFonction FROM DataFichier WHERE idProjetData =?";
+    
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre avec la variable $idProjetData
+        $stmt->bind_param("i", $idProjetData);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataFichier, $idProjetData, $nbLignes, $nbFonctions, $tailleMinFonction, $tailleMaxFonction, $tailleMoyenneFonction);
+
+        // Tableau pour stocker les données des défis
+        $dataFichiers = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $dataFichier = array(
+                "idDataFichier" => $idDataFichier,
+                "idProjetData" => $idProjetData,
+                "nbLignes" => $nbLignes,
+                "nbFonctions" => $nbFonctions,
+                "tailleMinFonction" => $tailleMinFonction,
+                "tailleMaxFonction" => $tailleMaxFonction,
+                "tailleMoyenneFonction" => $tailleMoyenneFonction
+            );
+
+            // Ajouter le tableau associatif au tableau des défis
+            $dataFichiers[] = $dataFichier;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des défis de type "challenge"
+        return $dataFichiers;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+   }
+}
+
 ?>
