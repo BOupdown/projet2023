@@ -239,7 +239,7 @@ function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp) {
 // Retourne un tableau php contenant les informations d'un dataChallenge ayant pour id $idDatachallenge
 function getDataDefiParId($connexion, $idDataDefi)
 {
-    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin,descriptionD
               FROM DataDefi
               WHERE idDataDefi = ?";
 
@@ -256,7 +256,7 @@ function getDataDefiParId($connexion, $idDataDefi)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin, $descriptionD);
 
         // Récupération des données
         $stmt->fetch();
@@ -270,7 +270,8 @@ function getDataDefiParId($connexion, $idDataDefi)
             "nombreQuestionnaire" => $nombreQuestionnaire,
             "nom" => $nom,
             "dateDebut" => $dateDebut,
-            "dateFin" => $dateFin
+            "dateFin" => $dateFin,
+            "descriptionD" => $descriptionD
         );
 
         // Fermeture du statement
@@ -1054,5 +1055,50 @@ function getAllLoginsGestionnaire($connexion) {
     }
 }
 
+function getAllSujetByIdDataDefi($connexion, $idDataDefi)
+{
+    $query = "SELECT idSujet, nom, descriptionS, idDataDefi FROM Sujet WHERE idDataDefi = ?";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre
+        $stmt->bind_param("i", $idDataDefi);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idSujet, $nom, $descriptionS, $idDataDefi);
+
+        // Tableau pour stocker les données des sujets
+        $tableSujets = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $sujet = array(
+                "idSujet" => $idSujet,
+                "nom" => $nom,
+                "descriptionS" => $descriptionS,
+                "idDataDefi" => $idDataDefi,
+            );
+
+            // Ajouter le tableau associatif au tableau des sujets
+            $tableSujets[] = $sujet;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des sujets
+        return $tableSujets;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
 
 ?>

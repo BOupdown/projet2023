@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Gagnats des concours</title>
+  <title>Gagnants des concours</title>
   <link rel="stylesheet" type="text/css" href="../css/gagnants.css">
 </head>
 <?php

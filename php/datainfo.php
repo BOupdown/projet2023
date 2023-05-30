@@ -15,68 +15,86 @@
     require_once 'fonctionGetBDD.php';
 
     ?>
-    <h1 class="titredatainfo">Les défis</h1>
+    <h1 class="titre">Les défis</h1>
+
     <?php
     $connexion = connect($usernamedb, $passworddb, $dbname);
-    // Appel de la fonction pour récupérer les données
-    $dataDefiArray = getAllDataDefi($connexion);
-    $sujetArray = getAllSujet($connexion);
-    $questionnaireArray = getAllQuestionnaire($connexion);
+    $challenges = getAllDataChallenge($connexion);
     disconnect($connexion);
-    // Vérifier si des données ont été retournées
-    if ($dataDefiArray !== null) {
-        // Vérifier si le tableau n'est pas vide
-        if (!empty($dataDefiArray)) {
-            // Afficher le tableau HTML
-    
-
-            foreach ($dataDefiArray as $dataDefi) {
-                echo '<div class="table-wrapper">';
-                echo '<table class="tableinfo">';   
-                echo '<tr><th>Nom</th><th>Nom du gestionnaire</th><th>Type</th><th>Nombre de sujet</th><th>Nombre de questionnaire</th><th>Date de début</th><th>Date de fin</th></tr>';
-                echo '<tr>';
-                echo '<td>' . $dataDefi['nom'] . '</td>';
-                $connexion = connect($usernamedb, $passworddb, $dbname);
-                $gestionnaire = getGestionnaireParId($connexion, $dataDefi['idGestionnaire']);
-                if ($gestionnaire['idLogin'] == null) {
-                    $gestionnaire['nom'] = "Utilisateur supprimé";
-                }
-                echo '<td>' . $gestionnaire['nom']. '</td>';
-                disconnect($connexion);
-                echo '<td>' . $dataDefi['typeD'] . '</td>';
-                echo '<td>' . $dataDefi['nombreSujet'] . '</td>';
-                echo '<td>' . $dataDefi['nombreQuestionnaire'] . '</td>';
-                echo '<td>' . $dataDefi['dateDebut'] . '</td>';
-                echo '<td>' . $dataDefi['dateFin'] . '</td>';
-                echo '</table>';
-
-                echo '</div>';
-
-                echo '<table class="tableinfo2">';
-
-                foreach ($sujetArray as $ssujet) {
-                    echo '<tr>';
-                    echo '<td>' . $ssujet['nom'] . '</td>';
-                    echo '<td>' . $ssujet['descriptionS'] . '</td>';
-                    echo '</tr>';
-                }
-
-                foreach ($questionnaireArray as $squestion) {
-                    echo '<tr>';
-                    echo '<td>' . $squestion['nom'] . '</td>';
-                    echo '<td>' . $squestion['descriptionQ'] . '</td>';
-                    echo '</tr>';
-                }
-                echo '</table>';
-
+    echo "<div class='divElement'> ";
+    echo '<div class="divTitre">';
+    echo '<h2 class= "titre2">Data Challenge</h2>';
+    echo '</div>';
+    if ($challenges) {
+        $connexion = connect($usernamedb, $passworddb, $dbname);
+        echo '<table class="table">';
+        echo "<tr><th>Nom</th><th>Gestionnaire</th><th>Nombre de sujet</th><th>Date de début</th><th>Date de fin</th><th>Consulter</th></tr>";
+        
+        foreach ($challenges as $challenge) {
+            echo "<tr id='login_" . $challenge['idDataDefi'] . "'>";
+            echo "<td>" . $challenge['nom'] . "</td>";
+            $gestionnaire = getGestionnaireParId($connexion, $challenge['idGestionnaire']);
+            echo "<td>" . $gestionnaire['entreprise'] . "</td>";
+            echo "<td>" . $challenge['nombreSujet'] . "</td>";
+            echo "<td>" . $challenge['dateDebut'] . "</td>";
+            if ($challenge['dateFin'] < date("Y-m-d")) {
+                echo "<td class = 'dateFin'>" . $challenge['dateFin'] . "</td>";
+            } else {
+                echo "<td>" . $challenge['dateFin'] . "</td>";
             }
 
-        } else {
-            echo 'Aucune donnée de défi trouvée.';
+            echo "<td ><a class='consulterBtn' href=\"consulter.php?idData=".$challenge['idDataDefi']."\">Consulter</a></td>";
+            echo "</tr>";
         }
+
+        echo "</table>";
+        disconnect($connexion);
+
     } else {
-        echo 'Une erreur est survenue lors de la récupération des données.';
+        echo "<div class='divErreur'>";
+        echo "<p class='vide'>Aucune Data Battle</p>";
+        echo "</div>";
     }
+    echo "</div>";
+
+    $connexion = connect($usernamedb, $passworddb, $dbname);
+    $battles = getAllDataBattle($connexion);
+    disconnect($connexion);
+    echo "<div class='divElement'> ";
+
+    echo '<h2 class= "titre2">Data battle</h2>';
+    if ($battles) {
+        $connexion = connect($usernamedb, $passworddb, $dbname);
+        echo '<table class="table">';
+        echo "<tr><th>Nom</th><th>Gestionnaire</th><th>Nombre de questionnaire</th><th>Date de début</th><th>Date de fin</th><th>Supprimer</th></tr>";
+
+        foreach ($battles as $battle) {
+            echo "<tr id='login_" . $battle['idDataDefi'] . "'>";
+            echo "<td>" . $battle['nom'] . "</td>";
+            $gestionnaire = getGestionnaireParId($connexion, $battle['idGestionnaire']);
+            echo "<td>" . $gestionnaire['entreprise'] . "</td>";
+            echo "<td>" . $battle['nombreQuestionnaire'] . "</td>";
+            echo "<td>" . $battle['dateDebut'] . "</td>";
+            if ($battle['dateFin'] < date("Y-m-d")) {
+                echo "<td class = 'dateFin'>" . $battle['dateFin'] . "</td>";
+            } else {
+                echo "<td>" . $battle['dateFin'] . "</td>";
+            }
+
+            echo "<td><a class='consulterBtn' href=\"consulter.php?idData=".$battle['idDataDefi']."\">Consulter</a></td>";
+            echo "</tr>";
+        }
+
+        echo "</table>";
+        disconnect($connexion);
+    } else {
+        echo "<div class='divErreur'>";
+        echo "<p class='vide'>Aucun Data Challenge</p>";
+        echo "</div>";
+    }
+    echo "</div>";
+
+    
     ?>
 </body>
 
