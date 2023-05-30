@@ -12,7 +12,7 @@
     if ($allUser) {
         foreach($allUser as $user)
         {
-            $value = strpos($user["nomUtilisateur"], $inpText);
+            $value = stripos($user["nomUtilisateur"], $inpText);
             if (gettype($value) == "integer" && $value == 0)
             {
                 echo "<p class=\"list-group-item border-1\">".$user["nomUtilisateur"]."</p>";
