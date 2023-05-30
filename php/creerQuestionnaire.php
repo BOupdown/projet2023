@@ -1,18 +1,19 @@
-<?php
-    require 'fonctionCreateBDD.php';
+<?php session_start();
 
-    session_start();
+    // Vérifier que l'utilisateur connecté est gestionnaire
     if (!isset($_SESSION['type']) || $_SESSION['type'] != 'Gestionnaire') {
         header("Location: index.php");
         exit;
     }
+
+    require 'fonctionCreateBDD.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Messagerie / IA Pau</title>
+        <title>Créer un questionnaire / IA Pau</title>
         <link rel="stylesheet" href="../css/creerQuestionnaire.css">
         <script src="../js/fonctions-questionnaire.js"></script>
     </head>
@@ -38,20 +39,28 @@
                         <!-- Compteur de questions -->
                         <input type="hidden" id="compteur" name="compteur" value=1 >
 
+                        <?php unset($_SESSION['dataChallenge']); ?>
+
+                        <!-- Nom du questionnaire -->
                         <br><label for="nom">Nom :</label>
                         <input type="text" name="nom" required autocomplete="off">
+
+                        <!-- Description du questionnaire -->
                         <br><label for="description">Description :</label>
                         <textarea name="description" required></textarea>
+
+                        <!-- Liste des questions -->
                         <div id="conteneur-questions">
                             <div class="input-box">
                                 <span class="details">Question 1</span>
                                 <textarea name="question-1" rows=4 required></textarea>
+
+                                <!-- Bouton "Ajouter une question" -->
                                 <input id="btn-ajouter-question" type="button" value="+" onclick="ajouterQuestion(2)">
                             </div>
-
                         </div>
 
-                        <!-- Bouton de création -->
+                        <!-- Bouton de création du questionnaire -->
                         <div class="button">
                             <input type="submit" value="Créer">
                         </div>
@@ -61,4 +70,5 @@
             </div>
         </main>
     </body>
+
 </html>

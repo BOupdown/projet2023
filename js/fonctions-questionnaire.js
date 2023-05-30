@@ -16,9 +16,6 @@ function ajouterQuestion(numeroQuestion) {
 
     // Ajout de la nouvelle question à la page
     conteneur.appendChild(nouvelleQuestion);
-
-    
-
     
 }
 
