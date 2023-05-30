@@ -10,11 +10,11 @@
 <body>
     <?php
     session_start();    
-    /*
+    
     if (empty($_SESSION['type']) ||$_SESSION['type'] != 'Etudiant') {
         header('Location: /index.php');
         exit();
-    }*/
+    }
 
     require 'navbar.php';
     require_once 'fonctionGetBDD.php';
@@ -22,8 +22,7 @@
     
 
     //idGroupe doit etre le name de l'input
-    //$idGroupe = $_POST['idGroupe'];
-    $idGroupe = 1;
+    $idGroupe = $_POST['idGroupe'];
     $ajouterUser = "toto";
     $connexion = connect($usernamedb, $passworddb, $dbname);
     $groupe = getGroupeParId($connexion, $idGroupe);
