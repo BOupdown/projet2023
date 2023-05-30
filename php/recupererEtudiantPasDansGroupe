@@ -1,5 +1,8 @@
 <?php
-
+    require_once 'fonctionGetBDD.php';
+    require_once 'fonctionCreateBDD.php';
+    session_start();
+    
     function estDansUnGroupe($connexion, $idEtudiant)
     {
         $res = false;
@@ -16,17 +19,10 @@
                     $res = true;
                 }
             }
-            
         }
-
         return $res;
     }
 
-
-
-    require_once 'fonctionGetBDD.php';
-    require_once 'fonctionCreateBDD.php';
-    session_start();
 
     if (isset($_POST['query'])) {
         $connexion = connect($usernamedb,$passworddb,$dbname);
