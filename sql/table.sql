@@ -76,14 +76,12 @@ CREATE TABLE Questionnaire(
     FOREIGN KEY (idSujet) REFERENCES ProjetData (idSujet) ON DELETE CASCADE
 );
 
-    CREATE TABLE Question(
-        idQuestion INTEGER PRIMARY KEY AUTO_INCREMENT,
-        idQuestionnaire INTEGER,
-        question TEXT,
-        FOREIGN KEY (idQuestionnaire) REFERENCES Questionnaire (idQuestionnaire) ON DELETE CASCADE
-    );
-
-
+CREATE TABLE Question(
+    idQuestion INTEGER PRIMARY KEY AUTO_INCREMENT,
+    idQuestionnaire INTEGER,
+    question TEXT,
+    FOREIGN KEY (idQuestionnaire) REFERENCES Questionnaire (idQuestionnaire) ON DELETE CASCADE
+);
 
 
 CREATE TABLE Groupe(
