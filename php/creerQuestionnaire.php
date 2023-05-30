@@ -39,8 +39,6 @@
                         <!-- Compteur de questions -->
                         <input type="hidden" id="compteur" name="compteur" value=1 >
 
-                        <?php unset($_SESSION['dataChallenge']); ?>
-
                         <!-- Nom du questionnaire -->
                         <br><label for="nom">Nom :</label>
                         <input type="text" name="nom" required autocomplete="off">
