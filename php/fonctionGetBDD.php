@@ -613,9 +613,9 @@ function getAllDataDefi($connexion)
 }
 
 
-function getAllSujet($connexion)
+function getAllProjetData($connexion)
 {
-    $query = "SELECT idSujet, nom, descriptionS, idDataDefi FROM Sujet";
+    $query = "SELECT idSujet, nom, descriptionS, idDataDefi,image,ressources FROM ProjetData";
 
     try {
         // Préparation de la requête
@@ -625,7 +625,7 @@ function getAllSujet($connexion)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idSujet, $nom, $descriptionS, $idDataDefi);
+        $stmt->bind_result($idSujet, $nom, $descriptionS, $idDataDefi,$image,$ressources);
 
         // Tableau pour stocker les données des défis
         $tableDataDefi = array();
@@ -638,6 +638,9 @@ function getAllSujet($connexion)
                 "nom" => $nom,
                 "descriptionS" => $descriptionS,
                 "idDataDefi" => $idDataDefi,
+                "image" => $image,
+                "ressources" => $ressources
+
             );
 
             // Ajouter le tableau associatif au tableau des défis
@@ -1055,9 +1058,9 @@ function getAllLoginsGestionnaire($connexion) {
     }
 }
 
-function getAllSujetByIdDataDefi($connexion, $idDataDefi)
+function getAllProjetDataByIdDataDefi($connexion, $idDataDefi)
 {
-    $query = "SELECT idSujet, nom, descriptionS, idDataDefi FROM Sujet WHERE idDataDefi = ?";
+    $query = "SELECT idSujet, nom, descriptionS, idDataDefi, image, ressources FROM ProjetData WHERE idDataDefi = ?";
 
     try {
         // Préparation de la requête
@@ -1070,7 +1073,7 @@ function getAllSujetByIdDataDefi($connexion, $idDataDefi)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idSujet, $nom, $descriptionS, $idDataDefi);
+        $stmt->bind_result($idSujet, $nom, $descriptionS, $idDataDefi, $image, $ressources);
 
         // Tableau pour stocker les données des sujets
         $tableSujets = array();
@@ -1083,6 +1086,8 @@ function getAllSujetByIdDataDefi($connexion, $idDataDefi)
                 "nom" => $nom,
                 "descriptionS" => $descriptionS,
                 "idDataDefi" => $idDataDefi,
+                "image" => $image,
+                "ressources" => $ressources
             );
 
             // Ajouter le tableau associatif au tableau des sujets

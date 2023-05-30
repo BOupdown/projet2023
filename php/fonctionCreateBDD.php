@@ -114,34 +114,8 @@ function creerGroupe($connexion, $idCapitaine, $idDataChallenge, $idEtudiant1, $
     }
 }
 
-// Créer un projetData à paartir de ses informations
-function creerProjetData($connexion, $idDataChallenge, $idGroupe, $description, $image)
-{
-    try {
-        // Début de la transaction
-        $connexion->begin_transaction();
-
-        // Insertion des données dans la table ProjetData
-        $stmt = $connexion->prepare("INSERT INTO ProjetData (idDataChallenge, idGroupe, descriptionP, imageP)
-                                VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("iiss", $idDataChallenge, $idGroupe, $description, $image);
-        if ($stmt->execute() === false) {
-            throw new Exception("Erreur lors de l'insertion dans la table ProjetData : " . $connexion->error);
-        }
-
-        // Terminer la transaction
-        $connexion->commit();
-
-        echo "Opérations effectuées avec succès !";
-
-    } catch (Exception $e) {
-        // En cas d'erreur, annuler la transaction
-        $connexion->rollback();
-        echo "Erreur : " . $e->getMessage();
-    }
-}
 // Créer un data challenge à partir des informations 
-function creerDataChallenge($connexion, $idGestionnaire, $nombreSujet, $nom, $description, $dateDebut, $dateFin, $sujet1, $sujet2, $sujet3, $sujet4, $sujet5, $sujet6)
+function creerDataChallenge($connexion, $idGestionnaire, $nombreSujet, $nom, $description, $dateDebut, $dateFin)
 {
     try {
         // Début de la transaction
@@ -157,28 +131,6 @@ function creerDataChallenge($connexion, $idGestionnaire, $nombreSujet, $nom, $de
             throw new Exception("Erreur lors de l'insertion dans la table DataDefi : " . $connexion->error);
         }
 
-        // Récupérer l'ID du défi nouvellement créé
-        $idDataDefi = $connexion->insert_id;
-
-        // Création des sujets si les variables de sujets ne sont pas nulles
-        if (!is_null($sujet1)) {
-            creerSujet($connexion, $sujet1, $description, $idDataDefi);
-        }
-        if (!is_null($sujet2)) {
-            creerSujet($connexion, $sujet2, $description, $idDataDefi);
-        }
-        if (!is_null($sujet3)) {
-            creerSujet($connexion, $sujet3, $description, $idDataDefi);
-        }
-        if (!is_null($sujet4)) {
-            creerSujet($connexion, $sujet4, $description, $idDataDefi);
-        }
-        if (!is_null($sujet5)) {
-            creerSujet($connexion, $sujet5, $description, $idDataDefi);
-        }
-        if (!is_null($sujet6)) {
-            creerSujet($connexion, $sujet6, $description, $idDataDefi);
-        }
 
         // Terminer la transaction
         $connexion->commit();
@@ -255,7 +207,7 @@ function creerPodium($connexion, $idDataDefi, $idEtudiant1, $idEtudiant2, $idEtu
 
 
 // Créer une data battle à partir des informations
-function creerSujet($connexion, $nom, $descriptionS, $idDataDefi)
+function creerProjetData($connexion, $nom, $descriptionS, $idDataDefi,$image,$ressources)
 {
     try {
         // Début de la transaction

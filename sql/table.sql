@@ -53,14 +53,17 @@ CREATE TABLE DataDefi(
     dateDebut DATE DEFAULT (CURRENT_DATE),
     dateFIN DATE,
     descriptionD TEXT,
+    
     FOREIGN KEY (idGestionnaire) REFERENCES Gestionnaire (idLogin) ON DELETE SET NULL
 );
 
-CREATE TABLE Sujet(
+CREATE TABLE ProjetData(
     idSujet INTEGER PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(50),
     descriptionS TEXT,
     idDataDefi INTEGER,
+    image TEXT,
+    ressources TEXT,
     FOREIGN KEY (idDataDefi) REFERENCES DataDefi (idDataDefi) ON DELETE CASCADE
 );
 
@@ -99,16 +102,6 @@ CREATE TABLE Groupe(
     FOREIGN KEY (idEtudiant8) REFERENCES Etudiant (idLogin) ON DELETE SET NULL
 );
 
-
-CREATE TABLE ProjetData(
-    idProjetData INTEGER PRIMARY KEY AUTO_INCREMENT,
-    idDataChallenge INTEGER,
-    idGroupe INTEGER,
-    descriptionP TEXT,
-    imageP TEXT,
-    FOREIGN KEY (idDataChallenge) REFERENCES DataDefi (idDataDefi) ON DELETE CASCADE,
-    FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe)ON DELETE CASCADE
-);
 
 
 CREATE TABLE Podium(
