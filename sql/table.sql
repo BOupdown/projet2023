@@ -76,21 +76,14 @@ CREATE TABLE Questionnaire(
     FOREIGN KEY (idSujet) REFERENCES ProjetData (idSujet) ON DELETE CASCADE
 );
 
-CREATE TABLE Question{
-    idQuestion INTEGER PRIMARY KEY AUTO_INCREMENT,
-    idQuestionnaire INTEGER,
-    question TEXT,
-    FOREIGN KEY (idQuestionnaire) REFERENCES Questionnaire (idQuestionnaire) ON DELETE CASCADE
-};
+    CREATE TABLE Question(
+        idQuestion INTEGER PRIMARY KEY AUTO_INCREMENT,
+        idQuestionnaire INTEGER,
+        question TEXT,
+        FOREIGN KEY (idQuestionnaire) REFERENCES Questionnaire (idQuestionnaire) ON DELETE CASCADE
+    );
 
-CREATE TABLE Reponses{
-    idReponse INTEGER PRIMARY KEY AUTO_INCREMENT,
-    idGroupe INTEGER,
-    idQuestion INTEGER,
-    reponse TEXT,
-    FOREIGN KEY (idQuestion) REFERENCES Question (idQuestion) ON DELETE CASCADE,
-    FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe) ON DELETE CASCADE
-}
+
 
 
 CREATE TABLE Groupe(
@@ -118,6 +111,14 @@ CREATE TABLE Groupe(
     FOREIGN KEY (idEtudiant8) REFERENCES Etudiant (idLogin) ON DELETE SET NULL
 );
 
+CREATE TABLE Reponses(
+    idReponse INTEGER PRIMARY KEY AUTO_INCREMENT,
+    idGroupe INTEGER,
+    idQuestion INTEGER,
+    reponse TEXT,
+    FOREIGN KEY (idQuestion) REFERENCES Question (idQuestion) ON DELETE CASCADE,
+    FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe) ON DELETE CASCADE
+);  
 
 
 CREATE TABLE Podium(
@@ -152,11 +153,13 @@ CREATE TABLE MessageGroupe(
     FOREIGN KEY (idDestinataire) REFERENCES Groupe (idGroupe) ON DELETE SET NULL
 );
 
-CREATE TABLE DataFichier{
+CREATE TABLE DataFichier(
     idDataFichier INTEGER PRIMARY KEY AUTO_INCREMENT,
+    idProjetData INTEGER,
     nbLignes INTEGER,
     nbFonctions INTEGER,
     tailleMinFonction INTEGER,
     tailleMaxFonction INTEGER,
     tailleMoyenneFonction INTEGER,
-}
+    FOREIGN KEY (idProjetData) REFERENCES ProjetData (idSujet) ON DELETE CASCADE
+);

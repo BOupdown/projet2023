@@ -88,3 +88,7 @@ body {
     cursor: pointer;
     text-decoration: none;
 }
+.divErreur{
+    display: flex;
+    justify-content: center;
+}

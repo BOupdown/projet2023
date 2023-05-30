@@ -23,7 +23,7 @@ require_once 'fonctionCreateBDD.php';
     if ($data["idDataDefi"] == NULL) {
         header('Location: ../php/datainfo.php');
     }
-    $sujets = getDataProjetParIdDataDefi($connexion, $idData);
+    $sujets = getProjetDataParIdDataDefi($connexion, $idData);
     disconnect($connexion);
 
     ?>
@@ -60,8 +60,10 @@ require_once 'fonctionCreateBDD.php';
             echo "<h2 class ='defi-title'>Les sujets</h2>";
             foreach ($sujets as $sujet) {
                 echo "<div class ='sujet'>";
+                echo "<h3 class ='image-title'>" . $sujet["image"] . "</h3>";
                 echo "<h3 class ='sujet-title'>" . $sujet["nom"] . "</h3>";
                 echo "<p class ='description'>" . $sujet["descriptionS"] . "</p>";
+                echo "<p class ='sujet-ressources'>Date de début : " . $sujet["ressources"] . "</p>";
                 echo "</div>";
             }
 
