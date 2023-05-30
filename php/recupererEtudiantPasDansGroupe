@@ -1,0 +1,62 @@
+<?php
+
+    function estDansUnGroupe($connexion, $idEtudiant)
+    {
+        $res = false;
+        $allGroup = getAllGroupe($connexion);
+        //recuperer tous les groupes
+        //voir si id etudiant correspond
+        foreach($allGroup as $group)
+        {
+            for($i = 1; $i <= 8; $i++)  
+            {
+                
+                if ($group["idEtudiant".$i] == $idEtudiant)
+                {
+                    $res = true;
+                }
+            }
+            
+        }
+
+        return $res;
+    }
+
+
+
+    require_once 'fonctionGetBDD.php';
+    require_once 'fonctionCreateBDD.php';
+    session_start();
+
+    if (isset($_POST['query'])) {
+        $connexion = connect($usernamedb,$passworddb,$dbname);
+        $inpText = $_POST['query'];
+        $allUser = getAllLoginsEtudiants($connexion);
+        $size = count($allUser);
+        $listedUsers = $_POST['users'];
+
+        for ($i = 0; $i < $size; $i++)
+        {
+            //si user deja dans un groupe OU dans la liste saisie temporaire
+            if (estDansUnGroupe($connexion, $allUser[$i]["idLogin"]) || in_array($allUser[$i]["nomUtilisateur"], $listedUsers))
+            {
+                unset($allUser[$i]);
+            }
+        }
+
+        if ($allUser) {
+            foreach($allUser as $user)
+            {
+                $value = strpos($user["nomUtilisateur"], $inpText);
+                if (gettype($value) == "integer" && $value == 0)
+                {
+                    echo "<p class=\"list-group-item border-1\">".$user["nomUtilisateur"]."</p>";
+                }
+            }
+        } else {
+        echo '<a class="list-group-item border-1">Aucune correspondance</a>';
+        }
+        disconnect($connexion);
+    }
+
+?>
