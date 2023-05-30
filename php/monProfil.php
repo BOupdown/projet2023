@@ -21,7 +21,7 @@
         $connexion = connect($usernamedb, $passworddb, $dbname);
         $gestionnaires = getAllGestionnaire($connexion);
         $dataDefi = getDataDefiParIdGestionnaire($connexion, $_SESSION['id']);
-        $sujets = getSujetParIdDataDefi($connexion, $dataDefi['idDataDefi']);
+        //$sujets = getSujetParIdDataDefi($connexion, $dataDefi['idDataDefi']);
         disconnect($connexion);
         echo "<div class='divElement'> ";
         echo '<div class="divTitre">';

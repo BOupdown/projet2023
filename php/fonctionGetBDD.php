@@ -1156,4 +1156,62 @@ function getAllGroupe($connexion)
         }
     }
 
+
+    function getDataDefiParIdGestionnaire($connexion, $idGestionnaire)
+{
+    try {
+        // Préparer la requête pour récupérer les données de la table DataDefi
+        $stmt = $connexion->prepare("SELECT * FROM DataDefi WHERE idGestionnaire = ?");
+        $stmt->bind_param("i", $idGestionnaire);
+        if ($stmt->execute() === false) {
+            throw new Exception("Erreur lors de la récupération des données de la table DataDefi : " . $connexion->error);
+        }
+
+        // Récupérer les résultats de la requête
+        $result = $stmt->get_result();
+        $dataDefi = array();
+
+        // Parcourir les résultats et les stocker dans un tableau
+        while ($row = $result->fetch_assoc()) {
+            $dataDefi[] = $row;
+        }
+
+        // Retourner les données
+        return $dataDefi;
+
+    } catch (Exception $e) {
+        echo "Erreur : " . $e->getMessage();
+        return null;
+    }
+}
+
+function getDataProjetParIdDataDefi($connexion, $idDataDefi)
+{
+    try {
+        // Préparer la requête pour récupérer les sujets de la table Sujet
+        $stmt = $connexion->prepare("SELECT * FROM ProjetData WHERE idDataDefi = ?");
+        $stmt->bind_param("i", $idDataDefi);
+        if ($stmt->execute() === false) {
+            throw new Exception("Erreur lors de la récupération des sujets de la table ProjetData : " . $connexion->error);
+        }
+
+        // Récupérer les résultats de la requête
+        $result = $stmt->get_result();
+        $sujets = array();
+
+        // Parcourir les résultats et les stocker dans un tableau
+        while ($row = $result->fetch_assoc()) {
+            $sujets[] = $row;
+        }
+
+        // Retourner les sujets
+        return $sujets;
+
+    } catch (Exception $e) {
+        echo "Erreur : " . $e->getMessage();
+        return null;
+    }
+}
+
+
 ?>

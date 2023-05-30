@@ -23,7 +23,7 @@ require_once 'fonctionCreateBDD.php';
     if ($data["idDataDefi"] == NULL) {
         header('Location: ../php/datainfo.php');
     }
-    $sujets = getAllSujetByIdDataDefi($connexion, $idData);
+    $sujets = getDataProjetParIdDataDefi($connexion, $idData);
     disconnect($connexion);
 
     ?>
