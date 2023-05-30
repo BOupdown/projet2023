@@ -1101,4 +1101,54 @@ function getAllSujetByIdDataDefi($connexion, $idDataDefi)
     }
 }
 
+function getAllGroupe($connexion)
+    {
+        $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom FROM Groupe";
+        $idGroupe = $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom = null;
+
+        try {
+            // Préparation de la requête
+            $stmt = $connexion->prepare($query);
+
+            // Exécution de la requête
+            $stmt->execute();
+
+            // Liaison des colonnes du résultat avec des variables
+            $stmt->bind_result($idGroupe, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom);
+
+            // Tableau pour stocker les données des défis
+            $groups = array();
+
+            // Parcourir les enregistrements et récupérer les données
+            while ($stmt->fetch()) {
+                // Parcourir les enregistrements et récupérer les données
+                $groupe = array(
+                    "idGroupe" => $idGroupe,
+                    "idCapitaine" => $idCapitaine,
+                    "idDataChallenge" => $idDataChallenge,
+                    "idEtudiant1" => $idEtudiant1,
+                    "idEtudiant2" => $idEtudiant2,
+                    "idEtudiant3" => $idEtudiant3,
+                    "idEtudiant4" => $idEtudiant4,
+                    "idEtudiant5" => $idEtudiant5,
+                    "idEtudiant6" => $idEtudiant6,
+                    "idEtudiant7" => $idEtudiant7,
+                    "idEtudiant8" => $idEtudiant8,
+                    "nom" => $nom
+                    );
+                $groups[] = $groupe;
+            }
+
+            // Fermeture du statement
+            $stmt->close();
+
+            // Retourne le tableau des défis
+            return $groups;
+        } catch (Exception $e) {
+            // Gestion de l'exception
+            echo "Une erreur est survenue : " . $e->getMessage();
+            return null;
+        }
+    }
+
 ?>
