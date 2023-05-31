@@ -70,6 +70,7 @@ CREATE TABLE ProjetData(
 
 CREATE TABLE Questionnaire(
     idQuestionnaire INTEGER PRIMARY KEY AUTO_INCREMENT,
+    numero INTEGER,
     idSujet INTEGER,
     nom VARCHAR(50),
     descriptionQ TEXT,
@@ -77,11 +78,12 @@ CREATE TABLE Questionnaire(
 );
 
 CREATE TABLE Question(
-    idQuestion INTEGER PRIMARY KEY AUTO_INCREMENT,
-    idQuestionnaire INTEGER,
-    question TEXT,
-    FOREIGN KEY (idQuestionnaire) REFERENCES Questionnaire (idQuestionnaire) ON DELETE CASCADE
+  idQuestion INTEGER PRIMARY KEY AUTO_INCREMENT,
+  idQuestionnaire INTEGER,
+  question TEXT,
+  FOREIGN KEY (idQuestionnaire) REFERENCES Questionnaire (idQuestionnaire) ON DELETE CASCADE
 );
+
 
 
 CREATE TABLE Groupe(
@@ -97,6 +99,7 @@ CREATE TABLE Groupe(
     idEtudiant7 INTEGER,
     idEtudiant8 INTEGER,
     nom VARCHAR(100),
+    rendu BOOLEAN DEFAULT 0,
     FOREIGN KEY (idCapitaine) REFERENCES Etudiant (idLogin) ON DELETE SET NULL,
     FOREIGN KEY (idDataChallenge) REFERENCES DataDefi (idDataDefi) ON DELETE CASCADE,
     FOREIGN KEY (idEtudiant1) REFERENCES Etudiant (idLogin) ON DELETE SET NULL,
@@ -159,5 +162,14 @@ CREATE TABLE DataFichier(
     tailleMinFonction INTEGER,
     tailleMaxFonction INTEGER,
     tailleMoyenneFonction INTEGER,
+    FOREIGN KEY (idProjetData) REFERENCES ProjetData (idSujet) ON DELETE CASCADE
+);
+
+CREATE TABLE Rendu(
+    idGroupe INTEGER,
+    idProjetData INTEGER,
+    code TEXT,
+    PRIMARY KEY (idGroupe, idProjetData),
+    FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe) ON DELETE CASCADE,
     FOREIGN KEY (idProjetData) REFERENCES ProjetData (idSujet) ON DELETE CASCADE
 );
