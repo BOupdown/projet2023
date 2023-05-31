@@ -58,7 +58,7 @@
 
     } else {
         echo "<div class='divErreur'>";
-        echo "<p class='vide'>Aucune Data Battle</p>";
+        echo "<p class='vide'>Aucun Data Challenge</p>";
         echo "</div>";
     }
     echo "</div>";
@@ -72,20 +72,21 @@
     if ($battles) {
         $connexion = connect($usernamedb, $passworddb, $dbname);
         echo '<table class="table">';
-        echo "<tr><th>Groupe</th><th>nom du projet data</th><th>Voir les réponses et noter</th></tr>";
+        echo "<tr><th>Groupe</th><th>Nom du projet data</th><th>Voir les réponses et noter</th></tr>";
 
         foreach ($battles as $battle) {
             $groupes = getAllIdGroupeAvecReponsesParIdDataDefi($connexion, $battle['idDataDefi']);
             if ($groupes) {
                 foreach ($groupes as $groupe) {
+                    
                     echo "<tr id='login_" . $groupe['idGroupe'] . "'>";
-                    $groupe = getGroupeParId($connexion, $groupe['idGroupe']);
-                    echo "<td>" . $groupe['nom'] . "</td>";
+                    $groupee = getGroupeParId($connexion, $groupe['idGroupe']);
+                    echo "<td>" . $groupee['nom'] . "</td>";
                     echo "<td>" . $battle['nom'] . "</td>";
+                    echo "<td><a class='consulterBtn' href=\"noter.php?idGroupe=" . $groupe['idGroupe'] . "&idBattle=".$groupee['idDataChallenge']."\">Noter</a></td>";
 
                 }
 
-                echo "<td><a class='consulterBtn' href=\"noter.php?idGroupe=" . $groupe['idGroupe'] . "&idBattle=".$battle['idDataDefi']."\">Noter</a></td>";
                 echo "</tr>";
             }
         }
@@ -94,7 +95,7 @@
         disconnect($connexion);
     } else {
         echo "<div class='divErreur'>";
-        echo "<p class='vide'>Aucun Data Challenge</p>";
+        echo "<p class='vide'>Aucune Data Battle</p>";
         echo "</div>";
     }
     echo "</div>";

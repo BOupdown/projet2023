@@ -131,4 +131,32 @@ form .button input:hover {
     text-align: right;
     font-size: 100px;
     color: bisque;
-    margin-bottom: 1em;}
+    margin-bottom: 1em;
+}
+
+
+.btn{
+    border: none;
+    background-color: #172A3A;
+    color: bisque;
+    font-size: 1.5em;
+    border-radius: 20px;
+    padding: 0.5em;
+}
+
+.btn:hover{
+    background-color: #824C71;
+    color: bisque;
+    font-size: 1.5em;
+    border-radius: 20px;
+    padding: 0.5em;
+}
+.consulterBtn {
+    border-radius: 20px;
+    padding: 10px 20px;
+    background-color: #E5D0E3;
+    color: #172A3A;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}

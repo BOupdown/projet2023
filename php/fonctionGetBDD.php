@@ -1968,4 +1968,6 @@ function getDataFichierParIdGroupe($connexion, $idGroupe)
    }
 }
 
+
+
 ?>
