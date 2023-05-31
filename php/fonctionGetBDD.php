@@ -432,6 +432,8 @@ function getPodiumParId($connexion, $idDataBattle)
         return null;
     }
 }
+
+
 // Retourne les différents groupes d'un étudiants et leurs informations
 function getGroupesParIdEtudiant($connexion, $idEtudiant)
 {
@@ -574,6 +576,7 @@ function getAllDataDefi($connexion)
 {
     $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin FROM DataDefi";
 
+
     try {
         // Préparation de la requête
         $stmt = $connexion->prepare($query);
@@ -582,6 +585,7 @@ function getAllDataDefi($connexion)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
+
         $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
 
         // Tableau pour stocker les données des défis
@@ -607,6 +611,7 @@ function getAllDataDefi($connexion)
 
         // Fermeture du statement
         $stmt->close();
+
 
         // Retourne le tableau des défis
         return $tableDataDefi;
@@ -903,25 +908,6 @@ function getDataDefiParNom($connexion, $nomDataDefi)
 
         // Liaison des colonnes du résultat avec des variables
         $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
-
-        // Récupération des données
-        $stmt->fetch();
-
-        // Création d'un tableau associatif avec les résultats
-        $dataDefi = array(
-            "idDataDefi" => $idDataDefi,
-            "idGestionnaire" => $idGestionnaire,
-            "typeD" => $typeD,
-            "nombreSujet" => $nombreSujet,
-            "nombreQuestionnaire" => $nombreQuestionnaire,
-            "nom" => $nom,
-            "dateDebut" => $dateDebut,
-            "dateFin" => $dateFin
-        );
-
-        // Fermeture du statement
-        $stmt->close();
-
         // Retourne les informations du DataDefi
         return $dataDefi;
     } catch (Exception $e) {
