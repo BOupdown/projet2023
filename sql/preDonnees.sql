@@ -295,33 +295,6 @@ INSERT INTO DataDefi (idGestionnaire,typeD,nombreSujet,nombreQuestionnaire,nom,d
     ('Sujet20', 'Description du sujet20', 20, 'image20', 'ressources20');
 
 
-
-INSERT INTO DataFichier (idDataFichier,idProjetData,nbLignes,nbFonctions,tailleMinFonction,tailleMaxFonction,tailleMoyenneFonction) VALUES
-    (1, 1, 100, 10, 10, 100, 50),
-    (2, 2, 200, 20, 20, 200, 100),
-    (3, 3, 300, 30, 30, 300, 150),
-    (4, 4, 400, 40, 40, 400, 200),
-    (5, 5, 500, 50, 50, 500, 250),
-    (6, 6, 600, 60, 60, 600, 300),
-    (7, 7, 700, 70, 70, 700, 350),
-    (8, 8, 800, 80, 80, 800, 400),
-    (9, 9, 900, 90, 90, 900, 450),
-    (10, 10, 1000, 100, 100, 1000, 500),
-    (11, 11, 1100, 110, 110, 1100, 550),
-    (12, 12, 1200, 120, 120, 1200, 600),
-    (13, 13, 1300, 130, 130, 1300, 650),
-    (14, 14, 1400, 140, 140, 1400, 700),
-    (15, 15, 1500, 150, 150, 1500, 750),
-    (16, 16, 1600, 160, 160, 1600, 800),
-    (17, 17, 1700, 170, 170, 1700, 850),
-    (18, 18, 1800, 180, 180, 1800, 900),
-    (19, 19, 1900, 190, 190, 1900, 950),
-    (20, 20, 2000, 200, 200, 2000, 1000);
-
-
-
-
-
 INSERT INTO Groupe (idCapitaine,idDataChallenge,idEtudiant1,idEtudiant2,idEtudiant3,idEtudiant4,idEtudiant5,idEtudiant6,idEtudiant7,idEtudiant8,nom) VALUES
     (1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 'Groupe1'),
     (2, 2, 2, 3, 4, 5, 6, 7, 8, 1, 'Groupe2'),
@@ -343,6 +316,29 @@ INSERT INTO Groupe (idCapitaine,idDataChallenge,idEtudiant1,idEtudiant2,idEtudia
     (18, 18, 2, 3, 4, 5, 6, 7, 8, 1, 'Groupe18'),
     (19, 19, 3, 4, 5, 6, 7, 8, 1, 2, 'Groupe19'),
     (20, 20, 4, 5, 6, 7, 8, 1, 2, 3, 'Groupe20');  
+INSERT INTO DataFichier (idDataFichier, idGroupe, idProjetData, nomFichier, nbLignes,nbFonctions,tailleMinFonction,tailleMaxFonction,tailleMoyenneFonction) VALUES
+    (1, 1, 1, 'code.py', 100, 7, 2, 20, 3),
+    (2, 2, 2, 'code.py', 200, 20, 20, 200, 100),
+    (3, 3, 3, 'code.py', 300, 30, 30, 300, 150),
+    (4, 4, 4, 'code.py', 400, 40, 40, 400, 200),
+    (5, 5, 5, 'code.py', 500, 50, 50, 500, 250),
+    (6, 6, 6, 'code.py', 600, 60, 60, 600, 300),
+    (7, 7, 7, 'code.py', 700, 70, 70, 700, 350),
+    (8, 8, 8, 'code.py', 800, 80, 80, 800, 400),
+    (9, 9, 9, 'code.py', 900, 90, 90, 900, 450),
+    (10, 10, 10, 'code.py', 1000, 100, 100, 1000, 500),
+    (11, 11, 11, 'code.py', 1100, 110, 110, 1100, 550),
+    (12, 12, 12, 'code.py', 1200, 120, 120, 1200, 600),
+    (13, 13, 13, 'code.py', 1300, 130, 130, 1300, 650),
+    (14, 14, 14, 'code.py', 1400, 140, 140, 1400, 700),
+    (15, 15, 15, 'code.py', 1500, 150, 150, 1500, 750),
+    (16, 16, 16, 'code.py', 1600, 160, 160, 1600, 800),
+    (17, 17, 17, 'code.py', 1700, 170, 170, 1700, 850),
+    (18, 18, 18, 'code.py', 1800, 180, 180, 1800, 900),
+    (19, 19, 19, 'code.py', 1900, 190, 190, 1900, 950),
+    (20, 20, 20, 'code.py', 2000, 200, 200, 2000, 1000);
+
+
 
 
 INSERT INTO Podium (idDataBattle,idEtudiant1,idEtudiant2,idEtudiant3) VALUES
