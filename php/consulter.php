@@ -70,7 +70,7 @@ require_once 'fonctionCreateBDD.php';
                 echo "<h3 class ='image-title'>" . $sujet["image"] . "</h3>";
                 echo "<h3 class ='sujet-title'>" . $sujet["nom"] . "</h3>";
                 echo "<p class ='description'>" . $sujet["descriptionS"] . "</p>";
-                echo "<p class ='sujet-ressources'>Date de début : " . $sujet["ressources"] . "</p>";
+                echo "<p class ='sujet-ressources'>Ressources : " . $sujet["ressources"] . "</p>";
                 echo "</div>";
             }
 
