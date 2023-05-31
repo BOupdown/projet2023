@@ -56,7 +56,7 @@ require_once 'fonctionCreateBDD.php';
             echo "<p class ='defi-description'>Date de début : " . $data["dateDebut"] . "</p>";
             echo "<p class ='defi-description'>Date de fin : " . $data["dateFin"] . "</p>";
 
-            if ($data["typeD"] == "dataChallenge") {
+            if ($data["typeD"] == "Challenge") {
                 echo "<p class ='defi-description'>Nombre de sujets : " . $data["nombreSujet"] . "</p>";
             } else {
                 echo "<p class ='defi-description'>Nombre de questionnaires : " . $data["nombreQuestionnaire"] . "</p>";
