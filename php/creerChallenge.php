@@ -108,7 +108,7 @@
 
                             <!-- Nom du sujet -->
                             <div class="input-box">
-                                <span class="details">(*) Sujet n°1 - Nom</span>
+                                <span class="details">Sujet n°1 - Nom</span>
                                 <input class="oblig <?php if (in_array('nom_sujet1', $errors) ) {echo 'erreur'; } ?>"name="nom_sujet1" type="text" placeholder="Entrez le nom du sujet 1" autocomplete="off" value=<?php if (isset($_SESSION['sujet1'])) { echo $_SESSION['sujet1'];} ?>>
                             </div>
                             <?php unset($_SESSION['nom_sujet1']); ?>
@@ -136,7 +136,9 @@
                             <?php unset($_SESSION['ressrc1']); ?>
 
                             <!-- Bouton ajouter un sujet -->
-                            <input id="btn-ajouter-sujet" type="button" value="+" onclick="ajouterSujet(2)">
+                            <div class="input-box">
+                                <input id="btn-ajouter-sujet" type="button" value="+" onclick="ajouterSujet(2)">
+                            </div>
                         </div>
                 
                        
