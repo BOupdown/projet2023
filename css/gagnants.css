@@ -54,20 +54,6 @@
 body {
     background-image: url(../images/image.jpg);
     background-repeat: repeat;
-<<<<<<< HEAD
-    background-size: cover;
-}
-
-
-body {
-font-family: sans-serif;
-}
-
-.container {
-display: flex;
-align-items: flex-end;
-height: 400px;
-=======
     background-size: contain;
 }
 
@@ -76,7 +62,6 @@ height: 400px;
     align-items: flex-end;
     box-sizing: border-box;
     margin-bottom: 2em;
->>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
 }
 
 .podium__item {
@@ -93,10 +78,6 @@ color: bisque;
 
 .podium__city {
 text-align: center;
-<<<<<<< HEAD
-padding: 0 .5rem;
-=======
->>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
 }
 
 .podium__number {
@@ -106,34 +87,22 @@ height: 75px;
 
 .podium .first {
 min-height: 300px;
-<<<<<<< HEAD
-background: #020024;
-=======
 background: #824C71;
 color: #172A3A;
 border-radius: 10px 10px 0 0;
->>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
 
 }
 
 .podium .second {
 min-height: 200px;
-<<<<<<< HEAD
-background: #172A3A;
-=======
 background: #a16c90;
 color: #172A3A;
 border-radius: 10px 0 0 0;
 
->>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
 }
 
 .podium .third {
 min-height: 100px;
-<<<<<<< HEAD
-background: #4d5358;
-}
-=======
 background: #E5D0E3;
 color: #172A3A;
 border-radius: 0 10px 0 0;
@@ -146,4 +115,3 @@ border-radius: 0 10px 0 0;
     text-decoration: underline;
 }
 
->>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
