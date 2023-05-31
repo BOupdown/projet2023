@@ -117,6 +117,7 @@ CREATE TABLE Reponses(
     idGroupe INTEGER,
     idQuestion INTEGER,
     reponse TEXT,
+    note INTEGER,
     FOREIGN KEY (idQuestion) REFERENCES Question (idQuestion) ON DELETE CASCADE,
     FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe) ON DELETE CASCADE
 );  
@@ -168,10 +169,10 @@ CREATE TABLE DataFichier(
 );
 
 CREATE TABLE Rendu(
+    idRendu INTEGER PRIMARY KEY AUTO_INCREMENT,
     idGroupe INTEGER,
     idProjetData INTEGER,
     code TEXT,
-    PRIMARY KEY (idGroupe, idProjetData),
     FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe) ON DELETE CASCADE,
     FOREIGN KEY (idProjetData) REFERENCES ProjetData (idSujet) ON DELETE CASCADE
 );

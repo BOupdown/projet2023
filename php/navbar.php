@@ -33,7 +33,7 @@
                             }
                             if ($_SESSION['type'] == "Etudiant") {
                                 echo '<li><a class="hover-underline-animation" href="/php/datainfo.php">Les défis</a></li>';
-                                echo '<li><a class="hover-underline-animation" href="/php/gagnants.php">Les gagnants</a></li>';
+                                echo '<li><a class="hover-underline-animation" href="/php/mesEquipes.php">Mes équipes</a></li>';
                                 echo '<li><a class="hover-underline-animation" href="/php/creerGroupe.php">Créer groupe</a></li>';
 
                             }
