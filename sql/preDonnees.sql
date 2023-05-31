@@ -73,39 +73,32 @@ VALUES (3, 'Admin1', 'Admin1', '0626594871', 'admin@example.com');
 -- --------------- TABLE DATA DEFI ----------------------------------------------
 
 INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFIN)
-VALUES (6, 'DataBattle', 2, 3, 'Octogone 2pac vs Eminem', '2022-05-01', '2022-06-30');
+VALUES (6, 'Battle', 2, 3, 'Octogone 2pac vs Eminem', '2022-05-01', '2022-06-30');
 
 INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFIN)
-VALUES (7, 'DataBattle', 3, 2, 'Octogone Omar vs Julien', '2022-07-01', '2022-08-30');
+VALUES (7, 'Battle', 3, 2, 'Octogone Omar vs Julien', '2022-07-01', '2022-08-30');
 
--- --------------- TABLE SUJET ----------------------------------------------
-
-INSERT INTO Sujet (nom, descriptionS, idDataDefi)
-VALUES ('Sujet1', 'Si 2pac était un bard', 1);
-
-INSERT INTO Sujet (nom, descriptionS, idDataDefi)
-VALUES ('Sujet2', 'Si Eminem était boucher', 1);
 
 -- --------------- TABLE QUESTIONNAIRE ----------------------------------------------
 
-INSERT INTO Questionnaire (nom, descriptionQ, idDataDefi)
-VALUES ('Questionnaire1', 'pas d idee', 1);
+-- INSERT INTO Questionnaire (nom, descriptionQ, idDataDefi)
+-- VALUES ('Questionnaire1', 'pas d idee', 1);
 
-INSERT INTO Questionnaire (nom, descriptionQ, idDataDefi)
-VALUES ('Questionnaire2', 'Questionnaire pour un champion', 1);
+-- INSERT INTO Questionnaire (nom, descriptionQ, idDataDefi)
+-- VALUES ('Questionnaire2', 'Questionnaire pour un champion', 1);
 
-INSERT INTO Questionnaire (nom, descriptionQ, idDataDefi)
-VALUES ('Questionnaire3', 'QCM inédit', 1);
+-- INSERT INTO Questionnaire (nom, descriptionQ, idDataDefi)
+-- VALUES ('Questionnaire3', 'QCM inédit', 1);
 
 -- --------------- TABLE GROUPE ----------------------------------------------
 
 INSERT INTO Groupe (idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, nom)
 VALUES (1, 1, 1, 2, 3, 'Groupe A');
 
--- --------------- TABLE PROJET DATA ----------------------------------------------
+-- -- --------------- TABLE PROJET DATA ----------------------------------------------
 
-INSERT INTO ProjetData (idDataChallenge, idGroupe, descriptionP, imageP)
-VALUES (1, 1, 'le bard sort victorieux', 'images/image.png');
+-- INSERT INTO ProjetData (idDataChallenge, idGroupe, descriptionP, imageP)
+-- VALUES (1, 1, 'le bard sort victorieux', 'images/image.png');
 
 -- --------------- TABLE PODIUM ----------------------------------------------
 
@@ -203,11 +196,6 @@ INSERT INTO Login (nomUtilisateur, mdp, type) VALUES
 
 
 INSERT INTO Etudiant (idLogin, nom, prenom, niveauEtude, telephone, mail, ecole) VALUES
-    (1, 'Benzeroual', 'Omar', 'L3', '0662315984', 'benzeroual@cy-tech.fr', 'CY-Tech'),
-    (2, 'Dubois', 'Emma', 'L3', '0658741237', 'emma.dubois@example.com', 'University1'),
-    (3, 'Lefebvre', 'Thomas', 'L3', '0645987622', 'thomas.lefebvre@example.com', 'University2'),
-    (4, 'Martin', 'Julie', 'L3', '0612358748', 'julie.martin@example.com', 'University3'),
-    (5, 'Tremblay', 'Alexandre', 'L3', '0662315981', 'alexandre.tremblay@example.com', 'University4'),
     (6, 'Gagnon', 'Marie', 'L3', '0612358749', 'marie.gagnon@example.com', 'University5'),
     (7, 'Roy', 'Charlotte', 'L3', '0645874123', 'charlotte.roy@example.com', 'University6'),
     (8, 'Lavoie', 'William', 'L3', '0662315982', 'william.lavoie@example.com', 'University7'),
@@ -247,13 +235,6 @@ INSERT INTO Etudiant (idLogin, nom, prenom, niveauEtude, telephone, mail, ecole)
 
     
 INSERT INTO Gestionnaire (idLogin, nom, prenom, entreprise, telephone, mail, dateDebut, dateFin) VALUES
-    (1, 'Gestionnaire1', 'Gestionnaire1', 'ABC Company', '0695847128', 'gestionnaire1@example.com', '2022-01-01', '2022-12-31'),
-    (2, 'Gestionnaire2', 'Gestionnaire2', 'XYZ Corp', '0687451239', 'gestionnaire2@example.com', '2022-01-01', '2022-12-31'),
-    (3, 'Gestionnaire3', 'Gestionnaire3', '123 Industries', '0674895213', 'gestionnaire3@example.com', '2022-01-01', '2022-12-31'),
-    (4, 'Gestionnaire4', 'Gestionnaire4', 'Acme Corporation', '0662358741', 'gestionnaire4@example.com', '2022-01-01', '2022-12-31'),
-    (5, 'Gestionnaire5', 'Gestionnaire5', 'ABC Company', '0658741234', 'gestionnaire5@example.com', '2022-01-01', '2022-12-31'),
-    (6, 'Gestionnaire6', 'Gestionnaire6', 'XYZ Corp', '0645987623', 'gestionnaire6@example.com', '2022-01-01', '2022-12-31'),
-    (7, 'Gestionnaire7', 'Gestionnaire7', '123 Industries', '0635874126', 'gestionnaire7@example.com', '2022-01-01', '2022-12-31'),
     (8, 'Gestionnaire8', 'Gestionnaire8', 'Acme Corporation', '0622315987', 'gestionnaire8@example.com', '2022-01-01', '2022-12-31'),
     (9, 'Gestionnaire9', 'Gestionnaire9', 'ABC Company', '0612358745', 'gestionnaire9@example.com', '2022-01-01', '2022-12-31'),
     (10, 'Gestionnaire10', 'Gestionnaire10', 'XYZ Corp', '0695847129', 'gestionnaire10@example.com', '2022-01-01', '2022-12-31'),
@@ -269,29 +250,203 @@ INSERT INTO Gestionnaire (idLogin, nom, prenom, entreprise, telephone, mail, dat
     (20, 'Gestionnaire20', 'Gestionnaire20', 'Acme Corporation', '0687451241', 'gestionnaire20@example.com', '2022-01-01', '2022-12-31');
 
 
+INSERT INTO DataDefi (idGestionnaire,typeD,nombreSujet,nombreQuestionnaire,nom,dateDebut,dateFIN,descriptionD) VALUES
+    (6, 'Battle', 10, 10, 'Défi1', '2022-01-01', '2023-12-31', 'Description du défi1'),
+    (6, 'Challenge', 20, 20, 'Défi2', '2022-01-01', '2023-12-31', 'Description du défi2'),
+    (6, 'Battle', 30, 30, 'Défi3', '2022-01-01', '2022-12-31', 'Description du défi3'),
+    (7, 'Challenge', 40, 40, 'Défi4', '2022-01-01', '2022-12-31', 'Description du défi4'),
+    (7, 'Battle', 50, 50, 'Défi5', '2022-01-01', '2022-12-31', 'Description du défi5'),
+    (7, 'Challenge', 60, 60, 'Défi6', '2022-01-01', '2022-12-31', 'Description du défi6'),
+    (7, 'Battle', 70, 70, 'Défi7', '2022-01-01', '2022-12-31', 'Description du défi7'),
+    (8, 'Challenge', 80, 80, 'Défi8', '2022-01-01', '2022-12-31', 'Description du défi8'),
+    (9, 'Battle', 90, 90, 'Défi9', '2022-01-01', '2022-12-31', 'Description du défi9'),
+    (10, 'Challenge', 100, 100, 'Défi10', '2022-01-01', '2022-12-31', 'Description du défi10'),
+    (11, 'Battle', 110, 110, 'Défi11', '2022-01-01', '2022-12-31', 'Description du défi11'),
+    (12, 'Challenge', 120, 120, 'Défi12', '2022-01-01', '2022-12-31', 'Description du défi12'),
+    (13, 'Battle', 130, 130, 'Défi13', '2022-01-01', '2022-12-31', 'Description du défi13'),
+    (14, 'Challenge', 140, 140, 'Défi14', '2022-01-01', '2022-12-31', 'Description du défi14'),
+    (15, 'Battle', 150, 150, 'Défi15', '2022-01-01', '2022-12-31', 'Description du défi15'),
+    (16, 'Challenge', 160, 160, 'Défi16', '2022-01-01', '2022-12-31', 'Description du défi16'),
+    (17, 'Battle', 170, 170, 'Défi17', '2022-01-01', '2022-12-31', 'Description du défi17'),
+    (18, 'CHallenge', 180, 180, 'Défi18', '2022-01-01', '2022-12-31', 'Description du défi18'),
+    (19, 'Battle', 190, 190, 'Défi19', '2022-01-01', '2022-12-31', 'Description du défi19'),
+    (20, 'Challenge', 200, 200, 'Défi20', '2022-01-01', '2022-12-31', 'Description du défi20');
 
-INSERT TO DataFichier (idDataFichier,idProjetData,nbLignes,nbFonctions,tailleMinFonction,tailleMaxFonction,tailleMoyenneFonction) VALUES
-    (1,1,100,10,10,20,15),
-    (1,2,200,20,10,20,15),
-    (1,3,300,30,10,20,15),
-    (1,4,400,40,10,20,15),
-    (1,5,500,50,10,20,15),
-    (1,6,600,60,10,20,15),
-    (1,7,700,70,10,20,15),
-    (1,8,800,80,10,20,15),
-    (1,9,900,90,10,20,15),
-    (1,10,1000,100,10,20,15),
-    (1,11,1100,110,10,20,15),
-    (1,12,1200,120,10,20,15),
-    (1,13,1300,130,10,20,15),
-    (1,14,1400,140,10,20,15),
-    (1,15,1500,150,10,20,15),
-    (1,16,1600,160,10,20,15),
-    (1,17,1700,170,10,20,15),
-    (1,18,1800,180,10,20,15),
-    (1,19,1900,190,10,20,15),
-    (1,20,2000,200,10,20,15);
+    INSERT INTO ProjetData (nom,descriptionS,idDataDefi,image,ressources) VALUES
+    ('Sujet1', 'Description du sujet1', 1, 'image1', 'ressources1'),
+    ('Sujet2', 'Description du sujet2', 2, 'image2', 'ressources2'),
+    ('Sujet3', 'Description du sujet3', 3, 'image3', 'ressources3'),
+    ('Sujet4', 'Description du sujet4', 4, 'image4', 'ressources4'),
+    ('Sujet5', 'Description du sujet5', 5, 'image5', 'ressources5'),
+    ('Sujet6', 'Description du sujet6', 6, 'image6', 'ressources6'),
+    ('Sujet7', 'Description du sujet7', 7, 'image7', 'ressources7'),
+    ('Sujet8', 'Description du sujet8', 8, 'image8', 'ressources8'),
+    ('Sujet9', 'Description du sujet9', 9, 'image9', 'ressources9'),
+    ('Sujet10', 'Description du sujet10', 10, 'image10', 'ressources10'),
+    ('Sujet11', 'Description du sujet11', 11, 'image11', 'ressources11'),
+    ('Sujet12', 'Description du sujet12', 12, 'image12', 'ressources12'),
+    ('Sujet13', 'Description du sujet13', 13, 'image13', 'ressources13'),
+    ('Sujet14', 'Description du sujet14', 14, 'image14', 'ressources14'),
+    ('Sujet15', 'Description du sujet15', 15, 'image15', 'ressources15'),
+    ('Sujet16', 'Description du sujet16', 16, 'image16', 'ressources16'),
+    ('Sujet17', 'Description du sujet17', 17, 'image17', 'ressources17'),
+    ('Sujet18', 'Description du sujet18', 18, 'image18', 'ressources18'),
+    ('Sujet19', 'Description du sujet19', 19, 'image19', 'ressources19'),
+    ('Sujet20', 'Description du sujet20', 20, 'image20', 'ressources20');
+
+
+
+INSERT INTO DataFichier (idDataFichier,idProjetData,nbLignes,nbFonctions,tailleMinFonction,tailleMaxFonction,tailleMoyenneFonction) VALUES
+    (1, 1, 100, 10, 10, 100, 50),
+    (2, 2, 200, 20, 20, 200, 100),
+    (3, 3, 300, 30, 30, 300, 150),
+    (4, 4, 400, 40, 40, 400, 200),
+    (5, 5, 500, 50, 50, 500, 250),
+    (6, 6, 600, 60, 60, 600, 300),
+    (7, 7, 700, 70, 70, 700, 350),
+    (8, 8, 800, 80, 80, 800, 400),
+    (9, 9, 900, 90, 90, 900, 450),
+    (10, 10, 1000, 100, 100, 1000, 500),
+    (11, 11, 1100, 110, 110, 1100, 550),
+    (12, 12, 1200, 120, 120, 1200, 600),
+    (13, 13, 1300, 130, 130, 1300, 650),
+    (14, 14, 1400, 140, 140, 1400, 700),
+    (15, 15, 1500, 150, 150, 1500, 750),
+    (16, 16, 1600, 160, 160, 1600, 800),
+    (17, 17, 1700, 170, 170, 1700, 850),
+    (18, 18, 1800, 180, 180, 1800, 900),
+    (19, 19, 1900, 190, 190, 1900, 950),
+    (20, 20, 2000, 200, 200, 2000, 1000);
 
 
 
 
+
+INSERT INTO Groupe (idCapitaine,idDataChallenge,idEtudiant1,idEtudiant2,idEtudiant3,idEtudiant4,idEtudiant5,idEtudiant6,idEtudiant7,idEtudiant8,nom) VALUES
+    (1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 'Groupe1'),
+    (2, 2, 2, 3, 4, 5, 6, 7, 8, 1, 'Groupe2'),
+    (3, 3, 3, 4, 5, 6, 7, 8, 1, 2, 'Groupe3'),
+    (4, 4, 4, 5, 6, 7, 8, 1, 2, 3, 'Groupe4'),
+    (5, 5, 5, 6, 7, 8, 1, 2, 3, 4, 'Groupe5'),
+    (6, 6, 6, 7, 8, 1, 2, 3, 4, 5, 'Groupe6'),
+    (7, 7, 7, 8, 1, 2, 3, 4, 5, 6, 'Groupe7'),
+    (8, 8, 8, 1, 2, 3, 4, 5, 6, 7, 'Groupe8'),
+    (9, 9, 1, 2, 3, 4, 5, 6, 7, 8, 'Groupe9'),
+    (10, 10, 2, 3, 4, 5, 6, 7, 8, 1, 'Groupe10'),
+    (11, 11, 3, 4, 5, 6, 7, 8, 1, 2, 'Groupe11'),
+    (12, 12, 4, 5, 6, 7, 8, 1, 2, 3, 'Groupe12'),
+    (13, 13, 5, 6, 7, 8, 1, 2, 3, 4, 'Groupe13'),
+    (14, 14, 6, 7, 8, 1, 2, 3, 4, 5, 'Groupe14'),
+    (15, 15, 7, 8, 1, 2, 3, 4, 5, 6, 'Groupe15'),
+    (16, 16, 8, 1, 2, 3, 4, 5, 6, 7, 'Groupe16'),
+    (17, 17, 1, 2, 3, 4, 5, 6, 7, 8, 'Groupe17'),
+    (18, 18, 2, 3, 4, 5, 6, 7, 8, 1, 'Groupe18'),
+    (19, 19, 3, 4, 5, 6, 7, 8, 1, 2, 'Groupe19'),
+    (20, 20, 4, 5, 6, 7, 8, 1, 2, 3, 'Groupe20');  
+
+
+INSERT INTO Podium (idDataBattle,idEtudiant1,idEtudiant2,idEtudiant3) VALUES
+    (3, 3, 4, 5),
+    (4, 4, 5, 6),
+    (5, 5, 6, 7),
+    (6, 6, 7, 8),
+    (7, 7, 8, 1),
+    (8, 8, 1, 2),
+    (9, 1, 2, 3),
+    (10, 2, 3, 4),
+    (11, 3, 4, 5),
+    (12, 4, 5, 6),
+    (13, 5, 6, 7),
+    (14, 6, 7, 8),
+    (15, 7, 8, 1),
+    (16, 8, 1, 2),
+    (17, 1, 2, 3),
+    (18, 2, 3, 4),
+    (19, 3, 4, 5),
+    (20, 4, 5, 6);
+
+
+INSERT INTO Questionnaire (numero, idSujet, nom, descriptionQ) VALUES
+    (1, 1, 'Questionnaire1', 'Description du questionnaire1'),
+    (2, 2, 'Questionnaire2', 'Description du questionnaire2'),
+    (3, 3, 'Questionnaire3', 'Description du questionnaire3'),
+    (4, 4, 'Questionnaire4', 'Description du questionnaire4'),
+    (5, 5, 'Questionnaire5', 'Description du questionnaire5'),
+    (6, 6, 'Questionnaire6', 'Description du questionnaire6'),
+    (7, 7, 'Questionnaire7', 'Description du questionnaire7'),
+    (8, 8, 'Questionnaire8', 'Description du questionnaire8'),
+    (9, 9, 'Questionnaire9', 'Description du questionnaire9'),
+    (10, 10, 'Questionnaire10', 'Description du questionnaire10'),
+    (11, 11, 'Questionnaire11', 'Description du questionnaire11'),
+    (12, 12, 'Questionnaire12', 'Description du questionnaire12'),
+    (13, 13, 'Questionnaire13', 'Description du questionnaire13'),
+    (14, 14, 'Questionnaire14', 'Description du questionnaire14'),
+    (15, 15, 'Questionnaire15', 'Description du questionnaire15'),
+    (16, 16, 'Questionnaire16', 'Description du questionnaire16'),
+    (17, 17, 'Questionnaire17', 'Description du questionnaire17'),
+    (18, 18, 'Questionnaire18', 'Description du questionnaire18'),
+    (19, 19, 'Questionnaire19', 'Description du questionnaire19'),
+    (20, 20, 'Questionnaire20', 'Description du questionnaire20');
+
+INSERT INTO Question (idQuestionnaire, question) VALUES
+    (1, 'Question1'),
+    (1, 'Question2'),
+    (1, 'Question3'),
+    (1, 'Question4'),
+    (1, 'Question5'),
+    (1, 'Question6'),
+    (1, 'Question7'),
+    (1, 'Question8'),
+    (1, 'Question9'),
+    (1, 'Question10'),
+    (1, 'Question11'),
+    (1, 'Question12'),
+    (1, 'Question13'),
+    (1, 'Question14'),
+    (1, 'Question15'),
+    (1, 'Question16'),
+    (1, 'Question17'),
+    (1, 'Question18'),
+    (1, 'Question19'),
+    (1, 'Question20'),
+    (2, 'Question1'),
+    (2, 'Question2'),
+    (2, 'Question3'),
+    (2, 'Question4'),
+    (2, 'Question5'),
+    (2, 'Question6'),
+    (2, 'Question7'),
+    (2, 'Question8'),
+    (2, 'Question9'),
+    (2, 'Question10'),
+    (2, 'Question11'),
+    (2, 'Question12'),
+    (2, 'Question13'),
+    (2, 'Question14'),
+    (2, 'Question15'),
+    (2, 'Question16'),
+    (2, 'Question17'),
+    (2, 'Question18'),
+    (2, 'Question19'),
+    (2, 'Question20'),
+    (3, 'Question1'),
+    (3, 'Question2'),
+    (3, 'Question3'),
+    (3, 'Question4'),
+    (3, 'Question5'),
+    (3, 'Question6'),
+    (3, 'Question7'),
+    (3, 'Question8'),
+    (3, 'Question9'),
+    (3, 'Question10'),
+    (3, 'Question11'),
+    (3, 'Question12'),
+    (3, 'Question13'),
+    (3, 'Question14'),
+    (3, 'Question15'),
+    (3, 'Question16'),
+    (3, 'Question17'),
+    (3, 'Question18'),
+    (3, 'Question19'),
+    (3, 'Question20'),
+    (4, 'Question1');

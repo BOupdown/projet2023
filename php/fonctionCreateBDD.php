@@ -258,8 +258,23 @@ function creerQuestionnaire($connexion, $nom, $descriptionQ, $idDataDefi)
     }
 }
 
+function creerRendu($connexion, $idGroupe, $idProjetData, $code)
+{
+    try {
+        // Préparer la requête pour l'insertion dans la table Rendu
+        $query = $connexion->prepare("INSERT INTO Rendu (idGroupe, idProjetData, code) VALUES (?, ?, ?)");
+        $query->bind_param("iis", $idGroupe, $idProjetData, $code);
 
+        if ($query->execute() === false) {
+            throw new Exception("Erreur lors de l'insertion dans la table Rendu : " . $connexion->error);
+        }
 
+        echo "Opérations effectuées avec succès !";
+
+    } catch (Exception $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+}
 
 
 
