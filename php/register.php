@@ -10,8 +10,13 @@
 
 <body>
     <?php
-    include 'navbar.php';
     session_start();
+    if (!empty($_SESSION['type']) && $_SESSION['type'] != 'Administrateur') {
+        header('Location: ../index.php');
+        exit();
+    }
+    require 'navbar.php';
+
     if (isset($_GET['errors'])) {
         $errors = explode(';', $_GET['errors']);
         if (in_array('no', $errors)) {
@@ -26,10 +31,21 @@
     } else {
         $errors = [];
     }
+
+    ?>
+
+    <?php
+    if (isset($_SESSION['type']) && $_SESSION['type'] == 'Administrateur') {
+        echo '<div class="typeB">
+            <a href="register.php" class="buttonB">Inscription étudiant</a>
+            <a href="inscriptionGestionnaire.php" class="buttonB">Inscription gestionnaire</a>
+            </div>';
+            
+    }
     ?>
     <div class="body">
         <div class="container">
-            <div class="title">S'inscrire</div>
+            <div class="title">Inscription</div>
             <div class="content">
                 <form id="form" action="process-register.php" method="post" target="_self">
                     <div class="user-details">
@@ -50,14 +66,14 @@
                         ?>
                         <div class="input-box">
                             <span class="details">Email</span>
-                            <input <?php if (in_array('email', $errors) ) { echo 'class="erreur"'; } ?>name="email" type="text" placeholder="Entrez votre email" value=<?php if (isset($_SESSION['email'])) { echo $_SESSION['email'];} ?>>
+                            <input <?php if (in_array('email', $errors) ) { echo 'class="erreur"'; } ?>name="email" type="mail" placeholder="Entrez votre email" value=<?php if (isset($_SESSION['email'])) { echo $_SESSION['email'];} ?>>
                         </div>
                         <?php
                         unset($_SESSION['email']);
                         ?>
                         <div class="input-box">
                             <span class="details">Numéro de téléphone</span>
-                            <input <?php if (in_array('telephone', $errors) ) { echo 'class="erreur"'; } ?> name="telephone" type="text" placeholder="Entrez votre numéro de téléphone" value=<?php if (isset($_SESSION['telephone'])) { echo $_SESSION['telephone'];} ?> >
+                            <input <?php if (in_array('telephone', $errors) ) { echo 'class="erreur"'; } ?> name="telephone" type="tel"  pattern="[0-9]{10}" placeholder="Entrez votre numéro de téléphone" value=<?php if (isset($_SESSION['telephone'])) { echo $_SESSION['telephone'];} ?> >
                         </div>
                         <?php
                         unset($_SESSION['telephone']);
@@ -88,13 +104,13 @@
                         </div>
 
                     </div>
-                    <div class="gender-details">
-                        <input value="L1" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-1" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L1") {echo 'checked';} ?>>
-                        <input value="L2" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-2" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L2") {echo 'checked';} ?>>
-                        <input value="L3"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-3" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L3") {echo 'checked';} ?>>
-                        <input value="M1" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-4" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "M1") {echo 'checked';} ?>>
-                        <input value="M2"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-5" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "M2") {echo 'checked';} ?>>
-                        <input value="D"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-6" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "D") {echo 'checked';} ?>>
+                    <div class="niveau-details">
+                        <input name = "rd"value="L1" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-1" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L1") {echo 'checked';} ?>>
+                        <input name = "rd"value="L2" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-2" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L2") {echo 'checked';} ?>>
+                        <input name = "rd" value="L3"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-3" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "L3") {echo 'checked';} ?>>
+                        <input name = "rd"value="M1" <?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-4" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "M1") {echo 'checked';} ?>>
+                        <input name = "rd"value="M2"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?> type="radio" name="niveau" id="dot-5" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "M2") {echo 'checked';} ?>>
+                        <input name = "rd"value="D"<?php if (in_array('niveau', $errors)) { echo 'class="error"';} ?>  type="radio" name="niveau" id="dot-6" <?php if (isset($_SESSION['niveau']) && $_SESSION['niveau'] == "D") {echo 'checked';} ?>>
 
 
                         <span class="niveau-title">Année d'étude</span>

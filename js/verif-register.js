@@ -29,8 +29,16 @@ formulaire.addEventListener('submit', (event) => {
 
 // Ajouter un gestionnaire d'événements pour supprimer la classe "erreur" lors de la saisie de l'utilisateur
 formulaire.addEventListener('click', (event) => {
-    if (event.target) {
-        event.target.classList.remove('erreur');
+
+    if (event.target.type === 'radio' && event.target.name === 'rd') {
+        const radioSelected = [...document.querySelectorAll('input[type="radio"][name="rd"]')].some((radio) => radio.checked);
+        if (radioSelected) {
+            formulaire.querySelector('.category').classList.remove('erreurRadio');
+        }
+
+    } else {
+        if (event.target) {
+            event.target.classList.remove('erreur');
+        }
     }
-    
 });

@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'fonctionCreateBDD.php';
-require 'fonctionGetBDD.php';
+require_once 'fonctionGetBDD.php';
+require_once 'fonctionCreateBDD.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = 0;
@@ -35,7 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id = $reponse['idLogin'];
             $_SESSION['id'] = $id;
             $_SESSION['type'] = $reponse['type'];
-            header('Location: connexion.php?errors=no');
+            $_SESSION['login'] = $login;
+            header('Location: ../index.php');
             exit;
 
         } else {

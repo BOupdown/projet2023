@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'fonctionCreateBDD.php';
-require 'fonctionGetBDD.php';
+require_once 'fonctionGetBDD.php';
+require_once 'fonctionCreateBDD.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = 0;
@@ -11,8 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = htmlspecialchars($_POST['email']);
     $login = htmlspecialchars($_POST['login']);
     $telephone = htmlspecialchars($_POST['telephone']);
-    $mdp = sha1($_POST['mdp']);
-    $cmdp = sha1($_POST['cmdp']);
     $ecole = htmlspecialchars($_POST['ecole']);
     $niveau = htmlspecialchars($_POST['niveau']);
 
@@ -62,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errs .= "email;";
     }
 
-    if (empty($telephone)) {
+    if (empty($telephone) || !is_numeric($telephone) || strlen($telephone) != 10) {
         $errors += 1;
         $errs .= "telephone;";
     }

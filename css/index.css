@@ -6,11 +6,11 @@ body {
 
 #DataDefiTitle {
     position: absolute;
-    top: 35%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: bisque;
-    font-size: 5vw;
+    font-size: 7vw;
     font-weight: bold;
     text-align: center;
 }

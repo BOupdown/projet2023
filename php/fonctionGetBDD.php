@@ -5,7 +5,7 @@ function getEtudiantParId($connexion, $idEtudiant)
 {
     $query = "SELECT idLogin, nom, prenom, niveauEtude, telephone, mail FROM Etudiant WHERE idLogin = ?";
 
-    $idLogin = $nom = $prenom = $niveauEtude = $telephone = $mail = null;
+    $nom = $prenom = $niveauEtude = $telephone = $mail = null;
 
     try {
         // Préparation de la requête
@@ -193,7 +193,8 @@ function getUtilisateurParId($connexion, $idUtilisateur)
     }
 }
 // Retourne les informations d'un utilisateur à partir de son login et de son mot de passe
-function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp) {
+function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp)
+{
     $query = "SELECT idLogin, nomUtilisateur, mdp, type
               FROM Login
               WHERE nomUtilisateur = ? AND mdp = ?";
@@ -239,11 +240,11 @@ function getUtilisateurParCredentials($connexion, $nomUtilisateur, $mdp) {
 // Retourne un tableau php contenant les informations d'un dataChallenge ayant pour id $idDatachallenge
 function getDataDefiParId($connexion, $idDataDefi)
 {
-    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, descriptionD, dateDebut, dateFin
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin,descriptionD
               FROM DataDefi
               WHERE idDataDefi = ?";
 
-    $idDataDefi = $idGestionnaire = $typeD = $nombreSujet = $nombreQuestionnaire = $nom = $descriptionD = $dateDebut = $dateFin = null;
+    $idGestionnaire = $typeD = $nombreSujet = $nombreQuestionnaire = $nom = $dateDebut = $dateFin = null;
 
     try {
         // Préparation de la requête
@@ -256,7 +257,7 @@ function getDataDefiParId($connexion, $idDataDefi)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $descriptionD, $dateDebut, $dateFin);
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin, $descriptionD);
 
         // Récupération des données
         $stmt->fetch();
@@ -269,9 +270,9 @@ function getDataDefiParId($connexion, $idDataDefi)
             "nombreSujet" => $nombreSujet,
             "nombreQuestionnaire" => $nombreQuestionnaire,
             "nom" => $nom,
-            "descriptionD" => $descriptionD,
             "dateDebut" => $dateDebut,
-            "dateFin" => $dateFin
+            "dateFin" => $dateFin,
+            "descriptionD" => $descriptionD
         );
 
         // Fermeture du statement
@@ -289,11 +290,11 @@ function getDataDefiParId($connexion, $idDataDefi)
 
 function getGroupeParId($connexion, $idGroupe)
 {
-    $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom
+    $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom,rendu
               FROM Groupe
               WHERE idGroupe = ?";
 
-    $idGroupe = $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom = null;
+    $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom =$rendu = null;
 
     try {
         // Préparation de la requête
@@ -306,7 +307,7 @@ function getGroupeParId($connexion, $idGroupe)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des vpodiumariables
-        $stmt->bind_result($idGroupe, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom);
+        $stmt->bind_result($idGroupe, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom,$rendu);
 
         // Récupération des données
         $stmt->fetch();
@@ -324,7 +325,8 @@ function getGroupeParId($connexion, $idGroupe)
             "idEtudiant6" => $idEtudiant6,
             "idEtudiant7" => $idEtudiant7,
             "idEtudiant8" => $idEtudiant8,
-            "nom" => $nom
+            "nom" => $nom,
+            "rendu" => $rendu
         );
 
         // Fermeture du statement
@@ -339,38 +341,39 @@ function getGroupeParId($connexion, $idGroupe)
     }
 }
 
-// Retourne un tableau php contenant les informations du projet data ayant pour id $idProjetData
-function getProjetDataParId($connexion, $idProjetData)
+// Retourne un tableau php contenant les informations du projet data ayant pour id $idSujet
+function getProjetDataParId($connexion, $idSujet)
 {
-    $query = "SELECT idProjetData, idDataChallenge, idGroupe, descriptionP, imageP
+    $query = "SELECT idSujet, nom, descriptionS, idDataDefi, image, ressources
               FROM ProjetData
-              WHERE idProjetData = ?";
+              WHERE idSujet = ?";
 
-    $idProjetData = $idDataChallenge = $idGroupe = $descriptionP = $imageP = null;
+    $nom = $descriptionS = $idDataDefi = $image = $ressources = null;
 
     try {
         // Préparation de la requêtepodium
         $stmt = $connexion->prepare($query);
 
         // Liaison du paramètre avec la variable $idProjetData
-        $stmt->bind_param("i", $idProjetData);
+        $stmt->bind_param("i", $idSujet);
 
         // Exécution de la requête
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idProjetData, $idDataChallenge, $idGroupe, $descriptionP, $imageP);
+        $stmt->bind_result($nom, $descriptionS, $idDataDefi, $image, $ressources);
 
         // Récupération des données
         $stmt->fetch();
 
         // Création d'un tableau associatif avec les résultats
         $projetData = array(
-            "idProjetData" => $idProjetData,
-            "idDataChallenge" => $idDataChallenge,
-            "idGroupe" => $idGroupe,
-            "descriptionP" => $descriptionP,
-            "imageP" => $imageP
+            "idSujet" => $idSujet,
+            "nom" => $nom,
+            "descriptionS" => $descriptionS,
+            "idDataDefi" => $idDataDefi,
+            "image" => $image,
+            "ressources" => $ressources
         );
 
         // Fermeture du statement
@@ -393,6 +396,10 @@ function getPodiumParId($connexion, $idDataBattle)
               WHERE idDataBattle = ?";
 
     $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = null;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
     try {
         // Préparation de la requête
         $stmt = $connexion->prepare($query);
@@ -433,11 +440,11 @@ function getPodiumParId($connexion, $idDataBattle)
 // Retourne les différents groupes d'un étudiants et leurs informations
 function getGroupesParIdEtudiant($connexion, $idEtudiant)
 {
-    $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom
+    $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom,rendu
               FROM Groupe
               WHERE idEtudiant1 = ? OR idEtudiant2 = ? OR idEtudiant3 = ? OR idEtudiant4 = ? OR idEtudiant5 = ? OR idEtudiant6 = ? OR idEtudiant7 = ? OR idEtudiant8 = ?";
 
-    $idGroupe = $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom = null;
+    $idGroupe = $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom =$rendu= null;
 
     try {
         // Préparation de la requête
@@ -450,7 +457,7 @@ function getGroupesParIdEtudiant($connexion, $idEtudiant)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idGroupe, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom);
+        $stmt->bind_result($idGroupe, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom,$rendu);
 
         // Création d'un tableau pour stocker les groupes
         $groupes = array();
@@ -470,7 +477,8 @@ function getGroupesParIdEtudiant($connexion, $idEtudiant)
                 "idEtudiant6" => $idEtudiant6,
                 "idEtudiant7" => $idEtudiant7,
                 "idEtudiant8" => $idEtudiant8,
-                "nom" => $nom
+                "nom" => $nom,
+                "rendu" => $rendu
             );
 
             // Ajout du groupe au tableau des groupes
@@ -519,7 +527,8 @@ function getEmailsEtudiantsParIdGroupe($connexion, $idGroupe)
 }
 
 
-function getUtilisateurParLogin($connexion, $login) {
+function getUtilisateurParLogin($connexion, $login)
+{
     $query = "SELECT idLogin, nomUtilisateur, mdp, type
               FROM Login
               WHERE nomUtilisateur = ?";
@@ -566,6 +575,176 @@ function getUtilisateurParLogin($connexion, $login) {
     }
 }
 
+<<<<<<< HEAD
+// Retourne un tableau php contenant tous les id des datas battle
+function getAllIdDataBattle($connexion)
+{
+    $query = "SELECT idDataBattle FROM Podium";
+
+    $idDataBattle = null;
+=======
+function getAllDataDefi($connexion)
+{
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin FROM DataDefi";
+>>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+<<<<<<< HEAD
+        // Liaison du paramètre avec la variable $idDapodiumtaBattle
+        $stmt->bind_param("i", $idDataBattle);
+
+=======
+>>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+<<<<<<< HEAD
+        $stmt->bind_result($idDataBattle);
+
+        $ids = array();
+        // Récupération des données
+        while ($stmt->fetch())
+        {
+            $ids[] = $idDataBattle;
+=======
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
+
+        // Tableau pour stocker les données des défis
+        $tableDataDefi = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $dataDefi = array(
+                "idDataDefi" => $idDataDefi,
+                "idGestionnaire" => $idGestionnaire,
+                "typeD" => $typeD,
+                "nombreSujet" => $nombreSujet,
+                "nombreQuestionnaire" => $nombreQuestionnaire,
+                "nom" => $nom,
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin
+            );
+
+            // Ajouter le tableau associatif au tableau des défis
+            $tableDataDefi[] = $dataDefi;
+>>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+<<<<<<< HEAD
+        // Retourne les informations du podium
+        return $ids;
+
+=======
+        // Retourne le tableau des défis
+        return $tableDataDefi;
+>>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
+function getAllProjetData($connexion)
+{
+    $query = "SELECT idSujet, nom, descriptionS, idDataDefi,image,ressources FROM ProjetData";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idSujet, $nom, $descriptionS, $idDataDefi, $image, $ressources);
+
+        // Tableau pour stocker les données des défis
+        $tableDataDefi = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $sujet = array(
+                "idSujet" => $idSujet,
+                "nom" => $nom,
+                "descriptionS" => $descriptionS,
+                "idDataDefi" => $idDataDefi,
+                "image" => $image,
+                "ressources" => $ressources
+
+            );
+
+            // Ajouter le tableau associatif au tableau des défis
+            $tableDataDefi[] = $sujet;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des défis
+        return $tableDataDefi;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
+function getAllQuestionnaire($connexion)
+{
+    $query = "SELECT idSujet, nom, descriptionQ, idDataDefi FROM Questionnaire";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idSujet, $nom, $descriptionQ, $idDataDefi);
+
+        // Tableau pour stocker les données des questionnaires
+        $tableauQuestionnaire = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $questionnaire = array(
+                "idSujet" => $idSujet,
+                "nom" => $nom,
+                "descriptionQ" => $descriptionQ,
+                "idDataDefi" => $idDataDefi,
+            );
+
+            // Ajouter le tableau associatif au tableau des questionnaires
+            $tableauQuestionnaire[] = $questionnaire;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des questionnaires
+        return $tableauQuestionnaire;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
 // Retourne un tableau php contenant tous les id des datas battle
 function getAllIdDataBattle($connexion)
 {
@@ -577,9 +756,6 @@ function getAllIdDataBattle($connexion)
         // Préparation de la requête
         $stmt = $connexion->prepare($query);
 
-        // Liaison du paramètre avec la variable $idDapodiumtaBattle
-        $stmt->bind_param("i", $idDataBattle);
-
         // Exécution de la requête
         $stmt->execute();
 
@@ -588,8 +764,7 @@ function getAllIdDataBattle($connexion)
 
         $ids = array();
         // Récupération des données
-        while ($stmt->fetch())
-        {
+        while ($stmt->fetch()) {
             $ids[] = $idDataBattle;
         }
 
@@ -606,5 +781,1233 @@ function getAllIdDataBattle($connexion)
     }
 }
 
+// retourne un tableau contenant tous les étudiants de la base de données
+function getAllEtudiant($connexion)
+{
+    $query = "SELECT idLogin, nom, prenom,niveauEtude,telephone,mail, ecole FROM Etudiant";
 
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idUtilisateur, $nom, $prenom, $niveauEtude, $telephone, $mail, $ecole);
+
+        // Tableau pour stocker les données des utilisateurs
+        $utilisateurs = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $utilisateur = array(
+                "idLogin" => $idUtilisateur,
+                "nom" => $nom,
+                "prenom" => $prenom,
+                "niveauEtude" => $niveauEtude,
+                "telephone" => $telephone,
+                "mail" => $mail,
+                "ecole" => $ecole,
+            );
+
+            // Ajouter le tableau associatif au tableau des utilisateurs
+            $utilisateurs[] = $utilisateur;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des utilisateurs
+        return $utilisateurs;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+// Retourne tous les gestionnaires de la base de données    
+function getAllGestionnaire($connexion)
+{
+    $query = "SELECT idLogin, nom, prenom,entreprise,telephone,mail,dateDebut,dateFin FROM Gestionnaire";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idUtilisateur, $nom, $prenom, $entreprise, $telephone, $mail, $dateDebut, $dateFin);
+
+        // Tableau pour stocker les données des utilisateurs
+        $utilisateurs = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $utilisateur = array(
+                "idLogin" => $idUtilisateur,
+                "nom" => $nom,
+                "prenom" => $prenom,
+                "entreprise" => $entreprise,
+                "telephone" => $telephone,
+                "mail" => $mail,
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin,
+            );
+
+            // Ajouter le tableau associatif au tableau des utilisateurs
+            $utilisateurs[] = $utilisateur;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des utilisateurs
+        return $utilisateurs;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+function getAllLoginsEtudiants($connexion)
+{
+    $query = "SELECT idLogin, nomUtilisateur, mdp, type
+              FROM Login
+              WHERE type = 'etudiant'";
+
+    $logins = array();
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+        $idLogin = $nomUtilisateur = $mdp = $type = null;
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idLogin, $nomUtilisateur, $mdp, $type);
+
+        // Parcours des résultats
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les informations du login
+            $login = array(
+                "idLogin" => $idLogin,
+                "nomUtilisateur" => $nomUtilisateur
+            );
+
+            // Ajout du tableau du login au tableau des logins
+            $logins[] = $login;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des logins des étudiants
+        return $logins;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
+function getDataDefiParNom($connexion, $nomDataDefi)
+{
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin
+              FROM DataDefi
+              WHERE nom = ?";
+
+    $idDataDefi = $idGestionnaire = $typeD = $nombreSujet = $nombreQuestionnaire = $dateDebut = $dateFin = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre avec la variable $nomDataDefi
+        $stmt->bind_param("s", $nomDataDefi);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
+
+        // Récupération des données
+        $stmt->fetch();
+
+        // Création d'un tableau associatif avec les résultats
+        $dataDefi = array(
+            "idDataDefi" => $idDataDefi,
+            "idGestionnaire" => $idGestionnaire,
+            "typeD" => $typeD,
+            "nombreSujet" => $nombreSujet,
+            "nombreQuestionnaire" => $nombreQuestionnaire,
+            "nom" => $nom,
+            "dateDebut" => $dateDebut,
+            "dateFin" => $dateFin
+        );
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations du DataDefi
+        return $dataDefi;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+function getAllDataChallenge($connexion)
+{
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin FROM DataDefi WHERE typeD = 'Challenge'";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
+
+        // Tableau pour stocker les données des défis
+        $tableDataDefi = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $dataDefi = array(
+                "idDataDefi" => $idDataDefi,
+                "idGestionnaire" => $idGestionnaire,
+                "typeD" => $typeD,
+                "nombreSujet" => $nombreSujet,
+                "nombreQuestionnaire" => $nombreQuestionnaire,
+                "nom" => $nom,
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin
+            );
+
+            // Ajouter le tableau associatif au tableau des défis
+            $tableDataDefi[] = $dataDefi;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des défis de type "challenge"
+        return $tableDataDefi;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+function getAllDataBattle($connexion)
+{
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin FROM DataDefi WHERE typeD = 'Battle'";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
+
+        // Tableau pour stocker les données des défis
+        $tableDataDefi = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $dataDefi = array(
+                "idDataDefi" => $idDataDefi,
+                "idGestionnaire" => $idGestionnaire,
+                "typeD" => $typeD,
+                "nombreSujet" => $nombreSujet,
+                "nombreQuestionnaire" => $nombreQuestionnaire,
+                "nom" => $nom,
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin
+            );
+
+            // Ajouter le tableau associatif au tableau des défis
+            $tableDataDefi[] = $dataDefi;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des défis de type "challenge"
+        return $tableDataDefi;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+function getAllLoginsGestionnaire($connexion)
+{
+    $query = "SELECT idLogin, nomUtilisateur, mdp, type
+              FROM Login
+              WHERE type = 'Gestionnaire'";
+
+    $logins = array();
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+        $idLogin = $nomUtilisateur = $mdp = $type = null;
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idLogin, $nomUtilisateur, $mdp, $type);
+
+        // Parcours des résultats
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les informations du login
+            $login = array(
+                "idLogin" => $idLogin,
+                "nomUtilisateur" => $nomUtilisateur
+            );
+
+            // Ajout du tableau du login au tableau des logins
+            $logins[] = $login;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des logins des étudiants
+        return $logins;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+function getAllProjetDataByIdDataDefi($connexion, $idDataDefi)
+{
+    $query = "SELECT idSujet, nom, descriptionS, idDataDefi, image, ressources FROM ProjetData WHERE idDataDefi = ?";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre
+        $stmt->bind_param("i", $idDataDefi);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idSujet, $nom, $descriptionS, $idDataDefi, $image, $ressources);
+
+        // Tableau pour stocker les données des sujets
+        $tableSujets = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $sujet = array(
+                "idSujet" => $idSujet,
+                "nom" => $nom,
+                "descriptionS" => $descriptionS,
+                "idDataDefi" => $idDataDefi,
+                "image" => $image,
+                "ressources" => $ressources
+            );
+
+            // Ajouter le tableau associatif au tableau des sujets
+            $tableSujets[] = $sujet;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des sujets
+        return $tableSujets;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+function getAllGroupe($connexion)
+{
+    $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom FROM Groupe";
+    $idGroupe = $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idGroupe, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom);
+
+        // Tableau pour stocker les données des défis
+        $groups = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Parcourir les enregistrements et récupérer les données
+            $groupe = array(
+                "idGroupe" => $idGroupe,
+                "idCapitaine" => $idCapitaine,
+                "idDataChallenge" => $idDataChallenge,
+                "idEtudiant1" => $idEtudiant1,
+                "idEtudiant2" => $idEtudiant2,
+                "idEtudiant3" => $idEtudiant3,
+                "idEtudiant4" => $idEtudiant4,
+                "idEtudiant5" => $idEtudiant5,
+                "idEtudiant6" => $idEtudiant6,
+                "idEtudiant7" => $idEtudiant7,
+                "idEtudiant8" => $idEtudiant8,
+                "nom" => $nom
+            );
+            $groups[] = $groupe;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des défis
+        return $groups;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+// Récupérer les données d'un défi par son idGestionnaire
+function getDataDefiParIdGestionnaire($connexion, $idGestionnaire)
+{
+    try {
+        // Préparer la requête pour récupérer les données de la table DataDefi
+        $stmt = $connexion->prepare("SELECT * FROM DataDefi WHERE idGestionnaire = ?");
+        $stmt->bind_param("i", $idGestionnaire);
+        if ($stmt->execute() === false) {
+            throw new Exception("Erreur lors de la récupération des données de la table DataDefi : " . $connexion->error);
+        }
+
+        // Récupérer les résultats de la requête
+        $result = $stmt->get_result();
+        $dataDefi = array();
+
+        // Parcourir les résultats et les stocker dans un tableau
+        while ($row = $result->fetch_assoc()) {
+            $dataDefi[] = $row;
+        }
+
+        // Retourner les données
+        return $dataDefi;
+
+    } catch (Exception $e) {
+        echo "Erreur : " . $e->getMessage();
+        return null;
+    }
+}
+
+// Récupérer les données d'un défi par son idDataDefi
+function getProjetDataParIdDataDefi($connexion, $idDataDefi)
+{
+    $query = "SELECT idSujet, nom, descriptionS, idDataDefi, image, ressources FROM ProjetData WHERE idDataDefi = ?";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre
+        $stmt->bind_param("i", $idDataDefi);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idSujet, $nom, $descriptionS, $idDataDefi, $image, $ressources);
+
+        // Tableau pour stocker les projets de données
+        $tableProjetData = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $projetData = array(
+                "idSujet" => $idSujet,
+                "nom" => $nom,
+                "descriptionS" => $descriptionS,
+                "idDataDefi" => $idDataDefi,
+                "image" => $image,
+                "ressources" => $ressources
+            );
+
+            // Ajouter le tableau associatif au tableau des projets de données
+            $tableProjetData[] = $projetData;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des projets de données
+        return $tableProjetData;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+function getDataFichierParIdProjetData($connexion, $idProjetData)
+{
+    $query = "SELECT idDataFichier, idProjetData, nbLignes, nbFonctions, tailleMinFonction, tailleMaxFonction, tailleMoyenneFonction FROM DataFichier WHERE idProjetData =?";
+    
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre avec la variable $idProjetData
+        $stmt->bind_param("i", $idProjetData);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataFichier, $idProjetData, $nbLignes, $nbFonctions, $tailleMinFonction, $tailleMaxFonction, $tailleMoyenneFonction);
+
+        // Tableau pour stocker les données des défis
+        $dataFichiers = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $dataFichier = array(
+                "idDataFichier" => $idDataFichier,
+                "idProjetData" => $idProjetData,
+                "nbLignes" => $nbLignes,
+                "nbFonctions" => $nbFonctions,
+                "tailleMinFonction" => $tailleMinFonction,
+                "tailleMaxFonction" => $tailleMaxFonction,
+                "tailleMoyenneFonction" => $tailleMoyenneFonction
+            );
+
+            // Ajouter le tableau associatif au tableau des défis
+            $dataFichiers[] = $dataFichier;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des défis de type "challenge"
+        return $dataFichiers;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+   }
+}
+
+function getGroupeParIdEtudiantEtDataDefi($connexion, $idEtudiant, $idDataDefi)
+{
+    $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom,rendu
+              FROM Groupe
+              WHERE (idEtudiant1 = ? OR idEtudiant2 = ? OR idEtudiant3 = ? OR idEtudiant4 = ? OR idEtudiant5 = ? OR idEtudiant6 = ? OR idEtudiant7 = ? OR idEtudiant8 = ?)
+              AND idDataChallenge = ?";
+
+    $idGroupe = $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom = $rendu= null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison des paramètres avec les variables correspondantes
+        $stmt->bind_param("iiiiiiiii", $idEtudiant, $idEtudiant, $idEtudiant, $idEtudiant, $idEtudiant, $idEtudiant, $idEtudiant, $idEtudiant,$idDataDefi);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idGroupe, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom, $rendu);
+
+        // Récupération des données
+        $stmt->fetch();
+
+        // Création d'un tableau associatif avec les résultats
+        $groupe = array(
+            "idGroupe" => $idGroupe,
+            "idCapitaine" => $idCapitaine,
+            "idDataChallenge" => $idDataChallenge,
+            "idEtudiant1" => $idEtudiant1,
+            "idEtudiant2" => $idEtudiant2,
+            "idEtudiant3" => $idEtudiant3,
+            "idEtudiant4" => $idEtudiant4,
+            "idEtudiant5" => $idEtudiant5,
+            "idEtudiant6" => $idEtudiant6,
+            "idEtudiant7" => $idEtudiant7,
+            "idEtudiant8" => $idEtudiant8,
+            "nom" => $nom,
+            "rendu" => $rendu
+        );
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations du groupe
+        return $groupe;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+function getProjetDataParNomEtDataDefi($connexion, $nom, $idDataDefi)
+{
+    $query = "SELECT idSujet, nom, descriptionS, idDataDefi,image,ressources
+              FROM ProjetData
+              WHERE nom = ?
+              AND idDataDefi = ?";
+
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison des paramètres avec les variables correspondantes
+        $stmt->bind_param("si", $nom, $idDataDefi);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idSujet, $nom, $descriptionS, $idDataDefi, $image, $ressources);
+
+        // Récupération des données
+        $stmt->fetch();
+
+        // Création d'un tableau associatif avec les résultats
+        $projetData = array(
+            "idSujet" => $idSujet,
+            "nom" => $nom,
+            "descriptionS" => $descriptionS,
+            "idDataDefi" => $idDataDefi,
+            "image" => $image,
+            "ressources" => $ressources
+        );
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations du projet de données
+        return $projetData;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+function getRenduParIdProjetDataEtIdGroupe($connexion, $idProjetData, $idGroupe)
+{
+    $query = "SELECT idRendu, idGroupe, idProjetData, code
+              FROM Rendu
+              WHERE idGroupe = ?
+              AND idProjetData = ?";
+
+    $idGroupeResult = $idProjetDataResult = $code = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison des paramètres avec les variables correspondantes
+        $stmt->bind_param("ii", $idGroupe, $idProjetData);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idRendu, $idGroupeResult, $idProjetDataResult, $code);
+
+        // Récupération des données
+        $stmt->fetch();
+
+        // Création d'un tableau associatif avec les résultats
+        $rendu = array(
+            "idGroupe" => $idGroupeResult,
+            "idProjetData" => $idProjetDataResult,
+            "code" => $code,
+            "idRendu" => $idRendu
+        );
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations du rendu
+        return $rendu;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
+// Récupère les questions d'un questionnaire
+function getQuestionsParIdDataDefiEtNumero($connexion, $id){
+    $query = "SELECT idQuestion, idQuestionnaire, question
+              FROM Question
+              WHERE idQuestionnaire = ?";
+
+    $idQuestion = $idQuestionnaire = $question = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison des paramètres avec les variables correspondantes
+        $stmt->bind_param("i", $id);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idQuestion, $idQuestionnaire, $question);
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats
+            $question = array(
+                "idQuestion" => $idQuestion,
+                "idQuestionnaire" => $idQuestionnaire,
+                "question" => $question
+            );
+
+            // Ajoute une question au tableau des résultats
+            $questions[] = $question;
+        }
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations de la question
+        return $questions;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+function getAllDataBattleByGestionnaire($connexion, $idGestionnaire)
+{
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin FROM DataDefi WHERE typeD = 'Battle' AND idGestionnaire = ?";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre gestionnaire à la requête
+        $stmt->bind_param("i", $idGestionnaire);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
+
+        // Tableau pour stocker les données des défis
+        $tableDataDefi = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $dataDefi = array(
+                "idDataDefi" => $idDataDefi,
+                "idGestionnaire" => $idGestionnaire,
+                "typeD" => $typeD,
+                "nombreSujet" => $nombreSujet,
+                "nombreQuestionnaire" => $nombreQuestionnaire,
+                "nom" => $nom,
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin
+            );
+
+            // Ajouter le tableau associatif au tableau des défis
+            $tableDataDefi[] = $dataDefi;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des défis de type "Battle" pour le gestionnaire donné
+        return $tableDataDefi;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+function getAllDataChallengeByGestionaire($connexion, $idGestionnaire)
+{
+    $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin FROM DataDefi WHERE typeD = 'Challenge' AND idGestionnaire = ?";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre gestionnaire à la requête
+        $stmt->bind_param("i", $idGestionnaire);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
+
+        // Tableau pour stocker les données des défis
+        $tableDataDefi = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $dataDefi = array(
+                "idDataDefi" => $idDataDefi,
+                "idGestionnaire" => $idGestionnaire,
+                "typeD" => $typeD,
+                "nombreSujet" => $nombreSujet,
+                "nombreQuestionnaire" => $nombreQuestionnaire,
+                "nom" => $nom,
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin
+            );
+
+            // Ajouter le tableau associatif au tableau des défis
+            $tableDataDefi[] = $dataDefi;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne le tableau des défis de type "Challenge" pour le gestionnaire donné
+        return $tableDataDefi;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+function getGroupesParIdDataDefi($connexion, $idDataDefi)
+{
+    $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom, rendu
+              FROM Groupe
+              WHERE idDataChallenge = ?";
+
+    $idGroupe = $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom = $rendu = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre idDataDefi à la requête
+        $stmt->bind_param("i", $idDataDefi);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idGroupe, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom, $rendu);
+
+        // Tableau pour stocker les groupes
+        $groupes = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $groupe = array(
+                "idGroupe" => $idGroupe,
+                "idCapitaine" => $idCapitaine,
+                "idDataChallenge" => $idDataChallenge,
+                "idEtudiant1" => $idEtudiant1,
+                "idEtudiant2" => $idEtudiant2,
+                "idEtudiant3" => $idEtudiant3,
+                "idEtudiant4" => $idEtudiant4,
+                "idEtudiant5" => $idEtudiant5,
+                "idEtudiant6" => $idEtudiant6,
+                "idEtudiant7" => $idEtudiant7,
+                "idEtudiant8" => $idEtudiant8,
+                "nom" => $nom,
+                "rendu" => $rendu
+            );
+
+            // Ajouter le tableau associatif au tableau des groupes
+            $groupes[] = $groupe;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations des groupes
+        return $groupes;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+function getRenduParIdDataDefi($connexion, $idDataDefi)
+{
+    $query = "SELECT idRendu, idGroupe, idProjetData, code
+              FROM Rendu
+              WHERE idProjetData IN (SELECT idSujet FROM ProjetData WHERE idDataDefi = ?)";
+
+    $idGroupeResult = $idProjetDataResult = $code = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre idDataDefi à la requête
+        $stmt->bind_param("i", $idDataDefi);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idRendu, $idGroupeResult, $idProjetDataResult, $code);
+
+        // Tableau pour stocker les rendus
+        $rendus = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $rendu = array(
+                "idGroupe" => $idGroupeResult,
+                "idProjetData" => $idProjetDataResult,
+                "code" => $code,
+                "idRendu" => $idRendu
+            );
+
+            // Ajouter le tableau associatif au tableau des rendus
+            $rendus[] = $rendu;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations des rendus
+        return $rendus;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
+
+function getAllIdGroupeAvecReponsesParIdDataDefi($connexion, $idDataDefi)
+{
+    $query = "SELECT DISTINCT idGroupe
+              FROM Reponses
+              WHERE idGroupe IN (SELECT idGroupe FROM Groupe WHERE idDataChallenge = ?)";
+
+    $idGroupeResult = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre idDataDefi à la requête
+        $stmt->bind_param("i", $idDataDefi);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idGroupeResult);
+
+        // Tableau pour stocker les idGroupe
+        $idGroupes = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $idGroupe = array(
+                "idGroupe" => $idGroupeResult,
+            );
+
+            // Ajouter le tableau associatif au tableau des idGroupe
+            $idGroupes[] = $idGroupe;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations des idGroupe
+        return $idGroupes;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+function  getAllReponseNonNoteParIdDataBattleEtIdGroupe($connexion, $idBattle, $idGroupe){
+    $query = "SELECT DISTINCT idReponse, idGroupe, idQuestion, reponse, note
+              FROM Reponses
+              WHERE idGroupe = ? AND idQuestion IN (SELECT idQuestion FROM Question WHERE idQuestionnaire IN (SELECT idQuestionnaire FROM Questionnaire WHERE idSujet IN (SELECT idSujet FROM ProjetData WHERE idDataDefi= ?))) AND note IS NULL";
+
+    $idGroupeResult = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre idDataDefi à la requête
+        $stmt->bind_param("ii", $idGroupe, $idBattle);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result( $idReponse,$idGroupeResult, $idQuestion, $reponse,$note);
+
+        // Tableau pour stocker les idGroupe
+        $idGroupes = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $idGroupe = array(
+                "idGroupe" => $idGroupeResult,
+                "idReponse" => $idReponse,
+                "idQuestion" => $idQuestion,
+                "reponse" => $reponse,
+                "note" => $note
+            );
+
+            // Ajouter le tableau associatif au tableau des idGroupe
+            $idGroupes[] = $idGroupe;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations des idGroupe
+        return $idGroupes;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+function getAllReponseParIdDatabattleEtIdGroupe($connexion, $idBattle, $idGroupe){
+    $query = "SELECT DISTINCT idReponse, idGroupe, idQuestion, reponse, note
+    FROM Reponses
+    WHERE idGroupe = ? AND idQuestion IN (SELECT idQuestion FROM Question WHERE idQuestionnaire IN (SELECT idQuestionnaire FROM Questionnaire WHERE idSujet IN (SELECT idSujet FROM ProjetData WHERE idDataDefi= ?)))";
+
+    $idGroupeResult = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre idDataDefi à la requête
+        $stmt->bind_param("ii", $idGroupe, $idBattle);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idGroupeResult, $idReponse, $idQuestion, $reponse, $note);
+
+        // Tableau pour stocker les idGroupe
+        $idGroupes = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $idGroupe = array(
+                "idGroupe" => $idGroupeResult,
+                "idReponse" => $idReponse,
+                "idQuestion" => $idQuestion,
+                "reponse" => $reponse,
+                "note" => $note
+            );
+
+            // Ajouter le tableau associatif au tableau des idGroupe
+            $idGroupes[] = $idGroupe;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations des idGroupe
+        return $idGroupes;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+function getQuestionParId($connexion,$idQuestion){
+    $query = "SELECT idQuestion, idQuestionnaire, question
+              FROM Question
+              WHERE idQuestion = ?";
+
+    $idQuestionResult = null;
+    $idQuestionnaireResult = null;
+    $questionResult = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre idQuestion à la requête
+        $stmt->bind_param("i", $idQuestion);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idQuestionResult, $idQuestionnaireResult, $questionResult);
+
+        // Création d'un tableau associatif avec les résultats de chaque enregistrement
+        $question = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            $question = array(
+                "idQuestion" => $idQuestionResult,
+                "idQuestionnaire" => $idQuestionnaireResult,
+                "question" => $questionResult
+            );
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations de la question
+        return $question;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
+function getAllRenduParIdEtudiant($connexion,$id){
+    $query = "SELECT DISTINCT idRendu, idGroupe, idProjetData, code
+              FROM Rendu
+              WHERE idGroupe IN (SELECT idGroupe FROM Groupe WHERE idEtudiant1 = ? OR idEtudiant2 = ? OR idEtudiant3 = ? OR idEtudiant4 = ? OR idEtudiant5 = ? OR idEtudiant6 = ? OR idEtudiant7 = ? OR idEtudiant8 = ?)";
+
+    $idRenduResult = null;
+    $idGroupeResult = null;
+    $idProjetDataResult = null;
+    $codeResult = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre id à la requête
+        $stmt->bind_param("iiiiiiii", $id, $id, $id, $id, $id, $id, $id, $id);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idRenduResult, $idGroupeResult, $idProjetDataResult, $codeResult);
+
+        // Tableau pour stocker les idRendu
+        $idRendus = array();
+
+        // Parcourir les enregistrements et récupérer les données
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats de chaque enregistrement
+            $idRendu = array(
+                "idRendu" => $idRenduResult,
+                "idGroupe" => $idGroupeResult,
+                "idProjetData" => $idProjetDataResult,
+                "code" => $codeResult
+            );
+
+            // Ajouter le tableau associatif au tableau des idRendu
+            $idRendus[] = $idRendu;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations des idRendu
+        return $idRendus;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+}
+}
+
+// Récupère les questions d'un questionnaire
+function getQuestionsParIdDataDefiEtNumero($connexion, $id){
+    $query = "SELECT idQuestion, idQuestionnaire, question
+              FROM Question
+              WHERE idQuestionnaire = ?";
+
+    $idQuestion = $idQuestionnaire = $question = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison des paramètres avec les variables correspondantes
+        $stmt->bind_param("i", $id);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idQuestion, $idQuestionnaire, $question);
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats
+            $question = array(
+                "idQuestion" => $idQuestion,
+                "idQuestionnaire" => $idQuestionnaire,
+                "question" => $question
+            );
+
+            // Ajoute une question au tableau des résultats
+            $questions[] = $question;
+        }
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations de la question
+        return $questions;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
 ?>

@@ -1,0 +1,123 @@
+.fond {
+    margin: 0;
+    padding: 0;
+    display:grid;
+    margin-top: 1em ;
+    margin-left: auto;
+    margin-right: auto; 
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #172A3A   ;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom:2em ;
+    border-radius: 20px;
+    color: bisque;
+
+}
+
+.titre {
+    margin-top: 1.6em;
+    text-align: center;
+    font-size: 100px;
+    color: bisque;
+}   
+
+body {
+    background-image: url(../images/image.jpg);
+    background-repeat: repeat;
+    background-size: contain;
+}
+
+.content form .user-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+    text-align: center;
+    padding-top: 2em;
+}
+
+form .user-details .input-box {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+form .input-box span.details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.user-details .input-box input {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.user-details .input-box input:focus {
+    border-color: #172A3A;
+}
+
+form .niveau-details .niveau-title {
+    font-size: 20px;
+    font-weight: 500;
+}
+form .button {
+    height: 45px;
+    margin: 35px 0
+}
+
+form .button input {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #1ECECC, #29BABB);
+}
+
+form .button input:hover {
+    /* transform: scale(0.99); */
+    background: linear-gradient(-135deg, #1ECECC, #29BABB);
+}
+
+textarea {
+    resize: vertical;
+    width: 30em;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    height: 5em;
+}
+
+.list-group{
+    position: absolute;
+    color: #172A3A;
+    width: 35em;
+    height: 50px; /* Définissez ici la taille fixe souhaitée */
+    overflow: scroll;
+    z-index: 9999; /* Pour s'assurer que la div se superpose aux autres contenus */
+    background-color: rgb(255, 255, 255);
+    opacity: 1; /* Définissez ici l'opacité souhaitée pour la div de suggestions */
+    display: none;
+    border : 1px solid #172A3A;
+    border-radius: 5px;
+}

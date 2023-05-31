@@ -52,25 +52,38 @@ CREATE TABLE DataDefi(
     nom TEXT,
     dateDebut DATE DEFAULT (CURRENT_DATE),
     dateFIN DATE,
+    descriptionD TEXT,
+    
     FOREIGN KEY (idGestionnaire) REFERENCES Gestionnaire (idLogin) ON DELETE SET NULL
 );
 
-CREATE TABLE Sujet(
+CREATE TABLE ProjetData(
     idSujet INTEGER PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(50),
     descriptionS TEXT,
     idDataDefi INTEGER,
+    image TEXT,
+    ressources TEXT,
     FOREIGN KEY (idDataDefi) REFERENCES DataDefi (idDataDefi) ON DELETE CASCADE
 );
 
 
 CREATE TABLE Questionnaire(
-    idSujet INTEGER PRIMARY KEY AUTO_INCREMENT,
+    idQuestionnaire INTEGER PRIMARY KEY AUTO_INCREMENT,
+    numero INTEGER,
+    idSujet INTEGER,
     nom VARCHAR(50),
     descriptionQ TEXT,
-    idDataDefi INTEGER,
-    FOREIGN KEY (idDataDefi) REFERENCES DataDefi (idDataDefi) ON DELETE CASCADE
+    FOREIGN KEY (idSujet) REFERENCES ProjetData (idSujet) ON DELETE CASCADE
 );
+
+CREATE TABLE Question(
+  idQuestion INTEGER PRIMARY KEY AUTO_INCREMENT,
+  idQuestionnaire INTEGER,
+  question TEXT,
+  FOREIGN KEY (idQuestionnaire) REFERENCES Questionnaire (idQuestionnaire) ON DELETE CASCADE
+);
+
 
 
 CREATE TABLE Groupe(
@@ -86,6 +99,7 @@ CREATE TABLE Groupe(
     idEtudiant7 INTEGER,
     idEtudiant8 INTEGER,
     nom VARCHAR(100),
+    rendu BOOLEAN DEFAULT 0,
     FOREIGN KEY (idCapitaine) REFERENCES Etudiant (idLogin) ON DELETE SET NULL,
     FOREIGN KEY (idDataChallenge) REFERENCES DataDefi (idDataDefi) ON DELETE CASCADE,
     FOREIGN KEY (idEtudiant1) REFERENCES Etudiant (idLogin) ON DELETE SET NULL,
@@ -98,16 +112,15 @@ CREATE TABLE Groupe(
     FOREIGN KEY (idEtudiant8) REFERENCES Etudiant (idLogin) ON DELETE SET NULL
 );
 
-
-CREATE TABLE ProjetData(
-    idProjetData INTEGER PRIMARY KEY AUTO_INCREMENT,
-    idDataChallenge INTEGER,
+CREATE TABLE Reponses(
+    idReponse INTEGER PRIMARY KEY AUTO_INCREMENT,
     idGroupe INTEGER,
-    descriptionP TEXT,
-    imageP TEXT,
-    FOREIGN KEY (idDataChallenge) REFERENCES DataDefi (idDataDefi) ON DELETE CASCADE,
-    FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe)ON DELETE CASCADE
-);
+    idQuestion INTEGER,
+    reponse TEXT,
+    note INTEGER,
+    FOREIGN KEY (idQuestion) REFERENCES Question (idQuestion) ON DELETE CASCADE,
+    FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe) ON DELETE CASCADE
+);  
 
 
 CREATE TABLE Podium(
@@ -124,12 +137,42 @@ CREATE TABLE Podium(
 
 CREATE TABLE Message(
     idMessage INTEGER PRIMARY KEY AUTO_INCREMENT,
-    idExpediteur INTEGER,
+    idExpediteur INTEGER ,
     idDestinataire INTEGER,
     dateHeure DATETIME DEFAULT NOW(),
+    objet VARCHAR(128),
     contenu TEXT,
-    lu BOOLEAN DEFAULT 0,
-    FOREIGN KEY (idExpediteur) REFERENCES Login (idLogin),
-    FOREIGN KEY (idDestinataire) REFERENCES Login (idLogin)
+    FOREIGN KEY (idExpediteur) REFERENCES Login (idLogin) ON DELETE SET NULL,
+    FOREIGN KEY (idDestinataire) REFERENCES Login (idLogin) ON DELETE SET NULL
 );
 
+
+CREATE TABLE MessageGroupe(
+    idMessage INTEGER PRIMARY KEY,
+    idDestinataire INTEGER,
+    FOREIGN KEY (idMessage) REFERENCES Message (idMessage) ON DELETE CASCADE,
+    FOREIGN KEY (idDestinataire) REFERENCES Groupe (idGroupe) ON DELETE SET NULL
+);
+
+CREATE TABLE DataFichier(
+    idDataFichier INTEGER PRIMARY KEY AUTO_INCREMENT,
+    idGroupe INTEGER,
+    idProjetData INTEGER,
+    nomFichier TEXT,
+    nbLignes INTEGER,
+    nbFonctions INTEGER,
+    tailleMinFonction INTEGER,
+    tailleMaxFonction INTEGER,
+    tailleMoyenneFonction INTEGER,
+    FOREIGN KEY (idProjetData) REFERENCES ProjetData (idSujet) ON DELETE CASCADE,
+    FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe) ON DELETE CASCADE
+);
+
+CREATE TABLE Rendu(
+    idRendu INTEGER PRIMARY KEY AUTO_INCREMENT,
+    idGroupe INTEGER,
+    idProjetData INTEGER,
+    code TEXT,
+    FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe) ON DELETE CASCADE,
+    FOREIGN KEY (idProjetData) REFERENCES ProjetData (idSujet) ON DELETE CASCADE
+);

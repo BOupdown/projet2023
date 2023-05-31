@@ -1,5 +1,4 @@
 const formulaire = document.getElementById('form');
-const messageErreurRadio = document.querySelector('.messageErreurRadio');
 
 
 formulaire.addEventListener('submit', (event) => {
