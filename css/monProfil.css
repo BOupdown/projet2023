@@ -101,3 +101,18 @@ h2 {
   color: red;
 }
 
+.table3 {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.table3 th,
+.table3 td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.table3 th {
+  background-color: #f2f2f2;
+}
