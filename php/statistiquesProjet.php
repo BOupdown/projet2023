@@ -25,7 +25,6 @@
 
     $connexion = connect($usernamedb,$passworddb,$dbname);
     $listeFichiers = getDataFichierParIdProjetData($connexion, $idProjet);
-    var_dump($listeFichiers);
     
     disconnect($connexion);
     $nbFichiers = count($listeFichiers);
