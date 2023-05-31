@@ -40,6 +40,10 @@ require_once 'fonctionCreateBDD.php';
             header('Location: ../php/mesEquipes.php?erreur=capitaine');
             exit();
         }
+        if($groupe['rendu'] == 1){
+            header('Location: ../php/mesEquipes.php?erreur=rendu');
+            exit();
+        }
 
         $connexion = connect($usernamedb, $passworddb, $dbname);
         $data = getDataDefiParId($connexion, $id);
@@ -49,13 +53,7 @@ require_once 'fonctionCreateBDD.php';
             header('Location: ../php/mesEquipes.php');
             exit();
         }
-        $connexion = connect($usernamedb, $passworddb, $dbname);
-        $rendu = getRenduParIdProjetDataEtIdGroupe($connexion, $id, $groupe['idGroupe']);
-        disconnect($connexion);
-        if ($rendu['idRendu'] != null) {
-            header('Location: ../php/mesEquipes.php?erreur=rendu');
-            exit();
-        }
+
         if($data['dateFin'] < date("Y-m-d H:i:s")){
             header('Location: ../php/mesEquipes.php?erreur=fini');
             exit();
@@ -78,18 +76,23 @@ require_once 'fonctionCreateBDD.php';
         echo '<div class="content">';
 
         echo '<form class ="form" action="process-renduBattle.php" method="post" target="_self">';
+        echo '<input name="idDataDefi" type="hidden" value=' . $id . '>';
+        echo '<input name="idGroupe" type="hidden" value=' . $groupe['idGroupe'] . '>';
+        $i = 0;
         foreach ($questions as $question) {
+            $i++;
             echo '<div class="user-details">';
             echo '<div class="input-box">';
             echo '<span class="details">' . $question['question'] . '</span>';
             echo '<input name="idQuestion" type="hidden" value=' . $question['idQuestion'] . '>';
-            echo '<textarea name="answer"  placeholder="Entrez votre réponse">';
+            echo '<textarea name="reponse-'.$i.'"  placeholder="Entrez votre réponse">';
             echo '</textarea>';
             echo '</div>';
             echo '</div>';
 
 
         }
+        echo '<input type="hidden" name="compteur" value=' . $i . '>';
         echo '<div class="button">';
         echo '<input type="submit" value="Valider">';
         echo '</form>';

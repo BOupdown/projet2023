@@ -42,6 +42,11 @@ require_once 'fonctionCreateBDD.php';
             exit();
         }
 
+        if($groupe['rendu']==1){
+            header('Location: ../php/mesEquipes.php?erreur=rendu');
+            exit();
+        }
+
         $connexion = connect($usernamedb, $passworddb, $dbname);
         $data = getDataDefiParId($connexion, $id);
         disconnect($connexion);
@@ -50,13 +55,7 @@ require_once 'fonctionCreateBDD.php';
             header('Location: ../php/mesEquipes.php');
             exit();
         }
-        $connexion = connect($usernamedb, $passworddb, $dbname);
-        $rendu = getRenduParIdProjetDataEtIdGroupe($connexion, $id, $groupe['idGroupe']);
-        disconnect($connexion);
-        if ($rendu['idRendu'] != null) {
-            header('Location: ../php/mesEquipes.php?erreur=rendu');
-            exit();
-        }
+        
         if($data['dateFin'] < date("Y-m-d H:i:s")){
             header('Location: ../php/mesEquipes.php?erreur=fini');
             exit();
@@ -94,7 +93,7 @@ require_once 'fonctionCreateBDD.php';
                         <input name="code" type="text" placeholder="Entrez votre code">
                     </div>
                     <div class="input-box">
-                        <input name="nom" id="groupe" type="hidden" placeholder="idEquipe" value=<?php echo $groupe['idGroupe'] ?>>
+                        <input name="groupe" id="groupe" type="hidden" placeholder="idEquipe" value=<?php echo $groupe['idGroupe'] ?>>
                     </div>
                     <div class="input-box">
                         <input name="idDataDefi" id="data" type="hidden" placeholder="idDataDefi" value=<?php echo $id ?>>
@@ -136,6 +135,11 @@ require_once 'fonctionCreateBDD.php';
                 $("#show-list").html("");
             }
         });
+            // Set searched text in input field on click of search button
+            $(document).on("click", "p", function () {
+            $("#projet").val($(this).text());
+            $("#show-list").html("");
+        }); 
 
     });
 

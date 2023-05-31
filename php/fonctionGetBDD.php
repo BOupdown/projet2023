@@ -290,11 +290,11 @@ function getDataDefiParId($connexion, $idDataDefi)
 
 function getGroupeParId($connexion, $idGroupe)
 {
-    $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom
+    $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom,rendu
               FROM Groupe
               WHERE idGroupe = ?";
 
-    $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom = null;
+    $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom =$rendu = null;
 
     try {
         // Préparation de la requête
@@ -307,7 +307,7 @@ function getGroupeParId($connexion, $idGroupe)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des vpodiumariables
-        $stmt->bind_result($idGroupe, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom);
+        $stmt->bind_result($idGroupe, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom,$rendu);
 
         // Récupération des données
         $stmt->fetch();
@@ -325,7 +325,8 @@ function getGroupeParId($connexion, $idGroupe)
             "idEtudiant6" => $idEtudiant6,
             "idEtudiant7" => $idEtudiant7,
             "idEtudiant8" => $idEtudiant8,
-            "nom" => $nom
+            "nom" => $nom,
+            "rendu" => $rendu
         );
 
         // Fermeture du statement
@@ -433,11 +434,11 @@ function getPodiumParId($connexion, $idDataBattle)
 // Retourne les différents groupes d'un étudiants et leurs informations
 function getGroupesParIdEtudiant($connexion, $idEtudiant)
 {
-    $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom
+    $query = "SELECT idGroupe, idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, idEtudiant4, idEtudiant5, idEtudiant6, idEtudiant7, idEtudiant8, nom,rendu
               FROM Groupe
               WHERE idEtudiant1 = ? OR idEtudiant2 = ? OR idEtudiant3 = ? OR idEtudiant4 = ? OR idEtudiant5 = ? OR idEtudiant6 = ? OR idEtudiant7 = ? OR idEtudiant8 = ?";
 
-    $idGroupe = $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom = null;
+    $idGroupe = $idCapitaine = $idDataChallenge = $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = $idEtudiant4 = $idEtudiant5 = $idEtudiant6 = $idEtudiant7 = $idEtudiant8 = $nom =$rendu= null;
 
     try {
         // Préparation de la requête
@@ -450,7 +451,7 @@ function getGroupesParIdEtudiant($connexion, $idEtudiant)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idGroupe, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom);
+        $stmt->bind_result($idGroupe, $idCapitaine, $idDataChallenge, $idEtudiant1, $idEtudiant2, $idEtudiant3, $idEtudiant4, $idEtudiant5, $idEtudiant6, $idEtudiant7, $idEtudiant8, $nom,$rendu);
 
         // Création d'un tableau pour stocker les groupes
         $groupes = array();
@@ -470,7 +471,8 @@ function getGroupesParIdEtudiant($connexion, $idEtudiant)
                 "idEtudiant6" => $idEtudiant6,
                 "idEtudiant7" => $idEtudiant7,
                 "idEtudiant8" => $idEtudiant8,
-                "nom" => $nom
+                "nom" => $nom,
+                "rendu" => $rendu
             );
 
             // Ajout du groupe au tableau des groupes
@@ -1343,12 +1345,11 @@ function getGroupeParIdEtudiantEtDataDefi($connexion, $idEtudiant, $idDataDefi)
 }
 function getProjetDataParNomEtDataDefi($connexion, $nom, $idDataDefi)
 {
-    $query = "SELECT idProjetData, idDataChallenge, idGroupe, descriptionP, imageP
+    $query = "SELECT idSujet, nom, descriptionS, idDataDefi,image,ressources
               FROM ProjetData
-              WHERE descriptionP = ?
-              AND idDataChallenge = ?";
+              WHERE nom = ?
+              AND idDataDefi = ?";
 
-    $idProjetData = $idDataChallenge = $idGroupe = $descriptionP = $imageP = null;
 
     try {
         // Préparation de la requête
@@ -1361,18 +1362,19 @@ function getProjetDataParNomEtDataDefi($connexion, $nom, $idDataDefi)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idProjetData, $idDataChallenge, $idGroupe, $descriptionP, $imageP);
+        $stmt->bind_result($idSujet, $nom, $descriptionS, $idDataDefi, $image, $ressources);
 
         // Récupération des données
         $stmt->fetch();
 
         // Création d'un tableau associatif avec les résultats
         $projetData = array(
-            "idProjetData" => $idProjetData,
-            "idDataChallenge" => $idDataChallenge,
-            "idGroupe" => $idGroupe,
-            "descriptionP" => $descriptionP,
-            "imageP" => $imageP
+            "idSujet" => $idSujet,
+            "nom" => $nom,
+            "descriptionS" => $descriptionS,
+            "idDataDefi" => $idDataDefi,
+            "image" => $image,
+            "ressources" => $ressources
         );
 
         // Fermeture du statement

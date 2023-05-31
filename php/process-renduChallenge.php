@@ -2,16 +2,19 @@
 session_start();
 require 'fonctionCreateBDD.php';
 require 'fonctionGetBDD.php';
+require_once 'fonctionSetBDD.php';
+
 
 function existeProjetData($projet,$idData, $usernamedb, $passworddb, $dbname)
 {
-    $res = false;
+    $res = true;
     $connexion = connect($usernamedb, $passworddb, $dbname);
-    $resultat = getProjetDataParNomEtDataDefi($connexion,$projet,$idData);
+    $resultat = getProjetDataParNomEtDataDefi($connexion, $projet, $idData);
     disconnect($connexion);
 
-    if ($resultat['idProjetData'] == null) {
-        $res = true;
+    if ($resultat['idSujet'] == null) {
+        $res = false;
+
     }
     return $res;
 }
@@ -21,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errs = "";
     $projet = htmlspecialchars($_POST['projet']);
     $code = htmlspecialchars($_POST['code']);
-    $idData = htmlspecialchars($_POST['idData']);
-    $idGroupe = htmlspecialchars($_POST['id']);
+    $idData = htmlspecialchars($_POST['idDataDefi']);
+    $idGroupe = htmlspecialchars($_POST['groupe']);
 
     if (empty($projet)) {
         $errors++;
@@ -46,11 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors++;
         $errs .= "idGroupe;";
     }
-    
     if ($errors == 0) {
         $connexion = connect($usernamedb, $passworddb, $dbname);
         $idProjet = getProjetDataParNomEtDataDefi($connexion,$projet,$idData)['idProjetData'];
         creerRendu($connexion, $idGroup, $idProjet, $code);
+        mettreRenduVrai($connexion, $idGroupe);
         disconnect($connexion);
         header('Location: mesEquipes.php?errors=no');
         exit;
@@ -59,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['projet'] = $projet;
         $_SESSION['code'] = $code;
 
-        header('Location: renduChallenge.php?errors=' . $errs);
+       // header('Location: renduChallenge.php?errors=' . $errs);
         exit;
 
     }

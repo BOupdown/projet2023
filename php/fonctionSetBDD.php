@@ -20,7 +20,29 @@ function setMotDePasse($connexion, $idLogin, $nouveauMotDePasse)
     }
 }
 
+function mettreRenduVrai($connexion, $idGroupe) {
+    try {
+        // Création de la requête SQL
+        $query = "UPDATE Groupe SET rendu = 1 WHERE idGroupe = ?";
 
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre avec la variable $idGroupe
+        $stmt->bind_param("i", $idGroupe);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Fermeture du statement
+        $stmt->close();
+
+        echo "Le champ 'rendu' a été mis à vrai pour le groupe avec ID = $idGroupe";
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur s'est produite lors de la mise à jour du champ 'rendu' : " . $e->getMessage();
+    }
+}
 
 
 ?>

@@ -107,3 +107,17 @@ textarea {
     transition: all 0.3s ease;
     height: 5em;
 }
+
+.list-group{
+    position: absolute;
+    color: #172A3A;
+    width: 35em;
+    height: 50px; /* Définissez ici la taille fixe souhaitée */
+    overflow: scroll;
+    z-index: 9999; /* Pour s'assurer que la div se superpose aux autres contenus */
+    background-color: rgb(255, 255, 255);
+    opacity: 1; /* Définissez ici l'opacité souhaitée pour la div de suggestions */
+    display: none;
+    border : 1px solid #172A3A;
+    border-radius: 5px;
+}

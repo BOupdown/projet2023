@@ -31,7 +31,7 @@ if (isset($_GET['errors'])) {
             echo "<script>alert(\"Vous n'êtes pas le capitaine\")</script>";
         }
         if (in_array('rendu', $errors)) {
-            echo "<script>alert(\"Vous avez déjà rendu un projet !\")</script>";
+            echo "<script>alert(\"Vous avez déjà rendu ce projet !\")</script>";
         }
         if (in_array('fini', $errors)) {
             echo "<script>alert(\"La date de rendu est dépassée !\")</script>";
