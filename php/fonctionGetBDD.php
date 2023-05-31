@@ -1931,4 +1931,47 @@ function getAllRenduParIdEtudiant($connexion,$id){
         echo "Une erreur est survenue : " . $e->getMessage();
 }
 }
+
+// Récupère les questions d'un questionnaire
+function getQuestionsParIdDataDefiEtNumero($connexion, $id){
+    $query = "SELECT idQuestion, idQuestionnaire, question
+              FROM Question
+              WHERE idQuestionnaire = ?";
+
+    $idQuestion = $idQuestionnaire = $question = null;
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison des paramètres avec les variables correspondantes
+        $stmt->bind_param("i", $id);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Liaison des colonnes du résultat avec des variables
+        $stmt->bind_result($idQuestion, $idQuestionnaire, $question);
+        while ($stmt->fetch()) {
+            // Création d'un tableau associatif avec les résultats
+            $question = array(
+                "idQuestion" => $idQuestion,
+                "idQuestionnaire" => $idQuestionnaire,
+                "question" => $question
+            );
+
+            // Ajoute une question au tableau des résultats
+            $questions[] = $question;
+        }
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les informations de la question
+        return $questions;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
 ?>
