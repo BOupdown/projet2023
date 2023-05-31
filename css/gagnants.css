@@ -1,19 +1,6 @@
 .fond {
     margin: 0;
     padding: 0;
-<<<<<<< HEAD
-
-    margin-top: 25%;
-    margin-left: auto;
-    margin-right: auto; 
-    width: 50%;
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    /*align-items: center;*/
-    background-color: grey;
-
-=======
     display:grid;
     margin-top: 1em ;
     margin-left: auto;
@@ -28,28 +15,15 @@
     margin-bottom:2em ;
     border-radius: 20px;
     color: bisque;
->>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
 
 }
 
 #DataDefiTitle {
-<<<<<<< HEAD
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: bisque;
-    font-size: 5vw;
-    font-weight: bold;
-    text-align: center;
-}
-=======
     margin-top: 1.6em;
     text-align: center;
     font-size: 100px;
     color: bisque;
 }   
->>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
 
 body {
     background-image: url(../images/image.jpg);
@@ -98,7 +72,10 @@ min-height: 200px;
 background: #a16c90;
 color: #172A3A;
 border-radius: 10px 0 0 0;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ba48672798d7c1a6d519fd4346a10a67539f80c5
 }
 
 .podium .third {

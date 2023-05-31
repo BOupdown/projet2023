@@ -396,10 +396,7 @@ function getPodiumParId($connexion, $idDataBattle)
               WHERE idDataBattle = ?";
 
     $idEtudiant1 = $idEtudiant2 = $idEtudiant3 = null;
-<<<<<<< HEAD
-=======
 
->>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
     try {
         // Préparation de la requête
         $stmt = $connexion->prepare($query);
@@ -575,42 +572,20 @@ function getUtilisateurParLogin($connexion, $login)
     }
 }
 
-<<<<<<< HEAD
-// Retourne un tableau php contenant tous les id des datas battle
-function getAllIdDataBattle($connexion)
-{
-    $query = "SELECT idDataBattle FROM Podium";
-
-    $idDataBattle = null;
-=======
 function getAllDataDefi($connexion)
 {
     $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin FROM DataDefi";
->>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
+
 
     try {
         // Préparation de la requête
         $stmt = $connexion->prepare($query);
 
-<<<<<<< HEAD
-        // Liaison du paramètre avec la variable $idDapodiumtaBattle
-        $stmt->bind_param("i", $idDataBattle);
-
-=======
->>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
         // Exécution de la requête
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-<<<<<<< HEAD
-        $stmt->bind_result($idDataBattle);
 
-        $ids = array();
-        // Récupération des données
-        while ($stmt->fetch())
-        {
-            $ids[] = $idDataBattle;
-=======
         $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
 
         // Tableau pour stocker les données des défis
@@ -632,20 +607,14 @@ function getAllDataDefi($connexion)
 
             // Ajouter le tableau associatif au tableau des défis
             $tableDataDefi[] = $dataDefi;
->>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
         }
 
         // Fermeture du statement
         $stmt->close();
 
-<<<<<<< HEAD
-        // Retourne les informations du podium
-        return $ids;
 
-=======
         // Retourne le tableau des défis
         return $tableDataDefi;
->>>>>>> 3798246d6606beeda5c3a9fa818c29878e016228
     } catch (Exception $e) {
         // Gestion de l'exception
         echo "Une erreur est survenue : " . $e->getMessage();
@@ -939,25 +908,6 @@ function getDataDefiParNom($connexion, $nomDataDefi)
 
         // Liaison des colonnes du résultat avec des variables
         $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
-
-        // Récupération des données
-        $stmt->fetch();
-
-        // Création d'un tableau associatif avec les résultats
-        $dataDefi = array(
-            "idDataDefi" => $idDataDefi,
-            "idGestionnaire" => $idGestionnaire,
-            "typeD" => $typeD,
-            "nombreSujet" => $nombreSujet,
-            "nombreQuestionnaire" => $nombreQuestionnaire,
-            "nom" => $nom,
-            "dateDebut" => $dateDebut,
-            "dateFin" => $dateFin
-        );
-
-        // Fermeture du statement
-        $stmt->close();
-
         // Retourne les informations du DataDefi
         return $dataDefi;
     } catch (Exception $e) {
