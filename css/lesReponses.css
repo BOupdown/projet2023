@@ -120,9 +120,6 @@ height: 5%;    width: 30%;
     cursor: pointer;
     transition: all 0.3s ease;
     background: linear-gradient(135deg, #1ECECC, #29BABB);
-    display: flex;
-    
-
     
 }
 
@@ -130,3 +127,8 @@ form .button input:hover {
     /* transform: scale(0.99); */
     background: linear-gradient(-135deg, #1ECECC, #29BABB);
 }   
+.fin{
+    text-align: right;
+    font-size: 100px;
+    color: bisque;
+    margin-bottom: 1em;}
