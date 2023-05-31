@@ -24,53 +24,67 @@
 
     $idBattle = $_GET['idBattle'];
     $idGroupe = $_GET['idGroupe'];
-    var_dump($idBattle);
-    var_dump($idGroupe);
 
+    if(empty($idBattle) || empty($idGroupe)){
+        header('Location: ../php/mesDefis.php');
+        exit();
+    }
     $connexion = connect($usernamedb, $passworddb, $dbname);
     $reponses = getAllReponseNonNoteParIdDataBattleEtIdGroupe($connexion, $idBattle, $idGroupe);
+    disconnect($connexion);
 
 
     ?>
+
     <div class="fond">
         <div class="divElement">
             <div class="divTitre">
                 <h2 class="titre">Noter</h2>
             </div>
+            <div class="divRetour">
+                <a href="../php/lesReponses.php" class="btn">Retour</a>
+            </div>
             <?php
             if ($reponses) {
                 $connexion = connect($usernamedb, $passworddb, $dbname);
-                echo '<form action="../php/process-noter.php.php" method="post">';
+                echo '<form action="../php/process-noter.php" method="post">';
                 echo '<table class="table">';
                 echo "<tr><th>Question</th><th>Réponse</th><th>Note</th></tr>";
+                $i = 0;
                 foreach ($reponses as $q) {
+                    $i++;
                     $question = getQuestionParId($connexion, $q['idQuestion']);
                     echo "<tr id='login_" . $q['idReponse'] . "'>";
                     echo "<td>" . $question['question'] . "</td>";
                     echo "<td>" . $q['reponse'] . "</td>";
                     echo '<td class="note">  <label>
-                    <input type="radio" name="rating'.$q['idReponse'].'" value="0">
+                    <input type="radio" name="rating' . $q['idReponse'] . '" value="0">
                     <span class="rating-label">0</span>
                   </label>
                   <label>
-                    <input type="radio" name="rating'.$q['idReponse'].'" value="1">
+                    <input type="radio" name="rating' . $q['idReponse'] . '" value="1">
                     <span class="rating-label">1</span>
                   </label>
                   <label>
-                    <input type="radio" name="rating'.$q['idReponse'].'" value="2">
+                    <input type="radio" name="rating' . $q['idReponse'] . '" value="2">
                     <span class="rating-label">2</span>
                   </label>
                   <label>
-                    <input type="radio" name="rating'.$q['idReponse'].'" value="3">
+                    <input type="radio" name="rating' . $q['idReponse'] . '" value="3">
                     <span class="rating-label">3</span>
                   </label>
                   <label>
-                    <input type="radio" name="rating'.$q['idReponse'].'" value="4">
+                    <input type="radio" name="rating' . $q['idReponse'] . '" value="4">
                     <span class="rating-label">4</span>
                   </label>
+                    <label>
+                        <input type="hidden" name="id' . $i . '" value="' . $q['idReponse'] . '">
+                    </label>
+
                 </td>';
                     echo "</tr>";
                 }
+                echo '<input type="hidden" name="compteur" value="' . $i . '">';
                 echo "</table>";
                 disconnect($connexion);
                 echo '<div class="fin">';
@@ -80,12 +94,11 @@
                 echo '</div>';
                 echo '</form>';
             } else {
-                echo "<div class='divErreur'>";
-                echo "<p>Il n'y a pas de question à noter</p>";
-                echo "</div>";
+
                 $connexion = connect($usernamedb, $passworddb, $dbname);
                 $reponses = getAllReponseParIdDatabattleEtIdGroupe($connexion, $idBattle, $idGroupe);
                 disconnect($connexion);
+                $connexion = connect($usernamedb, $passworddb, $dbname);
                 if ($reponses) {
                     echo '<table class="table">';
                     echo "<tr><th>Question</th><th>Réponse</th><th>Note</th></tr>";
@@ -98,6 +111,7 @@
                         echo "</tr>";
                     }
                     echo "</table>";
+                    disconnect($connexion);
                 }
             }
             ?>

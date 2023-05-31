@@ -30,7 +30,7 @@
     echo '<div class="divTitre">';
     echo '<h2 class= "titre2">Data Challenge</h2>';
     echo '</div>';
-    if ($challenges) {
+    if ($rendus) {
         $connexion = connect($usernamedb, $passworddb, $dbname);
         echo '<table class="table">';
         echo "<tr><th>Nom</th><th>Gestionnaire</th><th>Nombre de sujet</th><th>Date de début</th><th>Date de fin</th><th>Consulter</th></tr>";
@@ -54,44 +54,40 @@
 
     } else {
         echo "<div class='divErreur'>";
-        echo "<p class='vide'>Aucune Data Battle</p>";
+        echo "<p class='vide'>Vous n'avez pas participé à un data challenge</p>";
         echo "</div>";
     }
     echo "</div>";
 
     $connexion = connect($usernamedb, $passworddb, $dbname);
-    $battles = getAllDataBattle($connexion);
+    $groupes = getGroupesParIdEtudiant($connexion,$id);
     disconnect($connexion);
     echo "<div class='divElement'> ";
-
     echo '<h2 class= "titre2">Data battle</h2>';
-    if ($battles) {
+    if ($groupes[0]['idGroupe'] != null) {
         $connexion = connect($usernamedb, $passworddb, $dbname);
         echo '<table class="table">';
-        echo "<tr><th>Nom</th><th>Gestionnaire</th><th>Nombre de questionnaire</th><th>Date de début</th><th>Date de fin</th><th>Supprimer</th></tr>";
+        echo "<tr><th>Groupe</th><th>Nom du projet data</th><th>Voir les réponses et les notes</th></tr>";
 
-        foreach ($battles as $battle) {
-            echo "<tr id='login_" . $battle['idDataDefi'] . "'>";
+        foreach ($groupes as $groupe) {
+            $battle = getDataDefiParId($connexion, $groupe['idDataChallenge']);
+            $reponses = getAllReponseParIdDatabattleEtIdGroupe($connexion, $battle['idDataDefi'], $groupe['idGroupe']);
+            if($reponses[0]['idReponse'] != null){
+            echo "<tr id='login_" . $groupe['idGroupe'] . "'>";
+            echo "<td>" . $groupe['nom'] . "</td>";
             echo "<td>" . $battle['nom'] . "</td>";
-            $gestionnaire = getGestionnaireParId($connexion, $battle['idGestionnaire']);
-            echo "<td>" . $gestionnaire['entreprise'] . "</td>";
-            echo "<td>" . $battle['nombreQuestionnaire'] . "</td>";
-            echo "<td>" . $battle['dateDebut'] . "</td>";
-            if ($battle['dateFin'] < date("Y-m-d")) {
-                echo "<td class = 'dateFin'>" . $battle['dateFin'] . "</td>";
-            } else {
-                echo "<td>" . $battle['dateFin'] . "</td>";
-            }
+            
 
-            echo "<td><a class='consulterBtn' href=\"consulter.php?idData=".$battle['idDataDefi']."\">Consulter</a></td>";
+            echo "<td><a class='consulterBtn' href=\"mesReponses.php?idGroupe=" . $groupe['idGroupe'] . "&idBattle=".$groupe['idDataChallenge']."\">Consulter</a></td>";
             echo "</tr>";
+            }
         }
 
         echo "</table>";
         disconnect($connexion);
     } else {
         echo "<div class='divErreur'>";
-        echo "<p class='vide'>Aucun Data Challenge</p>";
+        echo "<p class='vide'>Vous n'avez pas participé à une data battle</p>";
         echo "</div>";
     }
     echo "</div>";
