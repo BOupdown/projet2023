@@ -120,7 +120,6 @@ function creerDataChallenge($connexion, $idGestionnaire, $nombreSujet, $nom, $de
     try {
         // Début de la transaction
         $connexion->begin_transaction();
-        $type = "dataChallenge";
         $nombreQuestionnaire = 0;
 
         // Insertion des données dans la table DataDefi
@@ -153,7 +152,6 @@ function creerDataBattle($connexion, $idGestionnaire, $nombreQuestionnaire, $nom
     try {
         // Début de la transaction
         $connexion->begin_transaction();
-        $type = "dataBattle";
         $nombreSujet = 1;
         // Insertion des données dans la table DataDefi
         $stmt = $connexion->prepare("INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, descriptionD, dateDebut, dateFin)
