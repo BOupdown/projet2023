@@ -40,6 +40,8 @@ require 'fonctionCreateBDD.php';
                     <!-- Compteur de questions -->
                     <input type="hidden" id="compteur" name="compteur" value=1>
 
+                    <input type="hidden" name="id_projetdata" value=<?= $_GET["id_projetdata"] ?>>
+
                     <!-- Nom du questionnaire -->
                     <div class="input-box">
                         <label for="nom">Nom :</label>
