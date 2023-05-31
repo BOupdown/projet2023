@@ -141,7 +141,6 @@ CREATE TABLE Message(
     dateHeure DATETIME DEFAULT NOW(),
     objet VARCHAR(128),
     contenu TEXT,
-    lu BOOLEAN DEFAULT 0,
     FOREIGN KEY (idExpediteur) REFERENCES Login (idLogin) ON DELETE SET NULL,
     FOREIGN KEY (idDestinataire) REFERENCES Login (idLogin) ON DELETE SET NULL
 );

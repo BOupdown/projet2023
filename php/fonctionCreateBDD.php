@@ -166,7 +166,7 @@ function creerDataBattle($connexion, $idGestionnaire, $nombreQuestionnaire, $nom
         // Récupérer l'ID du défi nouvellement créé
         $idDataDefi = $connexion->insert_id;
 
-        creerSujet($connexion, $sujet, $description, $idDataDefi);
+        creerProjetData($connexion, $sujet, $description, $idDataDefi);
 
         // Terminer la transaction
         $connexion->commit();
@@ -194,7 +194,6 @@ function creerPodium($connexion, $idDataDefi, $idEtudiant1, $idEtudiant2, $idEtu
             throw new Exception("Erreur lors de l'insertion dans la table Login : " . $connexion->error);
         }
 
-
         echo "Opérations effectuées avec succès !";
 
     } catch (Exception $e) {
@@ -205,17 +204,16 @@ function creerPodium($connexion, $idDataDefi, $idEtudiant1, $idEtudiant2, $idEtu
 
 }
 
-
 // Créer une data battle à partir des informations
-function creerProjetData($connexion, $nom, $descriptionS, $idDataDefi,$image,$ressources)
+function creerProjetData($connexion, $nom, $descriptionS, $idDataDefi, $image, $ressources)
 {
     try {
         // Début de la transaction
         $connexion->begin_transaction();
 
-        $stmt = $connexion->prepare("INSERT INTO Sujet ( nom, descriptionS, idDataDefi)
-                                VALUES ( ?, ?, ?)");
-        $stmt->bind_param("ssi", $nom, $descriptionS, $idDataDefi);
+        $stmt = $connexion->prepare("INSERT INTO ProjetData (nom, descriptionS, idDataDefi, image, ressources)
+                                VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssiss", $nom, $descriptionS, $idDataDefi, $image, $ressources);
         if ($stmt->execute() === false) {
             throw new Exception("Erreur lors de l'insertion dans la table DataDefi : " . $connexion->error);
         }

@@ -7,31 +7,27 @@
         die("Erreur : Permissions insuffisantes.");
     }
 
-     require 'fonctionCreateBDD.php';
+    require 'fonctionCreateBDD.php';
 
     $id_sujet = $_POST['projetdata'];
     $nom_questionnaire = $_POST['nom'];
     $description_questionnaire = $_POST['description'];
     $nb_questions = $_POST['compteur'];
 
-     $connexion = connect($usernamedb, $passworddb, $dbname);
+    $connexion = connect($usernamedb, $passworddb, $dbname);
 
-     // Création du questionnaire vide dans la base SQL
+    // Création du questionnaire vide dans la base SQL
     $requete_nouveau_questionnaire = "INSERT INTO Questionnaire (idSujet, nom, descriptionQ) VALUES (?, ?, ?)";
     $stmt = mysqli_prepare($connexion, $requete_nouveau_questionnaire);
     mysqli_stmt_bind_param($stmt, "iss", $id_sujet, $nom_questionnaire, $description_questionnaire);
     mysqli_stmt_execute($stmt);
 
-     // Valeur du dernier ID inséré dans la base SQL (ID du questionnaire)
+    // Valeur du dernier ID inséré dans la base SQL (ID du questionnaire)
     $id_questionnaire = mysqli_insert_id($connexion);
 
     for ($i = 1; $i <= $nb_questions; $i++) {
         
-
-
         $nameHTML_question = 'question-' . $i;
-
-        echo $nameHTML_question;
 
         // Ajout de la question au questionnaire dans la base SQL
         $requete_nouvelle_question = "INSERT INTO Question (idQuestionnaire, question) VALUES (?, ?)";
