@@ -9,7 +9,7 @@
 
     require 'fonctionCreateBDD.php';
 
-    $id_sujet = $_POST['projetdata'];
+    $id_sujet = $_POST['id_projetdata'];
     $nom_questionnaire = $_POST['nom'];
     $description_questionnaire = $_POST['description'];
     $nb_questions = $_POST['compteur'];

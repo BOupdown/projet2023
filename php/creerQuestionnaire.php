@@ -1,7 +1,7 @@
 <?php session_start();
 
-// Vérifier que l'utilisateur connecté est gestionnaire
-if (!isset($_SESSION['type']) || $_SESSION['type'] != 'Gestionnaire') {
+// Vérifier que l'utilisateur connecté est gestionnaire et que le questionnaire est associé à un data battle
+if ($_SESSION['type'] != 'Gestionnaire' || !isset($_GET["id_projetdata"]) || $_GET["defi"] != "Battle") {
     header("Location: ../index.php");
     exit;
 }
@@ -39,6 +39,8 @@ require 'fonctionCreateBDD.php';
 
                     <!-- Compteur de questions -->
                     <input type="hidden" id="compteur" name="compteur" value=1>
+
+                    <input type="hidden" name="id_projetdata" value=<?= $_GET["id_projetdata"] ?>>
 
                     <!-- Nom du questionnaire -->
                     <div class="input-box">

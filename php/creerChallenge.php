@@ -45,7 +45,7 @@
     </div>
     
     <div class="body">
-        <div class="container">
+        <div id="container-challenge" class="container">
             <div class="title">Créer un Data Challenge</div>
             <div class="content">
                 <form id="form" action="process-creerChallenge.php" method="post" target="_self">
@@ -62,12 +62,12 @@
                         <?php unset($_SESSION['nom']); ?>
 
                         <div class="input-box">
-                            <span class="details">Gestionnaire</span>
+                            <span class="details">Gestionnaire responsable</span>
                             <div class="input-group">
                                 <input  class="oblig<?php if (in_array('gestionnaire', $errors)) {
                                     echo "erreur";
                                 } ?> "  type="text" name="gestionnaire" id="gestionnaire" class="gestionnaire"
-                                    placeholder="Search..." autocomplete="off" value=<?php if (isset($_SESSION['gestionnaire'])) {
+                                    placeholder="Rechercher  🔍" autocomplete="off" value=<?php if (isset($_SESSION['gestionnaire'])) {
                                         echo $_SESSION['gestionnaire'];
                                     } ?>>
                             </div>

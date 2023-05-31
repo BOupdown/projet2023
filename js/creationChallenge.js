@@ -15,8 +15,8 @@ function ajouterSujet(numeroSujet) {
     document.getElementById("compteur").value = numeroSujet;
 
     // Mise à jour du bouton "Ajouter un sujet"
-    document.getElementById("btn-ajouter-sujet").remove();
     const numeroSujetSuivant = numeroSujet + 1;
+    document.getElementById("btn-ajouter-sujet").remove();
     nouveauSujet.innerHTML += "<div class='input-box'><input id='btn-ajouter-sujet' type='button' value='+' onclick='ajouterSujet("+numeroSujetSuivant+")'></div>";
 
     // Ajout de la nouvelle zone de saisie de sujet à la page

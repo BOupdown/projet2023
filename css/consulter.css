@@ -60,12 +60,9 @@ body {
     font-size: 1.5em;
     border-radius: 20px;
     padding: 0.5em;
+    text-decoration: none;
 }
 
 .btn:hover{
     background-color: #824C71;
-    color: bisque;
-    font-size: 1.5em;
-    border-radius: 20px;
-    padding: 0.5em;
 }
