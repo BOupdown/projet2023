@@ -49,18 +49,22 @@ require_once 'fonctionCreateBDD.php';
                     echo "<p class ='classique'>Date de début : <input type=\"date\" name=\"defi-dateD\" id=\"\" class=\"\" value=\"".$data["dateDebut"]."\"></p>";
                     echo "<p class ='classique'>Date de fin : <input type=\"date\" name=\"defi-dateF\" id=\"\" class=\"\" value=\"".$data["dateFin"]."\"></p>";
                     
-                    if ($data["typeD"] == "Challenge") {
+                    if ($data["typeD"] == "Challenge") 
+                    {
                         echo "<p class ='classique'>Nombre de sujets : <input type=\"number\" min=\"0\" name=\"nbSujet\" id=\"\" class=\"\" value=\"".$data["nombreSujet"]."\"></p>";
-                        echo "<input type=\"hidden\" name=\"type\" value=\"Challenge\">";
                     } 
                     else 
                     {
                         echo "<p class ='classique'>Nombre de questionnaires : <input type=\"number\" min=\"0\" name=\"nbQuestionnaire\" id=\"\" class=\"\" value=\"".$data["nombreQuestionnaire"]."\"></p>";
-                        echo "<input type=\"hidden\" name=\"type\" value=\"Battle\">";
                     }
 
+                    
                     echo "<div class ='sujets'>";
-                    echo "<h2 class ='defi-title'>Les projets data</h2>";
+                    if (count($sujets) > 0)
+                    {
+                        echo "<h2 class ='defi-title'>Les projets data</h2>";
+                    }
+                    
                     $i = 1;
                     foreach ($sujets as $sujet) {
                         echo "<div class ='sujet'>";
@@ -68,12 +72,14 @@ require_once 'fonctionCreateBDD.php';
                         echo "<p class ='sujet-title'>Nom du sujet : <input type=\"text\" name=\"defi-title".$i."\" id=\"\" class=\"\" value=\"".$sujet["nom"]."\"></p>";
                         echo "<p class ='sujet-description'>Description du sujet : <input type=\"text\" name=\"defi-description".$i."\" id=\"\" class=\"\" value=\"".$sujet["descriptionS"]."\"></p>";
                         echo "<p class ='sujet-ressources'>Ressources du sujet : <input type=\"textarea\" name=\"defi-ressources".$i."\" id=\"\" class=\"\" value=\"".$sujet["ressources"]."\"></p>";
-                        echo "<hr></div><br>";
+                        echo "<button type=\"button\" onclick=\"window.location.href = 'process-supprimer.php?idS=".$sujet["idSujet"]."&idD=".$idData."';\">Supprimer Projet Data</button>";
                         echo "<input type=\"hidden\" name=\"idSujet".$i."\" value=\"".$sujet["idSujet"]."\">"; 
+                        echo "<hr></div><br>";
                         $i++;
                     }
                     echo "</div>";
                     echo "<input type=\"hidden\" name=\"iSujet\" value=\"".($i-1)."\">"; 
+                    echo "<input type=\"hidden\" name=\"type\" value=\"".$data["typeD"]."\">";
                     ?>
                 
                 <div class="button">
