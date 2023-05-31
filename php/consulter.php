@@ -83,7 +83,7 @@
                         echo "<p class ='description'>" . $sujet["descriptionS"] . "</p>";
                         echo "<p class ='sujet-ressources'>Ressources : " . $sujet["ressources"] . "</p>";
                         if ($_SESSION['type'] == 'Gestionnaire' && $data["typeD"] == "Battle") {
-                            echo "<a href='../php/creerQuestionnaire.php?id_projetdata=".$sujet["idSujet"]. "' class='btn-creer'>Créer un questionnaire</a>";
+                            echo "<a href='../php/creerQuestionnaire.php?id_projetdata=".$sujet["idSujet"]. "&defi=".$data["typeD"]."' class='btn-creer'>Créer un questionnaire</a>";
                         }
                         echo "</div>";
                     }
