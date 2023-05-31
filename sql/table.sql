@@ -142,7 +142,6 @@ CREATE TABLE Message(
     dateHeure DATETIME DEFAULT NOW(),
     objet VARCHAR(128),
     contenu TEXT,
-    lu BOOLEAN DEFAULT 0,
     FOREIGN KEY (idExpediteur) REFERENCES Login (idLogin) ON DELETE SET NULL,
     FOREIGN KEY (idDestinataire) REFERENCES Login (idLogin) ON DELETE SET NULL
 );
@@ -157,13 +156,16 @@ CREATE TABLE MessageGroupe(
 
 CREATE TABLE DataFichier(
     idDataFichier INTEGER PRIMARY KEY AUTO_INCREMENT,
+    idGroupe INTEGER,
     idProjetData INTEGER,
+    nomFichier TEXT,
     nbLignes INTEGER,
     nbFonctions INTEGER,
     tailleMinFonction INTEGER,
     tailleMaxFonction INTEGER,
     tailleMoyenneFonction INTEGER,
-    FOREIGN KEY (idProjetData) REFERENCES ProjetData (idSujet) ON DELETE CASCADE
+    FOREIGN KEY (idProjetData) REFERENCES ProjetData (idSujet) ON DELETE CASCADE,
+    FOREIGN KEY (idGroupe) REFERENCES Groupe (idGroupe) ON DELETE CASCADE
 );
 
 CREATE TABLE Rendu(

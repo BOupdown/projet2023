@@ -25,7 +25,6 @@
 
     $listeChallenge = getAllDataChallenge($connexion);
     
-    
     $size = count($listeChallenge);
     for($i = 0; $i < $size; $i++)
     {

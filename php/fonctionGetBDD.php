@@ -341,38 +341,39 @@ function getGroupeParId($connexion, $idGroupe)
     }
 }
 
-// Retourne un tableau php contenant les informations du projet data ayant pour id $idProjetData
-function getProjetDataParId($connexion, $idProjetData)
+// Retourne un tableau php contenant les informations du projet data ayant pour id $idSujet
+function getProjetDataParId($connexion, $idSujet)
 {
-    $query = "SELECT idProjetData, idDataChallenge, idGroupe, descriptionP, imageP
+    $query = "SELECT idSujet, nom, descriptionS, idDataDefi, image, ressources
               FROM ProjetData
-              WHERE idProjetData = ?";
+              WHERE idSujet = ?";
 
-    $idDataChallenge = $idGroupe = $descriptionP = $imageP = null;
+    $nom = $descriptionS = $idDataDefi = $image = $ressources = null;
 
     try {
         // Préparation de la requêtepodium
         $stmt = $connexion->prepare($query);
 
         // Liaison du paramètre avec la variable $idProjetData
-        $stmt->bind_param("i", $idProjetData);
+        $stmt->bind_param("i", $idSujet);
 
         // Exécution de la requête
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($idProjetData, $idDataChallenge, $idGroupe, $descriptionP, $imageP);
+        $stmt->bind_result($nom, $descriptionS, $idDataDefi, $image, $ressources);
 
         // Récupération des données
         $stmt->fetch();
 
         // Création d'un tableau associatif avec les résultats
         $projetData = array(
-            "idProjetData" => $idProjetData,
-            "idDataChallenge" => $idDataChallenge,
-            "idGroupe" => $idGroupe,
-            "descriptionP" => $descriptionP,
-            "imageP" => $imageP
+            "idSujet" => $idSujet,
+            "nom" => $nom,
+            "descriptionS" => $descriptionS,
+            "idDataDefi" => $idDataDefi,
+            "image" => $image,
+            "ressources" => $ressources
         );
 
         // Fermeture du statement
@@ -431,6 +432,8 @@ function getPodiumParId($connexion, $idDataBattle)
         return null;
     }
 }
+
+
 // Retourne les différents groupes d'un étudiants et leurs informations
 function getGroupesParIdEtudiant($connexion, $idEtudiant)
 {
@@ -573,6 +576,7 @@ function getAllDataDefi($connexion)
 {
     $query = "SELECT idDataDefi, idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFin FROM DataDefi";
 
+
     try {
         // Préparation de la requête
         $stmt = $connexion->prepare($query);
@@ -581,6 +585,7 @@ function getAllDataDefi($connexion)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
+
         $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
 
         // Tableau pour stocker les données des défis
@@ -606,6 +611,7 @@ function getAllDataDefi($connexion)
 
         // Fermeture du statement
         $stmt->close();
+
 
         // Retourne le tableau des défis
         return $tableDataDefi;
@@ -902,25 +908,6 @@ function getDataDefiParNom($connexion, $nomDataDefi)
 
         // Liaison des colonnes du résultat avec des variables
         $stmt->bind_result($idDataDefi, $idGestionnaire, $typeD, $nombreSujet, $nombreQuestionnaire, $nom, $dateDebut, $dateFin);
-
-        // Récupération des données
-        $stmt->fetch();
-
-        // Création d'un tableau associatif avec les résultats
-        $dataDefi = array(
-            "idDataDefi" => $idDataDefi,
-            "idGestionnaire" => $idGestionnaire,
-            "typeD" => $typeD,
-            "nombreSujet" => $nombreSujet,
-            "nombreQuestionnaire" => $nombreQuestionnaire,
-            "nom" => $nom,
-            "dateDebut" => $dateDebut,
-            "dateFin" => $dateFin
-        );
-
-        // Fermeture du statement
-        $stmt->close();
-
         // Retourne les informations du DataDefi
         return $dataDefi;
     } catch (Exception $e) {
@@ -1980,4 +1967,5 @@ function getDataFichierParIdGroupe($connexion, $idGroupe)
         return null;
    }
 }
+
 ?>

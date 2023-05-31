@@ -16,7 +16,7 @@ require 'fonctionCreateBDD.php';
     <meta charset="UTF-8">
     <title>Créer un questionnaire / IA Pau</title>
     <link rel="stylesheet" href="../css/creerQuestionnaire.css">
-    <script src="../js/fonctions-questionnaire.js"></script>
+    <script src="../js/questionnaire.js"></script>
 </head>
 
 <body>

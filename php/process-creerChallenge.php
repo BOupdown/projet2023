@@ -11,7 +11,6 @@ function existeGestionnaire($gestionnaire, $usernamedb, $passworddb, $dbname)
     if ($resultat[0]['idLogin'] != null) {
         $res = true;
     }
-
     return $res;
 }
 
@@ -20,15 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errs = "";
     $nom = htmlspecialchars($_POST['nom']);
     $gestionnaire = htmlspecialchars($_POST['gestionnaire']);
-    $sujet1 = htmlspecialchars($_POST['sujet1']);
-    $sujet2 = htmlspecialchars($_POST['sujet2']);
-    $sujet3 = htmlspecialchars($_POST['sujet3']);
-    $sujet4 = htmlspecialchars($_POST['sujet4']);
-    $sujet5 = htmlspecialchars($_POST['sujet5']);
-    $sujet6 = htmlspecialchars($_POST['sujet6']);
     $dateDebut = htmlspecialchars($_POST['dateDebut']);
     $dateFin = htmlspecialchars($_POST['dateFin']);
     $description = htmlspecialchars($_POST['description']);
+    $nb_sujets = htmlspecialchars($_POST['compteur']);
+
 
     if (empty($nom)) {
         $errors++;
@@ -43,11 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errors++;
             $errs .= "absent;";
         }
-    }
-
-    if (empty($sujet1)) {
-        $errors++;
-        $errs .= "sujet1;";
     }
 
     if (empty($description)) {
@@ -70,39 +60,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errs .= "dates;";
     }
 
-
     if ($errors == 0) {
-        // compter le nombre de sujet non null
-        $nbSujet = 1;
-        if (!empty($sujet2)) {
-            $nbSujet++;
-        }else{
-            $sujet2 = null;
-        }
-        if (!empty($sujet3)) {
-            $nbSujet++;
-        }else{
-            $sujet3 = null;
-        }
-        if (!empty($sujet4)) {
-            $nbSujet++;
-        }else{
-            $sujet4 = null;
-        }
-        if (!empty($sujet5)) {
-            $nbSujet++;
-        }else{
-            $sujet5 = null;
-        }
-        if (!empty($sujet6)) {
-            $nbSujet++;
-        }else{
-            $sujet6 = null;
+        $connexion = connect($usernamedb, $passworddb, $dbname);
+        $gestionnaire = getUtilisateurParLogin($connexion, $gestionnaire)[0]['idLogin'];
+
+        // Création du data challenge vide dans la base SQL
+        $type_epreuve = "dataChallenge";
+        $nb_questions = 0;
+        $requete_nouveau_questionnaire = "INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, descriptionD, dateDebut, dateFin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($connexion, $requete_nouveau_questionnaire);
+        mysqli_stmt_bind_param($stmt, "isiissss", $gestionnaire, $type_epreuve, $nb_sujets, $nb_questions, $nom, $description, $dateDebut, $dateFin);
+        mysqli_stmt_execute($stmt);
+
+        // Valeur du dernier ID inséré dans la base SQL (ID du data challenge)
+        $id_datadefi = mysqli_insert_id($connexion);
+                
+        for ($i = 1; $i <= $nb_sujets; $i++) {
+
+            // Sélection des valeurs du formulaire
+            $nom = $_POST['nom_sujet' . $i];
+            $desc = $_POST['desc' . $i];
+            $img = $_POST['image' . $i];
+            $ressources = $_POST['ressrc' . $i];
+
+            creerProjetData($connexion, $nom, $desc, $id_datadefi, $img, $ressources);
         }
 
-        $connexion = connect($usernamedb, $passworddb, $dbname);
-        $gestionnaire = getUtilisateurParLogin($connexion, $gestionnaire)['idLogin'];
-        creerDataChallenge($connexion, $gestionnaire, $nbSujet, $nom, $description, $dateDebut, $dateFin, $sujet1, $sujet2, $sujet3, $sujet4, $sujet5, $sujet6);
         disconnect($connexion);
         header('Location: creerChallenge.php?errors=no');
         exit;
@@ -110,12 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $_SESSION['nom'] = $nom;
         $_SESSION['gestionnaire'] = $gestionnaire;
-        $_SESSION['sujet1'] = $sujet1;
-        $_SESSION['sujet2'] = $sujet2;
-        $_SESSION['sujet3'] = $sujet3;
-        $_SESSION['sujet4'] = $sujet4;
-        $_SESSION['sujet5'] = $sujet5;
-        $_SESSION['sujet6'] = $sujet6;
         $_SESSION['description'] = $description;
         $_SESSION['dateDebut'] = $dateDebut;
         $_SESSION['dateFin'] = $dateFin;

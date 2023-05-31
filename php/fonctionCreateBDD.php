@@ -120,7 +120,6 @@ function creerDataChallenge($connexion, $idGestionnaire, $nombreSujet, $nom, $de
     try {
         // Début de la transaction
         $connexion->begin_transaction();
-        $type = "dataChallenge";
         $nombreQuestionnaire = 0;
 
         // Insertion des données dans la table DataDefi
@@ -153,7 +152,6 @@ function creerDataBattle($connexion, $idGestionnaire, $nombreQuestionnaire, $nom
     try {
         // Début de la transaction
         $connexion->begin_transaction();
-        $type = "dataBattle";
         $nombreSujet = 1;
         // Insertion des données dans la table DataDefi
         $stmt = $connexion->prepare("INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, descriptionD, dateDebut, dateFin)
@@ -166,7 +164,7 @@ function creerDataBattle($connexion, $idGestionnaire, $nombreQuestionnaire, $nom
         // Récupérer l'ID du défi nouvellement créé
         $idDataDefi = $connexion->insert_id;
 
-        creerSujet($connexion, $sujet, $description, $idDataDefi);
+        creerProjetData($connexion, $sujet, $description, $idDataDefi);
 
         // Terminer la transaction
         $connexion->commit();
@@ -194,7 +192,6 @@ function creerPodium($connexion, $idDataDefi, $idEtudiant1, $idEtudiant2, $idEtu
             throw new Exception("Erreur lors de l'insertion dans la table Login : " . $connexion->error);
         }
 
-
         echo "Opérations effectuées avec succès !";
 
     } catch (Exception $e) {
@@ -205,17 +202,16 @@ function creerPodium($connexion, $idDataDefi, $idEtudiant1, $idEtudiant2, $idEtu
 
 }
 
-
 // Créer une data battle à partir des informations
-function creerProjetData($connexion, $nom, $descriptionS, $idDataDefi,$image,$ressources)
+function creerProjetData($connexion, $nom, $descriptionS, $idDataDefi, $image, $ressources)
 {
     try {
         // Début de la transaction
         $connexion->begin_transaction();
 
-        $stmt = $connexion->prepare("INSERT INTO Sujet ( nom, descriptionS, idDataDefi)
-                                VALUES ( ?, ?, ?)");
-        $stmt->bind_param("ssi", $nom, $descriptionS, $idDataDefi);
+        $stmt = $connexion->prepare("INSERT INTO ProjetData (nom, descriptionS, idDataDefi, image, ressources)
+                                VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssiss", $nom, $descriptionS, $idDataDefi, $image, $ressources);
         if ($stmt->execute() === false) {
             throw new Exception("Erreur lors de l'insertion dans la table DataDefi : " . $connexion->error);
         }
@@ -272,6 +268,32 @@ function creerRendu($connexion, $idGroupe, $idProjetData, $code)
         echo "Opérations effectuées avec succès !";
 
     } catch (Exception $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+}
+
+// Créer un data fichier à partir des informations
+function creerDataFichier($connexion, $idGroupe, $idProjetData, $nomFichier, $nbLignes, $nbFonctions, $tailleMinFonction, $tailleMaxFonction, $tailleMoyenneFonction)
+{
+    try {
+        // Début de la transaction
+        $connexion->begin_transaction();
+
+        $stmt = $connexion->prepare("INSERT INTO DataFichier (idGroupe, idProjetData, nomFichier, nbLignes, nbFonctions, tailleMinFonction, tailleMaxFonction, tailleMoyenneFonction)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("iisiiiii", $idGroupe, $idProjetData, $nomFichier, $nbLignes, $nbFonctions, $tailleMinFonction, $tailleMaxFonction, $tailleMoyenneFonction);
+        if ($stmt->execute() === false) {
+            throw new Exception("Erreur lors de l'insertion dans la table Questionnaire : " . $connexion->error);
+        }
+
+        // Terminer la transaction
+        $connexion->commit();
+
+        echo "Questionnaire créé avec succès !";
+
+    } catch (Exception $e) {
+        // En cas d'erreur, annuler la transaction
+        $connexion->rollback();
         echo "Erreur : " . $e->getMessage();
     }
 }
