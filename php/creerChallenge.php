@@ -1,18 +1,13 @@
 <!DOCTYPE html>
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
-    <title> Créer un challenge </title>
+    <title> Créer un challenge / IA Pau</title>
     <link rel="stylesheet" href="/css/creerChallengeBattle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <html lang="en">
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <script src="../js/creationChallenge.js"></script>
 </head>
-
 
 <body>
     <?php
@@ -60,13 +55,11 @@
                             <span class="details">Nom du challenge</span>
                             <input class="oblig<?php if (in_array('nom', $errors)) {
                                 echo "erreur";
-                            } ?>"name="nom"   type="text"  placeholder="Entrez le nom du challenge" value=<?php if (isset($_SESSION['nom'])) {
+                            } ?>"name="nom"   type="text"  placeholder="Entrez le nom du challenge" autocomplete="off" value=<?php if (isset($_SESSION['nom'])) {
                                  echo $_SESSION['nom'];
                              } ?>>
                         </div>
-                        <?php
-                        unset($_SESSION['nom']);
-                        ?>
+                        <?php unset($_SESSION['nom']); ?>
 
                         <div class="input-box">
                             <span class="details">Gestionnaire</span>
@@ -83,63 +76,8 @@
                             </div>
 
                         </div>
-                        <?php
-                        unset($_SESSION['gestionnaire']);
-                        ?>
-                       
+                        <?php unset($_SESSION['gestionnaire']); ?>
 
-                       <div class="input-box">
-                            <span class="details">Sujet n°1 *</span>
-                            <input class="oblig <?php if (in_array('sujet1', $errors) ) {echo 'erreur'; } ?>"name="sujet1" type="text" placeholder="Entrez le premier sujet" value=<?php if (isset($_SESSION['sujet1'])) { echo $_SESSION['sujet1'];} ?>>
-                        </div>
-                        <?php
-                        unset($_SESSION['sujet1']);
-                        ?>
-
-                        <div class="input-box">
-                            <span class="details">Sujet n°2</span>
-                            <input <?php if (in_array('sujet2', $errors) ) { echo 'class="erreur"'; } ?>name="sujet2" type="text" placeholder="Entrez le deuxième sujet" value=<?php if (isset($_SESSION['sujet2'])) { echo $_SESSION['sujet2'];} ?>>
-                        </div>
-
-                        <?php
-                        unset($_SESSION['sujet2']);
-                        ?>
-
-                        <div class="input-box">
-                            <span class="details">Sujet n°3</span>
-                            <input <?php if (in_array('sujet3', $errors) ) { echo 'class="erreur"'; } ?>name="sujet3" type="text" placeholder="Entrez le troisième sujet" value=<?php if (isset($_SESSION['sujet3'])) { echo $_SESSION['sujet3'];} ?>>
-                        </div>
-
-                        <?php
-                        unset($_SESSION['sujet3']);
-                        ?>
-
-                        <div class="input-box">
-                            <span class="details">Sujet n°4</span>
-                            <input <?php if (in_array('sujet4', $errors) ) { echo 'class="erreur"'; } ?>name="sujet4" type="text" placeholder="Entrez le quatrième sujet" value=<?php if (isset($_SESSION['sujet4'])) { echo $_SESSION['sujet4'];} ?>>
-                        </div>
-                        
-                        <?php
-                        unset($_SESSION['sujet4']);
-                        ?>
-
-                        <div class="input-box">
-                            <span class="details">Sujet n°5</span>
-                            <input <?php if (in_array('sujet5', $errors) ) { echo 'class="erreur"'; } ?>name="sujet5" type="text" placeholder="Entrez le cinquième sujet" value=<?php if (isset($_SESSION['sujet5'])) { echo $_SESSION['sujet5'];} ?>>
-                        </div>
-
-                        <?php
-                        unset($_SESSION['sujet5']);
-                        ?>
-
-                        <div class="input-box">
-                            <span class="details">Sujet n°6</span>
-                            <input <?php if (in_array('sujet6', $errors) ) { echo 'class="erreur"'; } ?>name="sujet6" type="text" placeholder="Entrez le sixième sujet" value=<?php if (isset($_SESSION['sujet6'])) { echo $_SESSION['sujet6'];} ?>>
-                        </div>
-
-                        <?php
-                        unset($_SESSION['sujet6']);
-                        ?>
 
                         <div class="input-box">
                             <span class ="details">Date de début</span>
@@ -147,34 +85,61 @@
 
                         </div>
 
-                        <?php
-                        unset($_SESSION['dateDebut']);
-                        ?>
+                        <?php unset($_SESSION['dateDebut']); ?>
 
                         <div class="input-box">
                             <span class ="details">Date de fin</span>
                             <input class ="oblig <?php if (in_array('dateFin', $errors) ) { echo "erreur"; } ?>"name="dateFin" type="date" placeholder="Entrez la date de fin" value=<?php if (isset($_SESSION['dateFin'])) { echo $_SESSION['dateFin'];} ?>>
                         </div>
 
-                        <?php
-                        unset($_SESSION['dateFin']);
-                        ?>
+                        <?php unset($_SESSION['dateFin']); ?>
 
                         <div class="input-box">
-                            <span class ="details">Description</span>
+                            <span class ="details">Description du challenge</span>
                             <textarea class ="oblig <?php if (in_array('description', $errors) ) { echo "erreur"; } ?>"name="description"  placeholder="Entrez une description" value=<?php if (isset($_SESSION['description'])) { echo $_SESSION['description'];} ?>></textarea>
                         </div>
                         
-                        <?php
-                        unset($_SESSION['description']);
-                        ?>
+                        <?php unset($_SESSION['description']); ?>
 
-                        <div class="input-box">
-                            <label class="details"><i>*Il faut au minimum un sujet<i></label>
+                        <!-- Compteur de sujets -->
+                        <input type="hidden" id="compteur" name="compteur" value=1>
+
+                        <div class='user-details'>
+
+                            <!-- Nom du sujet -->
+                            <div class="input-box">
+                                <span class="details">(*) Sujet n°1 - Nom</span>
+                                <input class="oblig <?php if (in_array('nom_sujet1', $errors) ) {echo 'erreur'; } ?>"name="nom_sujet1" type="text" placeholder="Entrez le nom du sujet 1" autocomplete="off" value=<?php if (isset($_SESSION['sujet1'])) { echo $_SESSION['sujet1'];} ?>>
+                            </div>
+                            <?php unset($_SESSION['nom_sujet1']); ?>
+                                    
+                            <!-- Description du sujet -->
+                            <div class="input-box">
+                                <span class="details">Sujet n°1 - Description</span>
+                                <textarea class ="oblig <?php if (in_array('desc1', $errors) ) { echo "erreur"; } ?>"name="desc1"  placeholder="Entrez une description" value=<?php if (isset($_SESSION['desc1'])) { echo $_SESSION['desc1'];} ?>></textarea>
+                            </div>
+
+                            <?php unset($_SESSION['desc1']); ?>
+
+                            <!-- Image du sujet -->
+                            <div class="input-box">
+                                <span class="details">Sujet n°1 - Image</span>
+                                <input class="oblig <?php if (in_array('image1', $errors) ) {echo 'erreur'; } ?>"name="image1" type="text" placeholder="Entrez le lien de l'image" value=<?php if (isset($_SESSION['image1'])) { echo $_SESSION['image1'];} ?>>
+                            </div>
+                            <?php unset($_SESSION['image1']); ?>
+
+                            <!-- Ressources du sujet -->
+                            <div class="input-box">
+                                <span class="details">Sujet n°1 - Ressources</span>
+                                <input class="oblig <?php if (in_array('ressrc1', $errors) ) {echo 'erreur'; } ?>"name="ressrc1" type="text" placeholder="Entrez le lien des ressources" value=<?php if (isset($_SESSION['ressrc1'])) { echo $_SESSION['ressrc1'];} ?>>
+                            </div>
+                            <?php unset($_SESSION['ressrc1']); ?>
+
+                            <!-- Bouton ajouter un sujet -->
+                            <input id="btn-ajouter-sujet" type="button" value="+" onclick="ajouterSujet(2)">
                         </div>
-                        
-
-
+                
+                       
                     </div>
 
                     <div class="button">
