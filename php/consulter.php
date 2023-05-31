@@ -37,8 +37,10 @@
             <a href="../php/datainfo.php" class="btn">Retour</a>
             <?php
                 if ($_SESSION['type'] == 'Administrateur') {
-                    echo "<a href=\"../php/modifier.php?idData=".$idData."\" class=\"btn\">Modifier</a>";
-                } 
+                    echo "<a href='../php/modifier.php?idData=".$idData."' class='btn'>Modifier</a>";
+                } else if ($_SESSION['type'] == 'Gestionnaire' && $data["typeD"] == "Battle") {
+                    echo "<a href='../php/creerQuestionnaire.php?id_projetdata=".$sujets[0]["idSujet"]. "&defi=".$data["typeD"]."' class='btn'>Créer un questionnaire</a>";
+                }
             ?>
         </div>
 
@@ -82,9 +84,6 @@
                         echo "<h3 class ='image-title'>" . $sujet["image"] . "</h3>";
                         echo "<p class ='description'>" . $sujet["descriptionS"] . "</p>";
                         echo "<p class ='sujet-ressources'>Ressources : " . $sujet["ressources"] . "</p>";
-                        if ($_SESSION['type'] == 'Gestionnaire' && $data["typeD"] == "Battle") {
-                            echo "<a href='../php/creerQuestionnaire.php?id_projetdata=".$sujet["idSujet"]. "&defi=".$data["typeD"]."' class='btn-creer'>Créer un questionnaire</a>";
-                        }
                         echo "</div>";
                     }
                 ?>
@@ -94,7 +93,7 @@
         </div>
         <?php
             if(isset($_SESSION['type']) && $_SESSION['type'] == 'Gestionnaire' && $_SESSION['id'] == $data["idGestionnaire"]){
-                echo '<div">
+                echo '<div class="fond">
                 <div class="infos">';
                     echo "<div class ='participants'>";
                     echo "<h2 class ='defi-title'>Participants</h2>";
