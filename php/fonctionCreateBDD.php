@@ -274,6 +274,32 @@ function creerRendu($connexion, $idGroupe, $idProjetData, $code)
     }
 }
 
+// Créer un data fichier à partir des informations
+function creerDataFichier($connexion, $idGroupe, $idProjetData, $nomFichier, $nbLignes, $nbFonctions, $tailleMinFonction, $tailleMaxFonction, $tailleMoyenneFonction)
+{
+    try {
+        // Début de la transaction
+        $connexion->begin_transaction();
+
+        $stmt = $connexion->prepare("INSERT INTO DataFichier (idGroupe, idProjetData, nomFichier, nbLignes, nbFonctions, tailleMinFonction, tailleMaxFonction, tailleMoyenneFonction)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("iisiiiii", $idGroupe, $idProjetData, $nomFichier, $nbLignes, $nbFonctions, $tailleMinFonction, $tailleMaxFonction, $tailleMoyenneFonction);
+        if ($stmt->execute() === false) {
+            throw new Exception("Erreur lors de l'insertion dans la table Questionnaire : " . $connexion->error);
+        }
+
+        // Terminer la transaction
+        $connexion->commit();
+
+        echo "Questionnaire créé avec succès !";
+
+    } catch (Exception $e) {
+        // En cas d'erreur, annuler la transaction
+        $connexion->rollback();
+        echo "Erreur : " . $e->getMessage();
+    }
+}
+
 
 
 
