@@ -17,6 +17,7 @@ require_once 'fonctionCreateBDD.php';
     if (!isset($_GET['idData'])) {
         header('Location: ../php/datainfo.php');
     }
+
     $idData = $_GET['idData'];
     $connexion = connect($usernamedb, $passworddb, $dbname);
     $data = getDataDefiParId($connexion, $idData);
@@ -31,7 +32,13 @@ require_once 'fonctionCreateBDD.php';
 
     <h1 id="DataDefiTitle">Le défi</h1>
     <div class ="divRetour">
-            <a href="../php/datainfo.php" class="btnRetour">Retour</a>
+            <a href="../php/datainfo.php" class="btn">Retour</a>
+            <?php
+                if ($_SESSION['type'] == 'Administrateur')
+                {
+                    echo "<a href=\"../php/modifier.php?idData=".$idData."\" class=\"btn\">Modifier</a>";
+                }
+            ?>
         </div>
 
     <div class="fond">
