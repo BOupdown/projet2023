@@ -15,7 +15,7 @@ if ($reponse['idLogin'] == NULL) {
     disconnect($connexion);
 
 } else {
-
+    var_dump($reponse);
     $connexion = connect($usernamedb, $passworddb, $dbname);
     $stmt = mysqli_prepare($connexion, 'DELETE FROM Etudiant WHERE idLogin=?');
     mysqli_stmt_bind_param($stmt, "i", $id);
