@@ -1,0 +1,132 @@
+body {
+    background-image: url(../images/image.jpg);
+    background-repeat: repeat;
+    background-size: contain;
+}
+
+
+.titre {
+    margin-top: 1.6em;
+    text-align: center;
+    font-size: 100px;
+    color: bisque;
+
+}
+
+
+.table {
+    margin-top: 1em;
+    width: 100%;
+    font-size: 14px;
+    background-color: #172A3A;
+    border-collapse: separate;
+    border-radius: 20px;
+    overflow: hidden;
+    border-spacing: 0;
+    text-align: center;
+    border: 5px solid #172A3A;
+    margin-bottom: 2em;
+
+}
+
+.table th,
+.table td {
+    border: 1px solid #172A3A;
+    padding: 10px;
+    color: wheat;
+}
+
+.table td {
+    background-color: #824C71;
+}
+
+.table tr:nth-child(even) {
+    background-color: #824C71;
+}
+
+.buttonTd {
+    text-align: center;
+}
+
+
+
+
+.titre2 {
+    margin-top: 1.6em;
+    color: bisque;
+    font-size: 2em;
+    background-color: #172A3A;
+    display: inline;
+    border-radius: 20px;
+    border: 5px solid #172A3A;
+}
+
+.divElement {
+    margin-top: 1em;
+}
+
+
+
+.lien {
+    color: bisque;
+    text-decoration: none;
+
+}
+
+.lien:hover {
+    color: #172A3A;
+    text-decoration: underline;
+}
+
+.rating-label {
+    display: inline-block;
+    padding: 20px;
+    border: 4px solid #172A3A;
+    border-radius: 33%;
+    cursor: pointer;
+    margin: 10px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:hover+.rating-label {
+    background-color: #172A3A;
+}
+
+input[type="radio"]:checked+.rating-label {
+    background-color: #ffc107;
+    color: #fff;
+    border-color: #ffc107;
+}
+
+.note {
+    width: 40%;
+    height: auto;
+    padding: 4px;
+    font-size: 12px;
+}
+
+form .button input {
+height: 5%;    width: 30%;
+    border-radius: 5px;
+
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #1ECECC, #29BABB);
+    display: flex;
+    
+
+    
+}
+
+form .button input:hover {
+    /* transform: scale(0.99); */
+    background: linear-gradient(-135deg, #1ECECC, #29BABB);
+}   

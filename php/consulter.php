@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Gagnats des concours</title>
+    <title>Le défi</title>
     <link rel="stylesheet" type="text/css" href="../css/consulter.css">
 </head>
 <?php
@@ -63,16 +63,35 @@ require_once 'fonctionCreateBDD.php';
                 echo "<h3 class ='image-title'>" . $sujet["image"] . "</h3>";
                 echo "<h3 class ='sujet-title'>" . $sujet["nom"] . "</h3>";
                 echo "<p class ='description'>" . $sujet["descriptionS"] . "</p>";
-                echo "<p class ='sujet-ressources'>Date de début : " . $sujet["ressources"] . "</p>";
+                echo "<p class ='sujet-ressources'>Ressources : " . $sujet["ressources"] . "</p>";
                 echo "</div>";
             }
-
-
             ?>
 
 
         </div>
     </div>
+    <?php
+    if(isset($_SESSION['type']) && $_SESSION['type'] == 'Gestionnaire' && $_SESSION['id'] == $data["idGestionnaire"]){
+        echo '<div class = "fond">
+        <div class = "infos">';
+            echo "<div class ='participants'>";
+            echo "<h2 class ='defi-title'>Participants</h2>";
+            $connexion = connect($usernamedb, $passworddb, $dbname);
+            $groupes = getGroupesParIdDataDefi($connexion, $idData);
+            disconnect($connexion);
+            foreach ($groupes as $groupe) {
+                echo "<div class ='groupe'>";
+                echo "<h3 class ='groupe-title'>" . $groupe["nom"] . "</h3>";
+                echo "</div>";
+            }
+        echo '</div>
+    </div>';
+    }
+
+    ?>
+    
+
 
 </body>
 
