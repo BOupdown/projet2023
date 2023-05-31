@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $gestionnaire = getUtilisateurParLogin($connexion, $gestionnaire)[0]['idLogin'];
 
         // Création du data challenge vide dans la base SQL
-        $type_epreuve = "dataChallenge";
+        $type_epreuve = "Challenge";
         $nb_questions = 0;
         $requete_nouveau_questionnaire = "INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, descriptionD, dateDebut, dateFin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($connexion, $requete_nouveau_questionnaire);
