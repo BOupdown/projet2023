@@ -82,7 +82,7 @@
                         echo "<h3 class ='image-title'>" . $sujet["image"] . "</h3>";
                         echo "<p class ='description'>" . $sujet["descriptionS"] . "</p>";
                         echo "<p class ='sujet-ressources'>Ressources : " . $sujet["ressources"] . "</p>";
-                        if ($_SESSION['type'] == 'Gestionnaire') {
+                        if ($_SESSION['type'] == 'Gestionnaire' && $data["typeD"] == "Battle") {
                             echo "<a href='../php/creerQuestionnaire.php?id_projetdata=".$sujet["idSujet"]. "' class='btn-creer'>Créer un questionnaire</a>";
                         }
                         echo "</div>";
