@@ -64,7 +64,10 @@ require_once 'fonctionCreateBDD.php';
             echo "</div>";
 
             echo "<div class ='sujets'>";
-            echo "<h2 class ='defi-title'>Les sujets</h2>";
+            if (count($sujets) > 0)
+            {
+                echo "<h2 class ='defi-title'>Les projets data</h2>";
+            }
             foreach ($sujets as $sujet) {
                 echo "<div class ='sujet'>";
                 echo "<h3 class ='image-title'>" . $sujet["image"] . "</h3>";
