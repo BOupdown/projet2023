@@ -4,14 +4,8 @@ body {
     background-size: cover;
 }
 
-#diagramme {
-    height: 400px !important;
-    width: 100%;
-}
 
-table, th, td {
-    border: 1px solid;
-}
+
 
 .body {
     height: 100vh;
@@ -98,4 +92,78 @@ table, th, td {
     .container .content .category {
         flex-direction: column;
     }
+}
+.container2{
+    max-width: 80%;
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    margin-bottom: 5em;
+}
+.graph-container {
+    white-space: nowrap; /* Permet d'empêcher le retour à la ligne des éléments */  }
+  
+  .graph {
+    display: inline-block; /* Affiche les éléments côte à côte */
+    width: 50%; /* Ajustez la largeur selon vos besoins */
+  }
+
+  .titre {
+    margin-top: 1.6em;
+    text-align: center;
+    font-size: 100px;
+    color: bisque;
+
+}
+
+.graph-container {
+    display: flex; /* Utilisez Flexbox pour la mise en page */
+    flex-wrap: wrap; /* Permet le retour à la ligne des conteneurs */
+  }
+  
+  .graph-pair {
+    display: flex; /* Affiche les paires de graphiques en ligne */
+    flex-basis: 50%; /* Chaque paire occupe 50% de la largeur de la ligne */
+    justify-content: center;
+  }
+  
+  .graph {
+    flex-basis: 50%; /* Chaque graphique occupe 50% de la largeur de la paire */
+  }
+#diagBarre,
+#diagramme{
+    width: 150% !important;
+    height: auto !important;
+}
+
+
+.table th,
+.table td {
+    border: 1px solid #172A3A;
+    padding: 10px;
+    color: wheat;
+}
+
+.table td {
+    background-color: #824C71;
+}
+
+.table tr:nth-child(even) {
+    background-color: #824C71;
+}
+.table {
+    margin-top: 1em;
+    width: 100%;
+    font-size: 14px;
+    background-color: #172A3A;
+    border-collapse: separate;
+    border-radius: 20px;
+    overflow: hidden;
+    border-spacing: 0;
+    text-align: center;
+    border: 5px solid #172A3A;
+    margin-bottom: 2em;
+
 }

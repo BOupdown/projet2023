@@ -71,6 +71,8 @@
             echo '<th>Etat</th>';
             echo '<th>Date de fin</th>';
             echo '<th>Actions</th>';
+            echo '<th>Analyse code</th>';
+
             echo '</tr>';
             foreach ($groupes as $groupe) {
                 $connexion = connect($usernamedb, $passworddb, $dbname);
@@ -124,9 +126,17 @@
                 } else {
                     echo 'Date de rendu dépassée';
                 }
+                echo '</td>';
+                echo '<td>';;
+                if ($data['typeD'] == 'Challenge') {
+                    echo '<a class="rendre" href="analyseCode.php?idGroupe=' . $groupe['idGroupe'] . '">Analyse</a>';
+                } else {
+                    echo 'Pas de code à analyser';
+                }
+                echo '</td>';
             }
 
-            echo '</td>';
+
             echo '</tr>';
         }
 

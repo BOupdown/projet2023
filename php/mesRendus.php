@@ -16,10 +16,8 @@
     require 'navbar.php';
     require_once 'fonctionCreateBDD.php';
     require_once 'fonctionGetBDD.php';
-
     ?>
     <h1 class="titre">Mes rendus</h1>
-
     
     <?php
     $id = $_SESSION['id'];
