@@ -24,6 +24,16 @@
     }
     
     $idGroupe = $_GET["idGroupe"];
+    $connexion = connect($usernamedb,$passworddb,$dbname);
+    $groupe = getGroupeParId($connexion, $idGroupe);
+    disconnect($connexion);
+    //si l'etudiant n'est pas dans le groupe
+    if (!in_array($_SESSION['id'],array_slice($groupe,3,8)))
+    {
+        header('Location: /index.php');
+        exit();
+    }
+    
 
     if (isset($_FILES["fileUpload"]))
     {
@@ -83,11 +93,12 @@
         //on check quand meme que le fichier n'existe pas
         if (!$fichier["nomFichier"])
         {
+            
             $connexion = connect($usernamedb, $passworddb, $dbname);
             creerDataFichier($connexion, $idGroupe, $idProjetData, $nomFichier, $data[0], $data[1], $data[2], $data[3], intval($data[4]));
             disconnect($connexion);
         }
-
+        echo "<script>alert(".var_dump($fichier).")</script>";  
         
 
         $calcul = (100 * $json->{"tailleMoyenneFonction"} * $json->{"nbFonctions"}) / $json->{"nbLignes"};
@@ -100,14 +111,13 @@
         $connexion = connect($usernamedb, $passworddb, $dbname);
         $fichier = getDataFichierParIdGroupe($connexion, $idGroupe);
         disconnect($connexion);
-        var_dump($fichier);
         if (!$fichier)
         {
             echo "<script>alert('Erreur lors du chargement du fichier')</script>";
             header('Location: /index.php');
         }
         
-
+        $fichier = $fichier[0];
         $nomFichier = $fichier["nomFichier"];
         
         $data = array($fichier["nbLignes"],
