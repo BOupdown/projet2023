@@ -35,6 +35,7 @@
         );
 
         // Paramètres du mail
+        $mail->CharSet = 'UTF-8';
         $mail->setFrom('theuretpat@cy-tech.fr', 'Gestionnaire IA Pau'); // Adresse affichée lors de la réception du mail
         $mail->addReplyTo('theuretpat@cy-tech.fr', 'Gestionnaire IA Pau'); // Adresse reliée au bouton "Répondre"
         $mail->addAddress($destinataire); // Destinataire
@@ -44,7 +45,7 @@
 
         // Envoi du message et test d'erreur
         if (!$mail->send()) {
-            echo "Le message n'a pas été envoyé. Erreur : {$mail->ErrorInfo}";
+            die("Le message n'a pas été envoyé. Erreur : {$mail->ErrorInfo}");
         }
     }
         

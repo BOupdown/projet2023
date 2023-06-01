@@ -1,0 +1,130 @@
+body {
+    background-image: url(../images/image.jpg);
+    background-repeat: repeat;
+    background-size: contain;
+}
+
+main {
+    padding: 10em;
+}
+
+/* conteneur de tous les éléments de la messagerie */
+#conteneur-messagerie {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 1000px;
+    height: 800px;
+    position: relative;
+}
+
+/* conteneur de la liste des destinataires & de la zone "Rechercher"*/
+#conteneur-nom-destinataire {
+    margin-right: 10px;
+    padding-right: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* conteneur de la partie principale de messagerie (conversation & envoi de messages) */
+#conteneur-conversation {
+    border-radius: 8px;
+    padding: 5px;
+    width: 600px;
+    background-color: white;
+}
+
+/* conteneur de tous les messages */
+#conteneur-messages {
+    height: 600px;
+    overflow-y: scroll;
+}
+
+/* case d'un seul message */
+.case-message {
+    background-color: bisque;
+    border-radius: 7px;
+    padding: 10px;
+    width: 400px;
+    color: #172A3A;
+    font-family: Calibri, sans-serif;
+}
+
+/*date & heure du message */
+.date-heure-message {
+    font-size: 11px;
+}
+
+/* case (emplacement de message) vide */
+.case-vide {
+    width: 200px;
+}
+
+
+/* conteneur des zones de saisie et du bouton "Envoyer" */
+#conteneur-saisie-mail {
+    position: absolute;
+    bottom: 10px;
+}
+
+/* zone de saisie du mail */
+#zone-saisie-mail {
+    width: 590px;
+    resize: none;
+    font-size: 14px;
+    border: 1px solid #172A3A;
+    border-radius: 10px;
+}
+
+/* zone de l'objet du mail */
+#zone-saisie-objet-mail {
+    font-size: 14px;
+    border: 1px solid #172A3A;
+    border-radius: 10px;
+    height: 20px;
+}
+
+button {
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    color: bisque;
+    font-size: 14px;
+    cursor: pointer;
+    background: #172A3A;
+    margin-bottom: 5px;
+}
+
+button:hover {
+    background: linear-gradient(-135deg, #1ECECC, #29BABB);
+}
+
+.input-box input {
+    height: 35px;
+    width: 135px;
+    padding-left: 10px;
+    margin-bottom: 7px;
+    outline: none;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+/* Liste déroulante de la recherche */
+.list-group{
+    position: absolute;
+    max-height:250px;
+    width: 127px;
+    padding-left: 10px;
+    overflow: scroll;
+    z-index: 9999;
+    background-color: rgb(255, 255, 255);
+    opacity: 90%;
+    font-size: 14px;
+    display: none;
+    margin-top:-5px;
+    border : 1px solid #172A3A;
+    border-radius: 5px;
+}

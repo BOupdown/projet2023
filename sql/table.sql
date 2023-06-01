@@ -146,12 +146,18 @@ CREATE TABLE Message(
     FOREIGN KEY (idDestinataire) REFERENCES Login (idLogin) ON DELETE SET NULL
 );
 
-
 CREATE TABLE MessageGroupe(
     idMessage INTEGER PRIMARY KEY,
     idDestinataire INTEGER,
     FOREIGN KEY (idMessage) REFERENCES Message (idMessage) ON DELETE CASCADE,
     FOREIGN KEY (idDestinataire) REFERENCES Groupe (idGroupe) ON DELETE SET NULL
+);
+
+CREATE TABLE MessageDataDefi(
+    idMessage INTEGER PRIMARY KEY,
+    idDestinataire INTEGER,
+    FOREIGN KEY (idMessage) REFERENCES Message (idMessage) ON DELETE CASCADE,
+    FOREIGN KEY (idDestinataire) REFERENCES DataDefi (idDataDefi) ON DELETE SET NULL
 );
 
 CREATE TABLE DataFichier(
