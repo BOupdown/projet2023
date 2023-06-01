@@ -29,14 +29,8 @@
                     <div class="input-box">
                         <div class="input-group">
                             <input
-                            <?php if (in_array('dataChallenge', $errors)) {
-                                echo 'class="erreur"';
-                            } ?>
-                                type="text" name="challenge" id="dataChallenge" placeholder="Rechercher  🔍" autocomplete="off"
-                                value=
-                            <?php if (isset($_SESSION['dataChallenge'])) {
-                                        echo $_SESSION['dataChallenge'];
-                            } ?>>
+                          
+                                type="text" name="challenge" id="dataChallenge" placeholder="Rechercher  🔍" autocomplete="off">
                         </div>
 
                         <div class="list-group" id="show-listChallenge">

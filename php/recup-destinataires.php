@@ -6,16 +6,16 @@
     if (isset($_POST['query'])) {
         $connexion = connect($usernamedb,$passworddb,$dbname);
         $inpText = $_POST['query'];
-        $allUser = getAllLoginsEtudiants($connexion);
+        $allUser = getAllLoginsEtudiantsEtNomGroupe($connexion);
         disconnect($connexion);
 
         if ($allUser) {
             foreach($allUser as $user)
             {
-                $value = stripos($user["nomUtilisateur"], $inpText);
+                $value = stripos($user, $inpText);
                 if (gettype($value) == "integer" && $value == 0)
                 {
-                    echo "<p class='data' class='list-group-item border-1' id='" . $user["idLogin"] . "'>".$user["nomUtilisateur"]."</p>";
+                    echo "<p class='data' class='list-group-item border-1' id=''>".$user."</p>";
                 }
             }
         } else {

@@ -2103,6 +2103,50 @@ function getQuestionnairesParIdSujet($connexion, $idSujet) {
         return null;
     }
 }
+function getAllLoginsEtudiantsEtNomGroupe($connexion)
+{
+    $queryEtudiants = "SELECT nomUtilisateur
+                       FROM Login
+                       WHERE type = 'etudiant'";
 
+    $queryGroupes = "SELECT nom
+                     FROM Groupe";
+
+    $logins = array();
+
+    try {
+        // Récupération des logins étudiants
+        $stmtEtudiants = $connexion->prepare($queryEtudiants);
+        $stmtEtudiants->execute();
+        $nomUtilisateur = null;
+        $stmtEtudiants->bind_result($nomUtilisateur);
+
+        while ($stmtEtudiants->fetch()) {
+            $logins[] = $nomUtilisateur;
+        }
+
+        $stmtEtudiants->close();
+
+        // Récupération des noms de groupe
+        $stmtGroupes = $connexion->prepare($queryGroupes);
+        $stmtGroupes->execute();
+        $nomGroupe = null;
+        $stmtGroupes->bind_result($nomGroupe);
+
+        // Ajout des noms de groupe dans le tableau des logins
+        while ($stmtGroupes->fetch()) {
+            $logins[] = $nomGroupe;
+        }
+
+        $stmtGroupes->close();
+
+        // Retourne le tableau des logins étudiants et des noms de groupe
+        return $logins;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
 
 ?>

@@ -42,6 +42,8 @@
                             if ($_SESSION['type'] == "Gestionnaire") {
                                 echo '<li><a class="hover-underline-animation" href="/php/mesDefis.php">Mes défis</a></li>';
                                 echo '<li><a class="hover-underline-animation" href="/php/lesReponses.php">Les réponses</a></li>';
+                                echo '<li><a class="hover-underline-animation" href="/php/messagerie.php">Messagerie</a></li>';
+
 
                             }
 
