@@ -12,6 +12,12 @@
     session_start();
     require 'navbar.php';
 
+    if (empty($_SESSION['type']) || $_SESSION['type'] != 'Etudiant' || empty($_GET["idGroupe"]))
+    {
+        header('Location: /index.php');
+        exit();
+    }
+
     function launch_api()
     {
         $test = "gnome-terminal --tab -- bash -c \"java -cp ../java/api.jar Serveur; exec bash\"";

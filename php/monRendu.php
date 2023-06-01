@@ -19,7 +19,8 @@
 
     if (empty($_SESSION['type']) || $_SESSION['type'] != 'Etudiant' || empty($_GET["idGroupe"]))
     {
-        //header('Location: /index.php');
+        header('Location: /index.php');
+        exit();
     }
     
     $idGroupe = $_GET["idGroupe"];
@@ -61,7 +62,7 @@
         if (!$resultat)
         {
             echo "<script>alert('Erreur lors du chargement du fichier')</script>";
-            //header('Location: /index.php');
+            header('Location: /index.php');
         }
         //on appelle l'api avec le fichier
         $json = json_decode($resultat);
