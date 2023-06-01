@@ -3,7 +3,7 @@
 
 <head>
     <title>Mes rendus</title>
-    <link rel="stylesheet" type="text/css" href="../css/datainfo.css">
+    <link rel="stylesheet" type="text/css" href="../css/lesReponses.css">
 </head>
 
 <body>
@@ -33,19 +33,23 @@
     if ($rendus) {
         $connexion = connect($usernamedb, $passworddb, $dbname);
         echo '<table class="table">';
-        echo "<tr><th>Nom</th><th>Gestionnaire</th><th>Nombre de sujet</th><th>Date de début</th><th>Date de fin</th><th>Consulter</th></tr>";
+        echo "<tr><th>Nom</th><th>Gestionnaire</th><th>Nombre de sujet</th><th>Date de fin</th><th>Le code</th><th>Consulter</th></tr>";
         
         foreach ($rendus as $rendu) {
-            echo "<tr id='login_" . $challenge['idRendu'] . "'>";
-            $challenge= getDataDefiParId($connexion, $rendu['idChallenge']);
-            echo "<td>" . $challenge['nom'] . "</td>";
-            $groupe = getGroupeParId($connexion, $challenge['idGroupe']);
-            echo "<td>" . $groupe['nom'] . "</td>";
-            $projetData = getProjetDataParId($connexion, $challenge['idProjetData']);
-            echo "<td>" . $projetData['nom'] . "</td>";
-            echo "<td><a href='" . $rendu['code'] . "'>".$rendu['code']."</a></td>";
+            $challenge= getDataDefiParId($connexion, $rendu['idProjetData']);
 
-            echo "<td ><a class='consulterBtn' href=\"consulter.php?idData=".$challenge['idDataDefi']."\">Consulter</a></td>";
+            echo "<tr id='login_" . $rendu['idRendu'] . "'>";
+            echo "<td>" . $challenge['nom'] . "</td>";
+            $groupe = getGroupeParId($connexion, $rendu['idGroupe']);
+            echo "<td>" . $groupe['nom'] . "</td>";
+            $projetData = getProjetDataParId($connexion, $rendu['idProjetData']);
+            $dataChallenge = getDataDefiParId($connexion, $projetData['idDataDefi']);
+            echo "<td>" . $projetData['nom'] . "</td>";
+            echo "<td>" . $dataChallenge['dateFin'] . "</td>";
+            echo "<td><a class=\"lien\" href='" . $rendu['code'] . "'>".$rendu['code']."</a></td>";
+
+
+            echo "<td ><a class='consulterBtn' href=\"monRendu.php?idGroupe=".$rendu['idGroupe']."\">Consulter</a></td>";
             echo "</tr>";
         }
 
