@@ -41,7 +41,7 @@
     if ($challenges) {
         $connexion = connect($usernamedb, $passworddb, $dbname);
         echo '<table class="table">';
-        echo "<tr><th>Nom</th><th>Nombre de sujet</th><th>Date de début</th><th>Date de fin</th><th>Consulter</th></tr>";
+        echo "<tr><th>Nom</th><th>Nombre de sujet</th><th>Date de début</th><th>Date de fin</th><th>Consulter</th><th>Statistiques</th></tr>";
         foreach ($challenges as $challenge) {
             echo "<tr id='login_" . $challenge['idDataDefi'] . "'>";
             echo "<td>" . $challenge['nom'] . "</td>";
@@ -54,6 +54,8 @@
             }
 
             echo "<td ><a class='consulterBtn' href=\"consulter.php?idData=" . $challenge['idDataDefi'] . "\">Consulter</a></td>";
+            echo "<td><a class = 'consulterBtn' href=\"statistiquesProjet.php?id=" . $challenge["idDataDefi"] . "\">" . $challenge["nom"] . "</a></td>";
+
             echo "</tr>";
         }
 
