@@ -1,16 +1,11 @@
 <!DOCTYPE html>
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
-    <title> Créer un challenge </title>
+    <title> Créer une battle / IA Pau </title>
     <link rel="stylesheet" href="/css/creerChallengeBattle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <html lang="en">
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
 </head>
 
 
@@ -28,7 +23,7 @@
     if (isset($_GET['errors'])) {
         $errors = explode(';', $_GET['errors']);
         if (in_array('no', $errors)) {
-            echo "<script>alert(\"Challenge créé avec succès\")</script>";
+            echo "<script>alert(\"Battle créé avec succès\")</script>";
         }
         if (in_array('dates', $errors)) {
             echo "<script>alert(\"Les dates sont incohérentes\")</script>";
@@ -56,21 +51,19 @@
                             <span class="details">Nom de la battle</span>
                             <input class="oblig<?php if (in_array('nom', $errors)) {
                                 echo "erreur";
-                            } ?>"name="nom"   type="text"  placeholder="Entrez le nom du challenge" value=<?php if (isset($_SESSION['nom'])) {
+                            } ?>"name="nom"   type="text"  placeholder="Entrez le nom de la battle" value=<?php if (isset($_SESSION['nom'])) {
                                  echo $_SESSION['nom'];
                              } ?>>
                         </div>
-                        <?php
-                        unset($_SESSION['nom']);
-                        ?>
+                        <?php unset($_SESSION['nom']); ?>
 
                         <div class="input-box">
-                            <span class="details">Gestionnaire</span>
+                            <span class="details">Gestionnaire responsable</span>
                             <div class="input-group">
                                 <input  class="oblig <?php  if (in_array('gestionnaire', $errors)) {
                                     echo "erreur";
                                 } ?>"  type="text" name="gestionnaire" id="gestionnaire" class="gestionnaire"
-                                    placeholder="Search..." autocomplete="off" value=<?php if (isset($_SESSION['gestionnaire'])) {
+                                    placeholder="Rechercher  🔍" autocomplete="off" value=<?php if (isset($_SESSION['gestionnaire'])) {
                                         echo $_SESSION['gestionnaire'];
                                     } ?>>
                             </div>
@@ -79,28 +72,8 @@
                             </div>
 
                         </div>
-                        <?php
-                        unset($_SESSION['gestionnaire']);
-                        ?>
+                        <?php unset($_SESSION['gestionnaire']); ?>
 
-                        <div class="input-box">
-                            <span class="details">Sujet</span>
-                            <input class="oblig <?php if (in_array('sujet', $errors) ) {echo 'erreur'; } ?>"name="sujet" type="text" placeholder="Entrez le sujet" value=<?php if (isset($_SESSION['sujet'])) { echo $_SESSION['sujet'];} ?>>
-                        </div>
-                        <?php
-                        unset($_SESSION['sujet']);
-                        ?>
-
-                        <div class="input-box">
-                            <span class="details">Nombre de questionnaire</span>
-                            <input class="oblig <?php if (in_array('questionnaire', $errors) ) { echo "erreur"; } ?>"name="questionnaire" type="number" placeholder="Entrez le nombre de questionnaire" value=<?php if (isset($_SESSION['questionnaire'])) { echo $_SESSION['questionnaire'];} ?>>
-                        </div>
-
-                        <?php
-                        unset($_SESSION['questionnaire']);
-                        ?>
-
-                      
 
                         <div class="input-box">
                             <span class ="details">Date de début</span>
@@ -108,27 +81,56 @@
 
                         </div>
 
-                        <?php
-                        unset($_SESSION['dateDebut']);
-                        ?>
+                        <?php unset($_SESSION['dateDebut']); ?>
 
                         <div class="input-box">
                             <span class ="details">Date de fin</span>
                             <input class ="oblig <?php if (in_array('dateFin', $errors) ) { echo "erreur"; } ?>"name="dateFin" type="date" placeholder="Entrez la date de fin" value=<?php if (isset($_SESSION['dateFin'])) { echo $_SESSION['dateFin'];} ?>>
                         </div>
 
-                        <?php
-                        unset($_SESSION['dateFin']);
-                        ?>
+                        <?php unset($_SESSION['dateFin']); ?>
 
                         <div class="input-box">
-                            <span class ="details">Description</span>
+                            <span class ="details">Description de la battle</span>
                             <textarea class ="oblig <?php if (in_array('description', $errors) ) { echo "erreur"; } ?>"name="description"  placeholder="Entrez une description" value=<?php if (isset($_SESSION['description'])) { echo $_SESSION['description'];} ?>></textarea>
                         </div>
                         
-                        <?php
-                        unset($_SESSION['description']);
-                        ?>
+                        <?php unset($_SESSION['description']); ?>
+
+                        <div class="input-box">
+                            <span class="details">Nombre de questionnaires</span>
+                            <input class="oblig <?php if (in_array('questionnaire', $errors) ) { echo "erreur"; } ?>"name="questionnaire" type="number" placeholder="Entrez le nombre de questionnaires" value=<?php if (isset($_SESSION['questionnaire'])) { echo $_SESSION['questionnaire'];} ?>>
+                        </div>
+
+                        <?php unset($_SESSION['questionnaire']); ?>
+
+                        <div class="input-box">
+                            <span class="details">Sujet</span>
+                            <input class="oblig <?php if (in_array('sujet', $errors) ) {echo 'erreur'; } ?>"name="sujet" type="text" placeholder="Entrez le nom du sujet" value=<?php if (isset($_SESSION['sujet'])) { echo $_SESSION['sujet'];} ?>>
+                        </div>
+                        <?php unset($_SESSION['sujet']); ?>
+
+                        <div class="input-box">
+                            <span class ="details">Description du sujet</span>
+                            <textarea class ="oblig <?php if (in_array('description_sujet', $errors) ) { echo "erreur"; } ?>"name="description_sujet"  placeholder="Entrez une description" value=<?php if (isset($_SESSION['description_sujet'])) { echo $_SESSION['description_sujet'];} ?>></textarea>
+                        </div>
+
+                        <?php unset($_SESSION['description_sujet']); ?>
+
+                        <div class="input-box">
+                            <span class="details">Image</span>
+                            <input name="image" type="text" placeholder="Entrez le lien de l'image">
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Ressources</span>
+                            <input name="ressources" type="text" placeholder="Entrez le lien des ressources">
+                        </div>
+
+                        
+
+
+
                         
                     </div>
 

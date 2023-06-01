@@ -83,9 +83,9 @@
                     foreach ($sujets as $sujet) {
                         echo "<div class ='sujet'>";
                         echo "<h3 class ='sujet-title'>" . $sujet["nom"] . "</h3>";
-                        echo "<h3 class ='image-title'>" . $sujet["image"] . "</h3>";
+                        echo "<h3 class ='image-title'><img class=\"img\" src=\"".$sujet["image"]."\" alt=\"Image-".$sujet["nom"]."\"></h3>";
                         echo "<p class ='description'>" . $sujet["descriptionS"] . "</p>";
-                        echo "<p class ='sujet-ressources'>Ressources : " . $sujet["ressources"] . "</p>";
+                        echo "<p class ='sujet-ressources'>Ressources : " . $sujet["ressources"] . "</p><br><hr width=\"35%\"><br>";
                         echo "</div>";
                     }
                 ?>

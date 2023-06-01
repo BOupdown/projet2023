@@ -18,6 +18,11 @@
 
 }
 
+.img {
+    width: 60%;
+    height: auto;
+}
+
 #DataDefiTitle {
     margin-top: 1.6em;
     text-align: center;

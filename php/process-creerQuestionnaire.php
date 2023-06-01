@@ -54,7 +54,7 @@
 
     // Redirection avec notification de confirmation
     $_SESSION['questionnaire-cree'] = 1;
-    header("Location: creerQuestionnaire.php");
-    exit;
+
+    header("Location: creerQuestionnaire.php?id_projetdata=".$id_sujet."&defi=Battle");
 
 ?>
