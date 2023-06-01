@@ -36,7 +36,7 @@ INSERT INTO Login (nomUtilisateur, mdp, type) VALUES
     ('user15','password17','Etudiant'),
     ('user16','password18','Etudiant'),
     ('user17','password19','Etudiant'),
-    ('user28','password20','Etudiant'),
+    ('user18','password20','Etudiant'),
     ('user19','password21','Etudiant'),
     ('user20','password22','Etudiant'),
     ('user21','password23','Etudiant'),
@@ -76,9 +76,9 @@ INSERT INTO Login (nomUtilisateur, mdp, type) VALUES
     ('user45','password45','Gestionnaire'),
     ('user46','password46','Gestionnaire'),
     ('user47','password47','Gestionnaire'),
-    ('user49','password48','Gestionnaire'),
-    ('user50','password49','Gestionnaire'),
-    ('user51','password50','Gestionnaire');
+    ('user48','password48','Gestionnaire'),
+    ('user49','password49','Gestionnaire'),
+    ('user50','password50','Gestionnaire');
 
 -- --------------- LOGIN ADMINISTRATEUR ----------------------------------------------
 
@@ -138,7 +138,7 @@ INSERT INTO Etudiant (idLogin, nom, prenom, niveauEtude, telephone, mail, ecole)
     (37, 'Fortin', 'Léa', 'L3', '0612358740', 'lea.fortin@example.com', 'University36'),
     (38, 'Gauthier', 'Emma', 'L3', '0658741245', 'emma.gauthier@example.com', 'University37');
 
--- --------------- TABLE GESTIONNAIRE ----------------------------------------------
+-- -- --------------- TABLE GESTIONNAIRE ----------------------------------------------
 
 INSERT INTO Gestionnaire (idLogin, nom, prenom, entreprise, telephone, mail, dateDebut, dateFin)
 VALUES (39, 'Gestionnaire1', 'Gestionnaire1', 'ABC Company', '0695847128', 'gestionnaire@example.com', '2022-01-01', '2022-12-31');
@@ -157,35 +157,33 @@ INSERT INTO Gestionnaire (idLogin, nom, prenom, entreprise, telephone, mail, dat
     (47, 'Gestionnaire14', 'Gestionnaire14', 'XYZ Corp', '0658741235', 'gestionnaire14@example.com', '2022-01-01', '2022-12-31'),
     (48, 'Gestionnaire15', 'Gestionnaire15', '123 Industries', '0645987624', 'gestionnaire15@example.com', '2022-01-01', '2022-12-31'),
     (49, 'Gestionnaire16', 'Gestionnaire16', 'Acme Corporation', '0635874127', 'gestionnaire16@example.com', '2022-01-01', '2022-12-31'),
-    (50, 'Gestionnaire17', 'Gestionnaire17', 'ABC Company', '0622315988', 'gestionnaire17@example.com', '2022-01-01', '2022-12-31'),
-    (51, 'Gestionnaire18', 'Gestionnaire18', 'XYZ Corp', '0612358746', 'gestionnaire18@example.com', '2022-01-01', '2022-12-31');
+    (50, 'Gestionnaire17', 'Gestionnaire17', 'ABC Company', '0622315988', 'gestionnaire17@example.com', '2022-01-01', '2022-12-31');
 
 
--- ---------------TABLE ADMINISTRATEUR ----------------------------------------------
+-- -- ---------------TABLE ADMINISTRATEUR ----------------------------------------------
 
-INSERT INTO Administrateur (idLogin, nom, prenom, telephone, mail)
-VALUES (52, 'Admin1', 'Admin1', '0626594871', 'admin@example.com');
+INSERT INTO Administrateur (idLogin, nom, prenom, telephone, mail) 
+VALUES (51, 'Admin1', 'Admin1', '0626594871', 'admin@example.com');
 
--- --------------- TABLE DATA DEFI ----------------------------------------------
-
-INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFIN)
-VALUES (39, 'Battle', 2, 3, 'Octogone 2pac vs Eminem', '2022-05-01', '2022-06-30');
+-- -- --------------- TABLE DATA DEFI ----------------------------------------------
 
 INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFIN)
-VALUES (40, 'Battle', 3, 2, 'Octogone Omar vs Julien', '2022-07-01', '2022-08-30');
+VALUES (39, 'Battle', 1, 3, 'Ia et nature', '2022-05-01', '2023-06-30');
+
+INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, dateDebut, dateFIN)
+VALUES (40, 'Battle', 1, 2, 'La robotique dans le quotidien', '2022-07-01', '2023-08-30');
 
 INSERT INTO DataDefi (idGestionnaire,typeD,nombreSujet,nombreQuestionnaire,nom,dateDebut,dateFIN,descriptionD) VALUES
     (41, 'Battle', 10, 10, 'Défi1', '2022-01-01', '2023-12-31', 'Description du défi1'),
     (42, 'Challenge', 20, 20, 'Défi2', '2022-01-01', '2023-12-31', 'Description du défi2'),
-    (43, 'Battle', 30, 30, 'Défi3', '2022-01-01', '2022-12-31', 'Description du défi3'),
-    (44, 'Challenge', 40, 40, 'Défi4', '2022-01-01', '2022-12-31', 'Description du défi4'),
+    (43, 'Battle', 30, 30, 'Défi3', '2022-01-01', '2023-12-31', 'Description du défi3'),
+    (44, 'Challenge', 40, 40, 'Défi4', '2022-01-01', '2023-12-31', 'Description du défi4'),
     (45, 'Battle', 50, 50, 'Défi5', '2022-01-01', '2022-12-31', 'Description du défi5'),
-    (46, 'Challenge', 60, 60, 'Défi6', '2022-01-01', '2022-12-31', 'Description du défi6'),
+    (46, 'Challenge', 60, 60, 'Défi6', '2022-01-01', '2023-12-31', 'Description du défi6'),
     (47, 'Battle', 70, 70, 'Défi7', '2022-01-01', '2022-12-31', 'Description du défi7'),
-    (48, 'Challenge', 80, 80, 'Défi8', '2022-01-01', '2022-12-31', 'Description du défi8'),
+    (48, 'Challenge', 80, 80, 'Défi8', '2022-01-01', '2023-12-31', 'Description du défi8'),
     (49, 'Battle', 90, 90, 'Défi9', '2022-01-01', '2022-12-31', 'Description du défi9'),
     (50, 'Challenge', 100, 100, 'Défi10', '2022-01-01', '2022-12-31', 'Description du défi10'),
-    (51, 'Battle', 110, 110, 'Défi11', '2022-01-01', '2022-12-31', 'Description du défi11'),
     (39, 'Challenge', 120, 120, 'Défi12', '2022-01-01', '2022-12-31', 'Description du défi12'),
     (40, 'Battle', 130, 130, 'Défi13', '2022-01-01', '2022-12-31', 'Description du défi13'),
     (41, 'Challenge', 140, 140, 'Défi14', '2022-01-01', '2022-12-31', 'Description du défi14'),
@@ -198,104 +196,48 @@ INSERT INTO DataDefi (idGestionnaire,typeD,nombreSujet,nombreQuestionnaire,nom,d
 
 
 
--- --------------- TABLE QUESTIONNAIRE ----------------------------------------------
-
--- INSERT INTO Questionnaire (nom, descriptionQ, idDataDefi)
--- VALUES ('Questionnaire1', 'pas d idee', 1);
-
--- INSERT INTO Questionnaire (nom, descriptionQ, idDataDefi)
--- VALUES ('Questionnaire2', 'Questionnaire pour un champion', 1);
-
--- INSERT INTO Questionnaire (nom, descriptionQ, idDataDefi)
--- VALUES ('Questionnaire3', 'QCM inédit', 1);
-
--- --------------- TABLE GROUPE ----------------------------------------------
-
-INSERT INTO Groupe (idCapitaine, idDataChallenge, idEtudiant1, idEtudiant2, idEtudiant3, nom)
-VALUES (1, 1, 1, 2, 3, 'Groupe A');
 
 -- -- --------------- TABLE PROJET DATA ----------------------------------------------
-
--- INSERT INTO ProjetData (idDataChallenge, idGroupe, descriptionP, imageP)
--- VALUES (1, 1, 'le bard sort victorieux', 'images/image.png');
-
--- --------------- TABLE PODIUM ----------------------------------------------
-
-INSERT INTO Podium (idDataBattle, idEtudiant1, idEtudiant2, idEtudiant3)
-VALUES (1, 3, 4, 5);
-
-INSERT INTO Podium (idDataBattle, idEtudiant1, idEtudiant2, idEtudiant3)
-VALUES (2, 5, 3, 4);
-
--- --------------- TABLE MESSAGE ----------------------------------------------
-
-INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
-VALUES (6, 2, 'vrai objet', 'bonjour bonjour bonjour b!!!!! jour');
-
-INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
-VALUES (6, 2, 'objet kreklzrnf', 'bonjour bonjour bonjour b!!!!! jour');
-
-INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
-VALUES (7, 1, 'OBJETTT', 'salutt salut :) b!!!!! jour');
-
-INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
-VALUES (6, 3, 'objet de oui', 'oui c pour ca que je parle avec user3');
-
-INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
-VALUES (3, 1, 'objet de ok', 'ok merci user1');
-
-INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
-VALUES (6, 4, 'sssss', 'sssssssssssssssssssssss');
-
-INSERT INTO Message (idExpediteur, idDestinataire, objet, contenu)
-VALUES (7, 2, 'Bjr', 'Bonjour, chacal!');
-
-INSERT INTO MessageGroupe (idMessage, idDestinataire)
-VALUES (7, 1);
--- 
-
--- --------------- TABLE PROJET DATA ----------------------------------------------
--- pas deux battles avec le meme idDataDefi mais avec Challenge c ok
+-- -- pas deux battles avec le meme idDataDefi mais avec Challenge c ok
     INSERT INTO ProjetData (nom,descriptionS,idDataDefi,image,ressources) VALUES
     ("Reconnaissance d'images", 'L exploration des méthodes d apprentissage automatique pour la reconnaissance d images.', 1, 'https://praedictia.com/wp-content/uploads/sites/107/2021/10/P3-1_intro_1456783511.jpg', 'wikipedia'),
     ("Jouer des jeux vidéos", 'L utilisation de l apprentissage par renforcement pour entraîner un agent à jouer à des jeux vidéo.', 2, 'https://www.afjv.com/2023/03/230306-cloud-gaming-jeux-video.jpg', 'youtube'),
     ("L'analyse de sentiments", 'L analyse de sentiment basée sur le traitement du langage naturel.', 3, 'https://blog.stack-labs.com/images/articles/sentiment_analysis/sentiment-analysis.jpg', 'national geographic'),
     ("La protection de la vie privée", 'L apprentissage fédéré pour la protection de la vie privée.', 4, 'https://droitdu.net/files/sites/107/2019/11/Capture-d%E2%80%99e%CC%81cran-2019-11-16-a%CC%80-21.03.26-650x411.png', 'twitch'),
-    ("IA et société", 'L exploration de l IA éthique et de ses implications sociétales.', 5, 'https://aurelienbamde.com/wp-content/uploads/2016/09/illustration-41.jpg', 'github'),
+    ("IA et société", 'L exploration de l IA éthique et de ses implications sociétales.', 5, 'https://aurelienbamde.com/wp-content/uploads/2016/09/illustration-41.jpg', 'github');
 
 
 INSERT INTO Groupe (idCapitaine,idDataChallenge,idEtudiant1,idEtudiant2,idEtudiant3,idEtudiant4,idEtudiant5,idEtudiant6,idEtudiant7,idEtudiant8,nom) VALUES
     (1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 'Groupe1'),
     (9, 2, 9, 10, 11, 12, 13, 14, 15, 16, 'Groupe2'),
     (17, 3, 17, 18, 18, 19, 20, 21, 22, 23, 'Groupe3'),
-    (24, 4, 24, 25, 26, 27, 28, 29, 30, 31, 'Groupe4'),
-    (5, 5, 1, 4, 5, 11, 16, 25, 30, 18, 'Groupe5'),
+    (1, 4, 1, 1, 26, 27, 28, 29, 30, 31, 'Groupe4'),
+    (1, 5, 1, 4, 5, 11, 16, 25, 30, 18, 'Groupe5'),
     (6, 6, 6, 7, 24, 21, 20, 19, 15, 11, 'Groupe6'),
     (7, 7, 7, 8, 5, 11, 16, 20, 25, 29, 'Groupe7'),
     (8, 8, 8, 18, 19, 3, 4, 14, 16, 7, 'Groupe8'),
     (9, 9, 9, 2, 3, 4, 5, 6, 29, 30, 'Groupe9'),
     (10, 1, 10, 3, 4, 7, 11, 15, 16, 22, 'Groupe10');
     
-    -- nbfonction * taillemoyennefonction < nbligne
+--     -- nbfonction * taillemoyennefonction < nbligne
 INSERT INTO DataFichier (idDataFichier, idGroupe, idProjetData, nomFichier, nbLignes,nbFonctions,tailleMinFonction,tailleMaxFonction,tailleMoyenneFonction) VALUES
-    (1, 1, 1, 'code.py', 100, 7, 2, 20, 3),
+    (1, 1, 2, 'code.py', 100, 7, 2, 20, 3),
     (2, 2, 2, 'code.py', 250, 20, 20, 200, 100),
-    (3, 3, 3, 'code.py', 4600, 30, 30, 300, 150),
-    (4, 4, 4, 'code.py', 8100, 40, 40, 400, 200),
-    (5, 5, 5, 'code.py', 13000, 50, 50, 500, 250),
-    (6, 6, 6, 'code.py', 18100, 60, 60, 600, 300),
-    (7, 7, 7, 'code.py', 25000, 70, 70, 700, 350),
-    (8, 8, 8, 'code.py', 32500, 80, 80, 800, 400),
-    (9, 9, 9, 'code.py', 41000, 90, 90, 900, 450);
+    (3, 3, 4, 'code.py', 4600, 30, 30, 300, 150),
+    (5, 5, 2, 'code.py', 13000, 50, 50, 500, 250),
+    (6, 6, 2, 'code.py', 18100, 60, 60, 600, 300),
+    (7, 7, 4, 'code.py', 25000, 70, 70, 700, 350),
+    (8, 8, 4, 'code.py', 32500, 80, 80, 800, 400),
+    (9, 9, 4, 'code.py', 41000, 90, 90, 900, 450);
 
 
 
 
--- FAIRE DES BONNES QUESTIONS
+-- -- FAIRE DES BONNES QUESTIONS
 INSERT INTO Questionnaire (numero, idSujet, nom, descriptionQ) VALUES
     (1, 1, 'Questionnaire 1', 'Les robots'),
     (2, 2, 'Questionnaire 2', 'La reconnaissance faciale'),
-    (3, 3, 'Questionnaire 3', 'Voiture volante'),
+    (3, 3, 'Questionnaire 3', 'Voiture volante');
 
 INSERT INTO Question (idQuestionnaire, question) VALUES
     (1, "Qui est le Business Process Owner (propriétaire du produit),
@@ -316,4 +258,4 @@ pour les données impliquées dans ce cas d'utilisation Robot"),
     (3, "Quelles sont les conditions à respecter légalement pour concevoir une voiture volante ?"),
     (3, "Quels sont les langages les plus adaptés pour accomplir cette tâche ?"),
     (3, "Avons-nous les compétences aujourd'hui pour fabriquer ce genre de voiture ?"),
-    (3, "Prouve-le.");
+    (3, "Prouve-le.");  
