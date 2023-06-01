@@ -83,13 +83,12 @@
             $json->{"tailleMaxFonction"},
             $json->{"tailleMoyenneFonction"},
         );
-        var_dump($data);
+        
         //ajout dans la bdd
-
         $connexion = connect($usernamedb, $passworddb, $dbname);
         $fichier = getDataFichierParIdGroupe($connexion, $idGroupe);
         disconnect($connexion);
-        var_dump($fichier);
+
         //on check quand meme que le fichier n'existe pas
         if (!$fichier["nomFichier"])
         {
@@ -98,7 +97,6 @@
             creerDataFichier($connexion, $idGroupe, $idProjetData, $nomFichier, $data[0], $data[1], $data[2], $data[3], intval($data[4]));
             disconnect($connexion);
         }
-        echo "<script>alert(".var_dump($fichier).")</script>";  
         
 
         $calcul = (100 * $json->{"tailleMoyenneFonction"} * $json->{"nbFonctions"}) / $json->{"nbLignes"};
