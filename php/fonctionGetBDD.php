@@ -2124,7 +2124,7 @@ function getAllLoginsEtudiantsEtNomGroupe($connexion) {
 
         while ($stmtEtudiants->fetch()) {
             $table = [
-                "type" => "etudiant",
+                "type" => "utilisateur",
                 "id" => $idLogin,
                 "nom" => $nomUtilisateur,
             ];  
