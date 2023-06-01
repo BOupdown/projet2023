@@ -59,11 +59,11 @@ VALUES (5, 'El Medkour', 'Nezar', 'L3', '0715849526', 'elmedkourn@cy-tech.fr', '
 -- --------------- TABLE GESTIONNAIRE ----------------------------------------------
 
 INSERT INTO Gestionnaire (idLogin, nom, prenom, entreprise, telephone, mail, dateDebut, dateFin)
-VALUES (6, 'Gestionnaire1', 'Gestionnaire1', 'ABC Company', '0695847128', 'gestionnaire@example.com', '2022-01-01', '2022-12-31');
+VALUES (6, 'Gestionnaire1', 'Gestionnaire1', 'ABC Company', '0695847128', 'gestionnaire@example.com', '2022-01-01', '2023-12-31');
 
 
 INSERT INTO Gestionnaire (idLogin, nom, prenom, entreprise, telephone, mail, dateDebut, dateFin)
-VALUES (7, 'Gestionnaire2', 'Gestionnaire2', 'ZZZ Company', '0695847128', 'gestionnaire@example.com', '2022-01-01', '2022-12-31');
+VALUES (7, 'Gestionnaire2', 'Gestionnaire2', 'ZZZ Company', '0695847128', 'gestionnaire@example.com', '2022-01-01', '2023-12-31');
 
 -- ---------------ABLE ADMINISTRATEUR ----------------------------------------------
 
@@ -196,7 +196,7 @@ INSERT INTO Login (nomUtilisateur, mdp, type) VALUES
 
 
 INSERT INTO Etudiant (idLogin, nom, prenom, niveauEtude, telephone, mail, ecole) VALUES
-    (6, 'Gagnon', 'Marie', 'L3', '0612358749', 'marie.gagnon@example.com', 'University5'),
+    (6, 'Gagnon', 'Marie', 'L3', '0612358749', 'marie.gagnon@Supprimer.com', 'University5'),
     (7, 'Roy', 'Charlotte', 'L3', '0645874123', 'charlotte.roy@example.com', 'University6'),
     (8, 'Lavoie', 'William', 'L3', '0662315982', 'william.lavoie@example.com', 'University7'),
     (9, 'Morin', 'Léa', 'L3', '0612358747', 'lea.morin@example.com', 'University8'),

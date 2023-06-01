@@ -2064,4 +2064,51 @@ function getQuestionnaireByQuestionId($connexion, $idQuestion)
     }
 }
 
+function getQuestionnairesParIdSujet($connexion, $idSujet) {
+    $query = "SELECT idQuestionnaire, numero, idSujet, nom, descriptionQ
+              FROM Questionnaire
+              WHERE idSujet = ?";
+
+    try {
+        // Préparation de la requête
+        $stmt = $connexion->prepare($query);
+
+        // Liaison du paramètre avec la variable correspondante
+        $stmt->bind_param("i", $idSujet);
+
+        // Exécution de la requête
+        $stmt->execute();
+
+        // Récupération des résultats
+        $resultat = $stmt->get_result();
+
+        // Création d'un tableau pour stocker les questionnaires
+        $questionnaires = [];
+
+        // Parcours des résultats et ajout dans le tableau
+        while ($row = $resultat->fetch_assoc()) {
+            $questionnaire = [
+                "idQuestionnaire" => $row["idQuestionnaire"],
+                "numero" => $row["numero"],
+                "idSujet" => $row["idSujet"],
+                "nom" => $row["nom"],
+                "descriptionQ" => $row["descriptionQ"]
+            ];
+
+            $questionnaires[] = $questionnaire;
+        }
+
+        // Fermeture du statement
+        $stmt->close();
+
+        // Retourne les questionnaires
+        return $questionnaires;
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+
 ?>
