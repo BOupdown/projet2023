@@ -19,13 +19,6 @@ function ajouterQuestion(numeroQuestion) {
 
     // Après avoir ajouté le contenu avec AJAX
     var container = document.querySelector('.container');
-    var contentHeight = container.scrollHeight;
-    var containerHeight = container.offsetHeight;
-    var marginTop = 20; // Valeur du margin top que vous souhaitez appliquer
 
-    if (contentHeight > containerHeight) {
-        container.style.height = contentHeight + 'px';
-        container.style.marginTop = marginTop + 'em';
-    }
 
 }

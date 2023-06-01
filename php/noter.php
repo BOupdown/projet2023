@@ -95,7 +95,7 @@
                 echo "</table>";
                 disconnect($connexion);
                 echo '<div class="fin">';
-                echo '<div class ="button">';
+                echo '<div class ="button2">';
                 echo '<input type="submit" value="Valider" class="">';
                 echo '</div>';
                 echo '</div>';
