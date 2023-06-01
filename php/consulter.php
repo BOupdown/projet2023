@@ -5,7 +5,6 @@
         <meta charset="UTF-8">
         <title>Le défi / IA Pau</title>
         <link rel="stylesheet" type="text/css" href="../css/consulter.css">
-        <script src="script.js"></script>
     </head>
 
     <?php
