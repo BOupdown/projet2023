@@ -31,6 +31,15 @@
     }
     
     $idGroupe = $_GET["idGroupe"];
+    $connexion = connect($usernamedb,$passworddb,$dbname);
+    $groupe = getGroupeParId($connexion, $idGroupe);
+    disconnect($connexion);
+    //si l'etudiant n'est pas dans le groupe
+    if (!in_array($_SESSION['id'],array_slice($groupe,3,8)))
+    {
+        header('Location: /index.php');
+        exit();
+    }
 
     ?>
     <div class="body">
