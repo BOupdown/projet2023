@@ -7,7 +7,8 @@ if ($_SESSION['type'] != 'Gestionnaire' || !isset($_GET["id_projetdata"]) || $_G
 }
 
 
-require 'fonctionCreateBDD.php';
+require_once 'fonctionCreateBDD.php';
+require_once 'fonctionGetBDD.php';
 $connexion = connect($usernamedb, $passworddb, $dbname);
 $gestionnaire = getGestionnaireParId($connexion, $_SESSION['id']);
 disconnect($connexion);

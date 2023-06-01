@@ -33,7 +33,7 @@
         // Code pour les gestionnaires
         if ($gestionnaires) {
             echo '<table class="table">';
-            echo "<tr><th>Nom</th><th>Prénom</th><th>Mail</th><th>Mot de passe</th><th>Entreprise</th><th>Téléphone</th><th>Date début</th><th>Date fin</th><th>DataDefi</th><th>Sujets</th></tr>";
+            echo "<tr><th>Nom</th><th>Prénom</th><th>Mail</th><th>Mot de passe</th><th>Entreprise</th><th>Téléphone</th><th>Date début</th><th>Date fin</th></tr>";
 
             foreach ($gestionnaires as $gestionnaire) {
                 if ($gestionnaire['idLogin'] === $_SESSION['id']) {
@@ -124,6 +124,7 @@
             echo "<th>Etudiant 6</th>";
             echo "<th>Etudiant 7</th>";
             echo "<th>Etudiant 8</th>";
+
             echo "<th>Quitter</th>";
             echo "</tr>";
 
