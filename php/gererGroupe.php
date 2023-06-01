@@ -12,32 +12,38 @@
     session_start();    
     
     if (empty($_SESSION['type']) ||$_SESSION['type'] != 'Etudiant') {
-        header('Location: /index.php');
+        header('Location: /php/monProfil.php');
         exit();
     }
 
     require 'navbar.php';
     require_once 'fonctionGetBDD.php';
     require_once 'fonctionCreateBDD.php';
-    
 
     //idGroupe doit etre le name de l'input
-    $idGroupe = $_POST['idGroupe'];
-    $ajouterUser = "toto";
+    $idGroupe = $_GET['idGroupe'];
     $connexion = connect($usernamedb, $passworddb, $dbname);
     $groupe = getGroupeParId($connexion, $idGroupe);
+    disconnect($connexion);
+    if ($_SESSION['id'] != $groupe["idCapitaine"])
+    {
+        header('Location: /php/monProfil.php');
+        exit();
+    }
+
     $nomsMembresGroupe = array();
     
     for ($i = 1; $i <= 8; $i++)
     {
         if (isset($groupe["idEtudiant".$i]))
         {
-            
+            $connexion = connect($usernamedb, $passworddb, $dbname);
             $user = getUtilisateurParId($connexion, $groupe["idEtudiant".$i]);
+            disconnect($connexion);
             $nomsMembresGroupe[] = $user;
         }
     }
-    disconnect($connexion);
+    
 
     ?>
     <div class="body">
@@ -97,9 +103,7 @@
                     <div class="button">
                         <input type="submit" value="Retirer les users séléctionnés">
                     </div>
-                </form>
-                <!-- input type="hidden" name="listeAjoutUser" value=<?php echo $ajouterUser; ?> -->
-                 
+                </form>   
             </div>
         </div>
     </div>
@@ -133,10 +137,6 @@
         // Set searched text in input field on click of search button
         $(document).on("click", "p", function () {
             var selectedUser = $(this).text();
-            /*
-            var inputHTML = '<input type="checkbox" name="retirerMembre' + (selectedUsers.length + 1) + '" id="check-' + (selectedUsers.length + 1) + '" value="' + selectedUser + '">';
-            var labelHTML = '<label for="check-' + (selectedUsers.length + 1) + '">' + selectedUser + '</label>';
-            */
             var selectedUserHTML = '<div><p>' + selectedUser + '</p></div>';
             var ancienneValeur = $("#aAjouterUsers").val();
             $("#aAjouterUsers").val(ancienneValeur+"-"+selectedUser);
