@@ -50,7 +50,19 @@
                     } else {
                         echo "<td id='dateFin_" . $gestionnaire['idLogin'] . "'>" . $gestionnaire['dateFin'] . "</td>";
                     }
+                    echo "<td id='dataDefi_" . $gestionnaire['idLogin'] . "'>";
+                    if ($dataDefi) {
+                        foreach ($dataDefi as $data) {
+                            echo "<div>" . $data['nom'] . "</div>";
+                        }
+                    }
 
+                    if ($dataDefi) {
+                        foreach ($dataDefi as $data) {
+                            echo "<td id='sujets_" . $gestionnaire['idLogin'] . "'><a class='consulterBtn' href='consulter.php?idData=".$sujet['idDataDefi'] . "'>Consulter</a></td>";
+                        }
+                    }
+                    echo "</td>";
 
 
                     echo "</tr>";
@@ -96,8 +108,7 @@
         }
 
         echo "</table>";
-        echo '<h2 class="titre2">Mes groupes</h2>';
-
+        echo "</div>";
 
         if (!empty($groupes)) {
             echo "<table class='table3'>";
@@ -113,7 +124,7 @@
             echo "<th>Etudiant 6</th>";
             echo "<th>Etudiant 7</th>";
             echo "<th>Etudiant 8</th>";
-            echo "<th>Supprimer</th>";
+            echo "<th>Quitter</th>";
             echo "</tr>";
 
             // Parcourir les groupes
@@ -140,7 +151,7 @@
                 echo "<td>" . $etudiant7['nom'] . "</td>";
                 echo "<td>" . $etudiant8['nom'] . "</td>";
 
-                echo "<td><button class='quitter' onclick='supprimerEtudiant(" . $groupe['idGroupe'] . ")'>X</button></td>";
+                echo "<td><button class='quitter' onclick='supprimerEtudiant(" . $groupe['idGroupe'] . "," . $_SESSION['id'] . ")'>X</button></td>";
                 echo "</tr>";
 
             }
@@ -150,111 +161,80 @@
         }
 
         echo "</div>";
-        echo "</div>";
+
     }
-        if (isset($_SESSION['type']) && $_SESSION['type'] == 'Administrateur') {
-            $id = $_SESSION['id'];
-            $connexion = connect($usernamedb, $passworddb, $dbname);
-            $leLogin = getUtilisateurParId($connexion, $id);
-            disconnect($connexion);
-            echo "<div class='divElement'> ";
-            echo '<table class="table">';
-            echo "<tr><th>Login</th><th>Mot de passe</th></tr>";
-
-            echo "<tr id='login_" . $leLogin['idLogin'] . "'>";
-            echo "<td id='login_" . $leLogin['idLogin'] . "'><button class='buttonModif' onclick='modifierCellule(" . $leLogin["idLogin"] . ", \"login\")'>" . $leLogin['nomUtilisateur'] . "</button></td>";
-            echo "<td id='mdp_" . $leLogin['idLogin'] . "'><button class='buttonModif' onclick='modifierCellule(" . $leLogin["idLogin"] . ", \"mdp\")'>Mot de passe</button></td>";
-
-
-            echo "</tr>";
-
-
-            echo "</table>";
-
-        }
-
-
-
-    
-    echo "</div>";
-    echo "</div>";
-    echo "</div>";
-
-
-
     ?>
 
+    <script>
+        function modifierCellule(idLogin, colonne) {
+            var cellule = document.getElementById(colonne + '_' + idLogin);
+            var valeurCourante = cellule.textContent;
+            var nouvellementModifie = prompt("Veuillez entrer la nouvelle valeur pour " + colonne, valeurCourante);
 
+            if (nouvellementModifie) {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.status == 200 && xhr.readyState == 4) {
+                        var nouvelleValeur = xhr.responseText;
+                        cellule.textContent = nouvelleValeur;
+                    }
+                };
+
+                xhr.open('POST', 'modifier.php', true); // Replace 'modifier.php' with the name of your server-side modification script
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.send('id=' + idLogin + '&colonne=' + colonne + '&nouvelleValeur=' + nouvellementModifie);
+            }
+        }
+
+        function modifierMotDePasse(idLogin) {
+            var cellule = document.getElementById('mdp_' + idLogin);
+            var valeurCourante =cellule.textContent;
+            var nouvellementModifie = prompt("Veuillez entrer le nouveau mot de passe");
+
+            if (nouvellementModifie) {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var nouvelleValeur = xhr.responseText;
+                        cellule.textContent = nouvelleValeur;
+                    }
+                };
+
+                xhr.open('POST', 'modifierMotDePasse.php', true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.send('id=' + idLogin + '&nouvelleValeur=' + nouvellementModifie);
+            }
+        }
+
+
+        function supprimerEtudiant(idGroupe, idEtudiant) {
+            var confirmation = confirm("Êtes-vous sûr de vouloir supprimer cet étudiant du groupe ?");
+
+            if (confirmation) {
+                var groupe = document.getElementById('login_' + idGroupe);
+                groupe.parentNode.removeChild(groupe);
+
+
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.status == 200 && xhr.readyState == 4) {
+
+
+                    }
+                };
+
+                xhr.open('GET', 'supprimerGroupe.php?id=' + idGroupe + '&idE=' + idEtudiant, true);
+                xhr.send();
+            }
+        }
+
+
+
+
+
+
+
+    </script>
 </body>
-<script>
-    function modifierCellule(idLogin, colonne) {
-        var cellule = document.getElementById(colonne + '_' + idLogin);
-        var valeurCourante = cellule.textContent;
-        var nouvellementModifie = prompt("Veuillez entrer la nouvelle valeur pour " + colonne, valeurCourante);
-
-        if (nouvellementModifie) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.status == 200 && xhr.readyState == 4) {
-                    var nouvelleValeur = xhr.responseText;
-                    cellule.textContent = nouvelleValeur;
-                }
-            };
-
-            xhr.open('POST', 'modifierProfil.php', true); // Replace 'modifier.php' with the name of your server-side modification script
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.send('id=' + idLogin + '&colonne=' + colonne + '&nouvelleValeur=' + nouvellementModifie);
-        }
-    }
-
-    function modifierMotDePasse(idLogin) {
-        var cellule = document.getElementById('mdp_' + idLogin);
-        var valeurCourante = cellule.textContent;
-        var nouvellementModifie = prompt("Veuillez entrer le nouveau mot de passe");
-
-        if (nouvellementModifie) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var nouvelleValeur = xhr.responseText;
-                    cellule.textContent = nouvelleValeur;
-                }
-            };
-
-            xhr.open('POST', 'modifierMotDePasse.php', true);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.send('id=' + idLogin + '&nouvelleValeur=' + nouvellementModifie);
-        }
-    }
-
-
-    function supprimerEtudiant(idGroupe) {
-        var confirmation = confirm("Êtes-vous sûr de vouloir supprimer cet étudiant du groupe ?");
-
-        if (confirmation) {
-            var groupe = document.getElementById('login_' + idGroupe);
-            groupe.parentNode.removeChild(groupe);
-
-
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.status == 200 && xhr.readyState == 4) {
-
-
-                }
-            };
-
-            xhr.open('GET', 'supprimerGroupe.php?id=' + idGroupe, true);
-            xhr.send();
-        }
-    }
-
-
-
-
-
-
-
-</script>
 
 </html>
