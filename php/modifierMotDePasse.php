@@ -19,6 +19,11 @@ if (isset($_POST['id']) && isset($_POST['nouvelleValeur'])) {
         $hashedPassword = sha1($nouvelleValeur);
         mysqli_stmt_bind_param($stmt, "si", $hashedPassword, $id);
         mysqli_stmt_execute($stmt);
+    } else if ($_SESSION['type'] == 'Administrateur' ) {
+        $stmt = mysqli_prepare($connexion, 'UPDATE Login SET mdp=? WHERE idLogin=?');
+        $hashedPassword = sha1($nouvelleValeur);
+        mysqli_stmt_bind_param($stmt, "si", $hashedPassword, $id);
+        mysqli_stmt_execute($stmt);
     } 
 
     
