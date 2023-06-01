@@ -14,7 +14,7 @@
     require_once 'fonctionCreateBDD.php';
     ?>
 
-    <h1 class="titre">Gérer profil</h1>
+    <h1 class="titre">Mon profil</h1>
 
     <?php
     if (isset($_SESSION['type']) && $_SESSION['type'] == 'Gestionnaire') {
@@ -124,7 +124,7 @@
             echo "<th>Etudiant 6</th>";
             echo "<th>Etudiant 7</th>";
             echo "<th>Etudiant 8</th>";
-
+            echo "<th>Gérer</th>";
             echo "<th>Quitter</th>";
             echo "</tr>";
 
@@ -151,6 +151,12 @@
                 echo "<td>" . $etudiant6['nom'] . "</td>";
                 echo "<td>" . $etudiant7['nom'] . "</td>";
                 echo "<td>" . $etudiant8['nom'] . "</td>";
+                if ($groupe['idCapitaine'] === $_SESSION['id']) {
+                   echo "<td><a class = 'quitter' href='gererGroupe.php?idGroupe=".$groupe['idGroupe']."' >Gérer</button></td>";
+                }
+                else {
+                    echo "<td></td>";
+                }
 
                 echo "<td><button class='quitter' onclick='supprimerEtudiant(" . $groupe['idGroupe'] . "," . $_SESSION['id'] . ")'>X</button></td>";
                 echo "</tr>";

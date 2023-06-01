@@ -54,8 +54,11 @@
     $pourcentageFonctionsMOY = round($pourcentageFonctionsMOY, 2);
     ?>
     <div class="body">
+    <div class ="divRetour">
+            <a href="../php/mesDefis.php" class="btn">Retour</a>
         <div class="container">
             <div class="title">Challenges consultables</div>
+
             <div class="content">
                 <?php
                 echo "<br>";
