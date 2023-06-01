@@ -40,6 +40,8 @@
                     echo "<a href='../php/modifier.php?idData=".$idData."' class='btn'>Modifier</a>";
                 } else if ($_SESSION['type'] == 'Gestionnaire' && $data["typeD"] == "Battle") {
                     echo "<a href='../php/creerQuestionnaire.php?id_projetdata=".$sujets[0]["idSujet"]. "&defi=".$data["typeD"]."' class='btn'>Créer un questionnaire</a>";
+                }else if ($_SESSION['type'] == 'Etudiant') {
+                    echo "<a href='../php/creerGroupe.php' class='btn'>Participer</a>";
                 }
             ?>
         </div>

@@ -10,26 +10,31 @@
 
 <body>
     <?php
-    session_start();    
-    
-    if (empty($_SESSION['type']) ||$_SESSION['type'] != 'Gestionnaire') {
+    session_start();
+
+    if (empty($_SESSION['type']) || $_SESSION['type'] != 'Gestionnaire') {
         header('Location: /index.php');
         exit();
+    }
+    $connexion = connect($usernamedb, $passworddb, $dbname);
+    $gestionnaire = getGestionnaireParId($connexion, $_SESSION['id']);
+    disconnect($connexion);
+    if ($gestionnaire['dateFin'] < date("Y-m-d")) {
+        header("Location: ../index.php");
+        exit;
     }
 
     require 'navbar.php';
     require_once 'fonctionGetBDD.php';
     require_once 'fonctionCreateBDD.php';
 
-    $connexion = connect($usernamedb,$passworddb,$dbname);
+    $connexion = connect($usernamedb, $passworddb, $dbname);
 
     $listeChallenge = getAllDataChallenge($connexion);
-    
+
     $size = count($listeChallenge);
-    for($i = 0; $i < $size; $i++)
-    {
-        if ($listeChallenge[$i]["idGestionnaire"] != $_SESSION["id"])
-        {
+    for ($i = 0; $i < $size; $i++) {
+        if ($listeChallenge[$i]["idGestionnaire"] != $_SESSION["id"]) {
             unset($listeChallenge[$i]);
         }
     }
@@ -41,13 +46,13 @@
             <div class="title">Challenges consultables</div>
             <div class="content">
                 <?php
-                    foreach($listeChallenge as $challenge)
-                    {
-                        echo "<div class=\"button\"><a href=\"statistiquesProjet.php?id=".$challenge["idDataDefi"]."\">".$challenge["nom"]."</a></div>";
-                    }
+                foreach ($listeChallenge as $challenge) {
+                    echo "<div class=\"button\"><a href=\"statistiquesProjet.php?id=" . $challenge["idDataDefi"] . "\">" . $challenge["nom"] . "</a></div>";
+                }
                 ?>
             </div>
         </div>
     </div>
 </body>
+
 </html>

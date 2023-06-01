@@ -21,11 +21,18 @@
         header('Location: ../php/mesDefis.php');
         exit();
     }
+    $connexion = connect($usernamedb, $passworddb, $dbname);
+    $gestionnaire = getGestionnaireParId($connexion, $_SESSION['id']);
+    disconnect($connexion);
+    if ($gestionnaire['dateFin'] < date("Y-m-d")) {
+        header("Location: ../index.php");
+        exit;
+    }
 
     $idBattle = $_GET['idBattle'];
     $idGroupe = $_GET['idGroupe'];
 
-    if(empty($idBattle) || empty($idGroupe)){
+    if (empty($idBattle) || empty($idGroupe)) {
         header('Location: ../php/mesDefis.php');
         exit();
     }

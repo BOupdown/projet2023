@@ -6,7 +6,15 @@ if ($_SESSION['type'] != 'Gestionnaire' || !isset($_GET["id_projetdata"]) || $_G
     exit;
 }
 
+
 require 'fonctionCreateBDD.php';
+$connexion = connect($usernamedb, $passworddb, $dbname);
+$gestionnaire = getGestionnaireParId($connexion, $_SESSION['id']);
+disconnect($connexion);
+if($gestionnaire['dateFin'] < date("Y-m-d")){
+    header("Location: ../index.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
