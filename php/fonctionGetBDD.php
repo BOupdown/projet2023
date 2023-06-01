@@ -361,7 +361,7 @@ function getProjetDataParId($connexion, $idSujet)
         $stmt->execute();
 
         // Liaison des colonnes du résultat avec des variables
-        $stmt->bind_result($nom, $descriptionS, $idDataDefi, $image, $ressources);
+        $stmt->bind_result($idSujet,$nom, $descriptionS, $idDataDefi, $image, $ressources);
 
         // Récupération des données
         $stmt->fetch();
@@ -1968,6 +1968,100 @@ function getDataFichierParIdGroupe($connexion, $idGroupe)
    }
 }
 
+function getLatestQuestionnaireBySujet($connexion, $idSujet)
+{
+    $query = "SELECT idQuestionnaire, numero, idSujet, nom, descriptionQ
+              FROM Questionnaire
+              WHERE idSujet = ?
+              ORDER BY idQuestionnaire DESC
+              LIMIT 1";
 
+    try {
+        // Préparation de la requête
+        $stmt = mysqli_prepare($connexion, $query);
+
+        // Liaison des paramètres avec les variables correspondantes
+        mysqli_stmt_bind_param($stmt, "i", $idSujet);
+
+        // Exécution de la requête
+        mysqli_stmt_execute($stmt);
+
+        // Récupération du résultat
+        $result = mysqli_stmt_get_result($stmt);
+
+        // Vérification du nombre de lignes retournées
+        if (mysqli_num_rows($result) > 0) {
+            // Récupération du résultat
+            $row = mysqli_fetch_assoc($result);
+
+            // Création d'un tableau associatif avec les données du questionnaire
+            $questionnaire = array(
+                "idQuestionnaire" => $row["idQuestionnaire"],
+                "numero" => $row["numero"],
+                "idSujet" => $row["idSujet"],
+                "nom" => $row["nom"],
+                "descriptionQ" => $row["descriptionQ"]
+            );
+
+            // Retourne le questionnaire trouvé
+            return $questionnaire;
+        } else {
+            // Aucun questionnaire trouvé pour l'idSujet spécifié
+            return null;
+        }
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
+
+function getQuestionnaireByQuestionId($connexion, $idQuestion)
+{
+    $query = "SELECT Q.idQuestionnaire, Q.numero, Q.idSujet, Q.nom, Q.descriptionQ
+              FROM Questionnaire Q
+              INNER JOIN Question QS ON Q.idQuestionnaire = QS.idQuestionnaire
+              WHERE QS.idQuestion = ?
+              LIMIT 1";
+
+    try {
+        // Préparation de la requête
+        $stmt = mysqli_prepare($connexion, $query);
+
+        // Liaison des paramètres avec les variables correspondantes
+        mysqli_stmt_bind_param($stmt, "i", $idQuestion);
+
+        // Exécution de la requête
+        mysqli_stmt_execute($stmt);
+
+        // Récupération du résultat
+        $result = mysqli_stmt_get_result($stmt);
+
+        // Vérification du nombre de lignes retournées
+        if (mysqli_num_rows($result) > 0) {
+            // Récupération du résultat
+            $row = mysqli_fetch_assoc($result);
+
+            // Création d'un tableau associatif avec les données du questionnaire
+            $questionnaire = array(
+                "idQuestionnaire" => $row["idQuestionnaire"],
+                "numero" => $row["numero"],
+                "idSujet" => $row["idSujet"],
+                "nom" => $row["nom"],
+                "descriptionQ" => $row["descriptionQ"]
+            );
+
+            // Retourne le questionnaire trouvé
+            return $questionnaire;
+        } else {
+            // Aucun questionnaire trouvé pour l'id de la question spécifiée
+            return null;
+        }
+    } catch (Exception $e) {
+        // Gestion de l'exception
+        echo "Une erreur est survenue : " . $e->getMessage();
+        return null;
+    }
+}
 
 ?>

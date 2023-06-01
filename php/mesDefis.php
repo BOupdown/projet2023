@@ -18,6 +18,13 @@
     require_once 'fonctionCreateBDD.php';
     require_once 'fonctionGetBDD.php';
 
+    $connexion = connect($usernamedb, $passworddb, $dbname);
+    $gestionnaire = getGestionnaireParId($connexion, $_SESSION['id']);
+    disconnect($connexion);
+    if ($gestionnaire['dateFin'] < date("Y-m-d")) {
+        header("Location: ../index.php");
+        exit;
+    }
     $id = $_SESSION['id'];
 
     ?>
@@ -46,7 +53,7 @@
                 echo "<td>" . $challenge['dateFin'] . "</td>";
             }
 
-            echo "<td ><a class='consulterBtn' href=\"consulter.php?idData=".$challenge['idDataDefi']."\">Consulter</a></td>";
+            echo "<td ><a class='consulterBtn' href=\"consulter.php?idData=" . $challenge['idDataDefi'] . "\">Consulter</a></td>";
             echo "</tr>";
         }
 
@@ -61,7 +68,7 @@
     echo "</div>";
 
     $connexion = connect($usernamedb, $passworddb, $dbname);
-    $battles = getAllDataBattleByGestionnaire($connexion,$id);
+    $battles = getAllDataBattleByGestionnaire($connexion, $id);
     disconnect($connexion);
     echo "<div class='divElement'> ";
 
@@ -82,7 +89,7 @@
                 echo "<td>" . $battle['dateFin'] . "</td>";
             }
 
-            echo "<td><a class='consulterBtn' href=\"consulter.php?idData=".$battle['idDataDefi']."\">Consulter</a></td>";
+            echo "<td><a class='consulterBtn' href=\"consulter.php?idData=" . $battle['idDataDefi'] . "\">Consulter</a></td>";
             echo "</tr>";
         }
 
@@ -95,7 +102,7 @@
     }
     echo "</div>";
 
-    
+
     ?>
 </body>
 

@@ -17,6 +17,13 @@
     require 'navbar.php';
     require_once 'fonctionCreateBDD.php';
     require_once 'fonctionGetBDD.php';
+    $connexion = connect($usernamedb, $passworddb, $dbname);
+    $gestionnaire = getGestionnaireParId($connexion, $_SESSION['id']);
+    disconnect($connexion);
+    if ($gestionnaire['dateFin'] < date("Y-m-d")) {
+        header("Location: ../index.php");
+        exit;
+    }
 
     $id = $_SESSION['id'];
 
@@ -39,14 +46,14 @@
 
             $reponses = getRenduParIdDataDefi($connexion, $challenge['idDataDefi']);
             if ($reponses) {
-                
+
 
                 foreach ($reponses as $reponse) {
                     echo "<tr id='login_" . $reponse['idRendu'] . "'>";
                     $groupe = getGroupeParId($connexion, $reponse['idGroupe']);
                     echo "<td>" . $groupe['nom'] . "</td>";
                     echo "<td>" . $challenge['nom'] . "</td>";
-                    echo "<td> <a class = \"lien\"href=" . $reponse['code'] .">".$reponse['code']."</td>";
+                    echo "<td> <a class = \"lien\"href=" . $reponse['code'] . ">" . $reponse['code'] . "</td>";
                     echo "</tr>";
                 }
                 echo "</tr>";
@@ -78,12 +85,12 @@
             $groupes = getAllIdGroupeAvecReponsesParIdDataDefi($connexion, $battle['idDataDefi']);
             if ($groupes) {
                 foreach ($groupes as $groupe) {
-                    
+
                     echo "<tr id='login_" . $groupe['idGroupe'] . "'>";
                     $groupee = getGroupeParId($connexion, $groupe['idGroupe']);
                     echo "<td>" . $groupee['nom'] . "</td>";
                     echo "<td>" . $battle['nom'] . "</td>";
-                    echo "<td><a class='consulterBtn' href=\"noter.php?idGroupe=" . $groupe['idGroupe'] . "&idBattle=".$groupee['idDataChallenge']."\">Noter</a></td>";
+                    echo "<td><a class='consulterBtn' href=\"noter.php?idGroupe=" . $groupe['idGroupe'] . "&idBattle=" . $groupee['idDataChallenge'] . "\">Noter</a></td>";
 
                 }
 
