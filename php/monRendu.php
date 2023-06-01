@@ -114,8 +114,7 @@
             echo "<script>alert('Erreur lors du chargement du fichier')</script>";
             header('Location: /index.php');
         }
-        
-        $fichier = $fichier[0];
+
         $nomFichier = $fichier["nomFichier"];
         
         $data = array($fichier["nbLignes"],
