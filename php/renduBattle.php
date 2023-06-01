@@ -40,13 +40,13 @@ require_once 'fonctionCreateBDD.php';
             header('Location: ../php/mesEquipes.php?erreur=capitaine');
             exit();
         }
-        if($groupe['rendu'] == 1){
-            header('Location: ../php/mesEquipes.php?erreur=rendu');
-            exit();
-        }
+        // if($groupe['rendu'] == 1){
+        //     header('Location: ../php/mesEquipes.php?erreur=rendu');
+        //     exit();
+        // }
 
         $connexion = connect($usernamedb, $passworddb, $dbname);
-        $data = getDataDefiParId($connexion, $id);
+        $data = getDataDefiParId($connexion, $id);        
         disconnect($connexion);
 
         if ($data['idDataDefi'] == null || $data['typeD'] != 'Battle') {
@@ -67,7 +67,17 @@ require_once 'fonctionCreateBDD.php';
     
         }
         $connexion = connect($usernamedb, $passworddb, $dbname);
-        $questions = getQuestionsParIdDataDefiEtNumero($connexion, $id);
+        $idSujet = getProjetDataParIdDataDefi($connexion, $data['idDataDefi']);
+        $questionnaire =getLatestQuestionnaireBySujet($connexion, $idSujet);    
+        $reponses =getAllReponseParIdDatabattleEtIdGroupe($connexion, $data['idDataDefi'], $groupe['idGroupe']);
+        foreach($reponses as $reponse){
+            $questionnaire2 =getQuestionnaireByQuestionId($connexion, $reponse['idQuestion']);
+            if($questionnaire2['numero'] >= $questionnaire['numero']){
+                header('Location: ../php/mesEquipes.php');
+                exit();
+            }
+        }
+        $questions = getQuestionsParIdDataDefiEtNumero($connexion, $questionnaire['idQuestionnaire']);
         disconnect($connexion);
         if ($questions[0]['idQuestion'] == null) {
             header('Location: ../php/mesEquipes.php');

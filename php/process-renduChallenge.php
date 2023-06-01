@@ -51,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     if ($errors == 0) {
         $connexion = connect($usernamedb, $passworddb, $dbname);
-        $idProjet = getProjetDataParNomEtDataDefi($connexion,$projet,$idData)['idProjetData'];
-        creerRendu($connexion, $idGroup, $idProjet, $code);
+        $idProjet = getProjetDataParNomEtDataDefi($connexion,$projet,$idData)['idDataDefi'];
+        creerRendu($connexion, $idGroupe, $idProjet, $code);
         mettreRenduVrai($connexion, $idGroupe);
         disconnect($connexion);
         header('Location: mesEquipes.php?errors=no');

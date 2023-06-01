@@ -72,7 +72,7 @@
         foreach ($groupes as $groupe) {
             $battle = getDataDefiParId($connexion, $groupe['idDataChallenge']);
             $reponses = getAllReponseParIdDatabattleEtIdGroupe($connexion, $battle['idDataDefi'], $groupe['idGroupe']);
-            if($reponses[0]['idReponse'] != null){
+            if($reponses != null){
             echo "<tr id='login_" . $groupe['idGroupe'] . "'>";
             echo "<td>" . $groupe['nom'] . "</td>";
             echo "<td>" . $battle['nom'] . "</td>";
