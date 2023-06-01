@@ -12,10 +12,9 @@
         if ($allUser) {
             foreach($allUser as $user)
             {
-                $value = stripos($user, $inpText);
-                if (gettype($value) == "integer" && $value == 0)
-                {
-                    echo "<p class='data' class='list-group-item border-1' id=''>".$user."</p>";
+                $value = stripos($user['nom'], $inpText);
+                if (gettype($value) == "integer" && $value == 0) {     
+                    echo "<p class='data' class='list-group-item border-1' id='".$user["id"]."' data-type='".$user["type"]."'>".$user["nom"]."</p>";
                 }
             }
         } else {

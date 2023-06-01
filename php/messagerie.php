@@ -28,9 +28,7 @@
 
                     <div class="input-box">
                         <div class="input-group">
-                            <input
-                          
-                                type="text" name="challenge" id="dataChallenge" placeholder="Rechercher  🔍" autocomplete="off">
+                            <input type="text" name="challenge" id="dataChallenge" placeholder="Rechercher  🔍" autocomplete="off">
                         </div>
 
                         <div class="list-group" id="show-listChallenge">
@@ -41,6 +39,7 @@
                     
 
                     <?php $connexion = connect($usernamedb, $passworddb, $dbname);
+                            $allUser = getAllLoginsEtudiantsEtNomGroupe($connexion);
 
                     // Affichage de tous les data défis associés au gestionnaire connecté
                     $defis = getDataDefiParIdGestionnaire($connexion, $_SESSION['id']);
@@ -127,7 +126,7 @@
         $(document).on("click", "p.data", function () {
             $("#dataChallenge").val("");
             $("#show-listChallenge").html("");
-            afficherConversation($(this).attr("id"), "utilisateur");
+            afficherConversation($(this).attr("id"), $(this).data("type"));
         }); 
     });
 

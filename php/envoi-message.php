@@ -36,7 +36,7 @@
             $destinataire = mysqli_fetch_assoc($resultat_requete_email);
 
             // Envoi du mail
-            envoyer_mail($destinataire['mail'], $mail_objet, $mail_contenu);
+            //envoyer_mail($destinataire['mail'], $mail_objet, $mail_contenu);
 
 
         } else if ($type_destinataire == 'equipe') {
@@ -80,7 +80,7 @@
 
             // Envoi du mail à chaque membre de l'équipe
             while ($membre = mysqli_fetch_assoc($resultat_requete_emails_equipe)) {
-                envoyer_mail($membre['mail'], $mail_objet, $mail_contenu);
+                //envoyer_mail($membre['mail'], $mail_objet, $mail_contenu);
             }
         } else if ($type_destinataire == 'datadefi') {
 
@@ -116,7 +116,7 @@
 
             // Envoi du mail à chaque participant du data défi
             while ($participant = mysqli_fetch_assoc($resultat_requete_emails_datadefi)) {
-                envoyer_mail($participant['mail'], $mail_objet, $mail_contenu);
+                //envoyer_mail($participant['mail'], $mail_objet, $mail_contenu);
             }
         }
 

@@ -112,7 +112,7 @@ button:hover {
     transition: all 0.3s ease;
 }
 
-/* Liste déroulante de la recherche */
+/* Suggestions de la recherche */
 .list-group{
     position: absolute;
     max-height:250px;
@@ -125,6 +125,5 @@ button:hover {
     font-size: 14px;
     display: none;
     margin-top:-5px;
-    border : 1px solid #172A3A;
     border-radius: 5px;
 }

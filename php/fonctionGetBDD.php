@@ -2103,26 +2103,32 @@ function getQuestionnairesParIdSujet($connexion, $idSujet) {
         return null;
     }
 }
-function getAllLoginsEtudiantsEtNomGroupe($connexion)
-{
-    $queryEtudiants = "SELECT nomUtilisateur
+
+function getAllLoginsEtudiantsEtNomGroupe($connexion) {
+    $queryEtudiants = "SELECT idLogin, nomUtilisateur
                        FROM Login
                        WHERE type = 'etudiant'";
 
-    $queryGroupes = "SELECT nom
+    $queryGroupes = "SELECT idGroupe, nom
                      FROM Groupe";
 
-    $logins = array();
+    $tablesEtudiants = [];
+    $tablesGroupes = [];
 
     try {
         // Récupération des logins étudiants
         $stmtEtudiants = $connexion->prepare($queryEtudiants);
         $stmtEtudiants->execute();
-        $nomUtilisateur = null;
-        $stmtEtudiants->bind_result($nomUtilisateur);
+        $stmtEtudiants->store_result();
+        $stmtEtudiants->bind_result($idLogin, $nomUtilisateur);
 
         while ($stmtEtudiants->fetch()) {
-            $logins[] = $nomUtilisateur;
+            $table = [
+                "type" => "etudiant",
+                "id" => $idLogin,
+                "nom" => $nomUtilisateur,
+            ];  
+            $tablesEtudiants[] = $table;
         }
 
         $stmtEtudiants->close();
@@ -2130,18 +2136,25 @@ function getAllLoginsEtudiantsEtNomGroupe($connexion)
         // Récupération des noms de groupe
         $stmtGroupes = $connexion->prepare($queryGroupes);
         $stmtGroupes->execute();
-        $nomGroupe = null;
-        $stmtGroupes->bind_result($nomGroupe);
+        $stmtGroupes->store_result();
+        $stmtGroupes->bind_result($idGroupe, $nomGroupe);
 
-        // Ajout des noms de groupe dans le tableau des logins
         while ($stmtGroupes->fetch()) {
-            $logins[] = $nomGroupe;
+            $table = [
+                "type" => "equipe",
+                "id" => $idGroupe,
+                "nom" => $nomGroupe,
+            ];  
+            $tablesGroupes[] = $table;
         }
 
         $stmtGroupes->close();
 
+        // Combinaison des tableaux étudiants et groupes
+        $tables = array_merge($tablesEtudiants, $tablesGroupes);
+
         // Retourne le tableau des logins étudiants et des noms de groupe
-        return $logins;
+        return $tables;
     } catch (Exception $e) {
         // Gestion de l'exception
         echo "Une erreur est survenue : " . $e->getMessage();
