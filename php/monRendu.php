@@ -23,6 +23,16 @@
     }
 
     $idGroupe = $_GET["idGroupe"];
+    $connexion = connect($usernamedb,$passworddb,$dbname);
+    $groupe = getGroupeParId($connexion, $idGroupe);
+    disconnect($connexion);
+    //si l'etudiant n'est pas dans le groupe
+    if (!in_array($_SESSION['id'],array_slice($groupe,3,8)))
+    {
+        header('Location: /index.php');
+        exit();
+    }
+    
 
     if (isset($_FILES["fileUpload"])) {
         $first = true;
@@ -66,19 +76,21 @@
             $json->{"tailleMaxFonction"},
             $json->{"tailleMoyenneFonction"},
         );
+
+        
         //ajout dans la bdd
-    
         $connexion = connect($usernamedb, $passworddb, $dbname);
         $fichier = getDataFichierParIdGroupe($connexion, $idGroupe);
         disconnect($connexion);
+
         //on check quand meme que le fichier n'existe pas
-        if (!$fichier["nomFichier"]) {
+        if (!$fichier["nomFichier"])
+        {
+            
             $connexion = connect($usernamedb, $passworddb, $dbname);
             creerDataFichier($connexion, $idGroupe, $idProjetData, $nomFichier, $data[0], $data[1], $data[2], $data[3], intval($data[4]));
             disconnect($connexion);
         }
-
-
 
         $calcul = (100 * $json->{"tailleMoyenneFonction"} * $json->{"nbFonctions"}) / $json->{"nbLignes"};
         $pourcentage = round($calcul);
@@ -88,11 +100,12 @@
         $connexion = connect($usernamedb, $passworddb, $dbname);
         $fichier = getDataFichierParIdGroupe($connexion, $idGroupe);
         disconnect($connexion);
-        if (!$fichier) {
+
+        if (!$fichier)
+        {
             echo "<script>alert('Erreur lors du chargement du fichier')</script>";
             header('Location: /index.php');
         }
-
 
         $nomFichier = $fichier["nomFichier"];
 
