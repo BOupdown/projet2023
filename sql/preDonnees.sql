@@ -141,11 +141,11 @@ INSERT INTO Etudiant (idLogin, nom, prenom, niveauEtude, telephone, mail, ecole)
 -- -- --------------- TABLE GESTIONNAIRE ----------------------------------------------
 
 INSERT INTO Gestionnaire (idLogin, nom, prenom, entreprise, telephone, mail, dateDebut, dateFin)
-VALUES (39, 'Gestionnaire1', 'Gestionnaire1', 'ABC Company', '0695847128', 'gestionnaire@example.com', '2022-01-01', '2022-12-31');
+VALUES (39, 'Gestionnaire1', 'Gestionnaire1', 'ABC Company', '0695847128', 'gestionnaire@example.com', '2022-01-01', '2023-12-31');
 
 
 INSERT INTO Gestionnaire (idLogin, nom, prenom, entreprise, telephone, mail, dateDebut, dateFin)
-VALUES (40, 'Gestionnaire2', 'Gestionnaire2', 'ZZZ Company', '0695847128', 'gestionnaire@example.com', '2022-01-01', '2022-12-31');
+VALUES (40, 'Gestionnaire2', 'Gestionnaire2', 'ZZZ Company', '0695847128', 'gestionnaire@example.com', '2022-01-01', '2023-12-31');
 
 INSERT INTO Gestionnaire (idLogin, nom, prenom, entreprise, telephone, mail, dateDebut, dateFin) VALUES
     (41, 'Gestionnaire8', 'Gestionnaire8', 'Acme Corporation', '0622315987', 'gestionnaire8@example.com', '2022-01-01', '2022-12-31'),
@@ -175,7 +175,7 @@ VALUES (40, 'Battle', 1, 2, 'La robotique dans le quotidien', '2022-07-01', '202
 
 INSERT INTO DataDefi (idGestionnaire,typeD,nombreSujet,nombreQuestionnaire,nom,dateDebut,dateFIN,descriptionD) VALUES
     (41, 'Battle', 10, 10, 'Défi1', '2022-01-01', '2023-12-31', 'Description du défi1'),
-    (42, 'Challenge', 20, 20, 'Défi2', '2022-01-01', '2023-12-31', 'Description du défi2'),
+    (39, 'Challenge', 20, 20, 'Défi2', '2022-01-01', '2023-12-31', 'Description du défi2'),
     (43, 'Battle', 30, 30, 'Défi3', '2022-01-01', '2023-12-31', 'Description du défi3'),
     (44, 'Challenge', 40, 40, 'Défi4', '2022-01-01', '2023-12-31', 'Description du défi4'),
     (45, 'Battle', 50, 50, 'Défi5', '2022-01-01', '2022-12-31', 'Description du défi5'),

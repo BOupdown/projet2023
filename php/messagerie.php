@@ -56,7 +56,7 @@
                             SELECT DISTINCT MsgGroupe.idDestinataire
                             FROM MessageGroupe MsgGroupe
                             INNER JOIN Message
-                            WHERE idExpediteur = 6
+                            WHERE idExpediteur = {$_SESSION['id']}
                         )";
 
                     $resultat_requete_groupes_destinataires = mysqli_query($connexion, $requete_groupes_destinataires);
