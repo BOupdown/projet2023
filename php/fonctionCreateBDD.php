@@ -147,16 +147,17 @@ function creerDataChallenge($connexion, $idGestionnaire, $nombreSujet, $nom, $de
 
 
 // Créer une data battle à partir des informations
-function creerDataBattle($connexion, $idGestionnaire, $nombreQuestionnaire, $nom, $description, $dateDebut, $dateFin, $sujet)
+function creerDataBattle($connexion, $idGestionnaire, $nombreQuestionnaire, $nom, $description, $dateDebut, $dateFin, $nom_sujet, $desc_sujet, $image, $ressources)
 {
     try {
         // Début de la transaction
         $connexion->begin_transaction();
         $nombreSujet = 1;
+        $type="Battle";
         // Insertion des données dans la table DataDefi
         $stmt = $connexion->prepare("INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, descriptionD, dateDebut, dateFin)
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ississss", $idGestionnaire, $type, $nombreSujet, $nombreQuestionnaire, $nom, $description, $dateDebut, $dateFin);
+        $stmt->bind_param("isiissss", $idGestionnaire, $type, $nombreSujet, $nombreQuestionnaire, $nom, $description, $dateDebut, $dateFin);
         if ($stmt->execute() === false) {
             throw new Exception("Erreur lors de l'insertion dans la table DataDefi : " . $connexion->error);
         }
@@ -164,7 +165,7 @@ function creerDataBattle($connexion, $idGestionnaire, $nombreQuestionnaire, $nom
         // Récupérer l'ID du défi nouvellement créé
         $idDataDefi = $connexion->insert_id;
 
-        creerProjetData($connexion, $sujet, $description, $idDataDefi);
+        creerProjetData($connexion, $nom_sujet, $desc_sujet, $idDataDefi, $image, $ressources);
 
         // Terminer la transaction
         $connexion->commit();

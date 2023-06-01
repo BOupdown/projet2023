@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $connexion = connect($usernamedb, $passworddb, $dbname);
         $gestionnaire = getUtilisateurParLogin($connexion, $gestionnaire)[0]['idLogin'];
 
-        // Création du data challenge vide dans la base SQL
+        // Création du data challenge sans sujets dans la base SQL
         $type_epreuve = "Challenge";
         $nb_questions = 0;
         $requete_nouveau_questionnaire = "INSERT INTO DataDefi (idGestionnaire, typeD, nombreSujet, nombreQuestionnaire, nom, descriptionD, dateDebut, dateFin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -74,7 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Valeur du dernier ID inséré dans la base SQL (ID du data challenge)
         $id_datadefi = mysqli_insert_id($connexion);
-                
+        
+        // Ajout de chaque sujet relié au data challenge dans la base SQL
         for ($i = 1; $i <= $nb_sujets; $i++) {
 
             // Sélection des valeurs du formulaire
@@ -82,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $desc = $_POST['desc' . $i];
             $img = $_POST['image' . $i];
             $ressources = $_POST['ressrc' . $i];
-
+ 
             creerProjetData($connexion, $nom, $desc, $id_datadefi, $img, $ressources);
         }
 
